@@ -19,7 +19,7 @@ class Delirio {
 	// now check if this is the right channel
 	if ($data->channel == $chan)
 	// it is, lets greet the joined user
-	   $irc->message(SMARTIRC_TYPE_CHANNEL, $chan, 'hi '.$data->nick);
+	   $irc->message(SMARTIRC_TYPE_CHANNEL, $data->channel, 'hi '.$data->nick);
     }
 
 
@@ -180,6 +180,15 @@ class Delirio {
 	}
     }
 
+    function saluta(&$irc, &$data)
+    {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1])) {
+		$irc->message(SMARTIRC_TYPE_CHANNEL, $data->channel, "Fottiti ".$data->messageex[1]);
+	    }
+	}
+    }
+
 /*Function that does the actual nickchange*/
 
     function changeNick($newnick, $priority = SMARTIRC_MEDIUM)
@@ -215,7 +224,7 @@ $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!part', $bot, 'part');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!rejoin', $bot, 'rejoin');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!ban', $bot, 'ban');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!nick', $bot, 'nick');
-
+$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!saluta', $bot, 'saluta');
 
 // nick , nome , realname , ident, senha do nick
 $irc->login('ilDelirante', 'ilDelirante'.'delirio', 8, 'delirioNetwork','');
