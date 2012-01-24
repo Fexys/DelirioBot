@@ -2,11 +2,12 @@
    include_once('SmartIRC.php');
 
 /* Variabile che contiene il nome del chan */
- $chan = "#DeliriNotturni";
+ //$chan = "#DeliriNotturni";
 
- /*Next, create the bot-class:*//*Next, create the bot-class:*/
-class mybot
-{
+ $chan = "#delirinotturni2";
+
+ /*Next, create the bot-class:*/
+class Delirio {
 
 /*A Greet function*/
 
@@ -27,7 +28,7 @@ class mybot
     function quit(&$irc, &$data)
     {
         // Only run the command if the nick is an owner.
-        if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
              $irc->message(SMARTIRC_TYPE_QUERY, $data->nick, "adios.");
              exit();
              Return ;
@@ -38,7 +39,7 @@ class mybot
 
     function kick(&$irc, &$data)
     {
-        if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
             if(isset($data->messageex[1],$data->messageex[2])) {
                 $nickname = $data->messageex[1];
                 $reason = $data->messageex[2];
@@ -56,7 +57,7 @@ class mybot
     function kick_response(&$irc, &$data)
     { //if bot is kicked
        if ($data->nick == $irc->_nick) {
-           $irc->join(array('#bebs_sp'));
+           $irc->join(array($chan));
            $irc->message(SMARTIRC_TYPE_CHANNEL, $data->channel, "dont kick me... please");
            Return ;
        }
@@ -78,9 +79,12 @@ class mybot
 
     function devoice(&$irc, &$data)
     {
-       if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) { if(isset($data->messageex[1])) { $nickname = $data->messageex[1];
+       if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+       if(isset($data->messageex[1])) {
+       $nickname = $data->messageex[1];
            $channel = $data->channel;
            $irc->devoice($channel, $nickname );
+       }
        }
     }
 
@@ -88,7 +92,7 @@ class mybot
 
     function op(&$irc, &$data)
     {
-        if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
             if(isset($data->messageex[1])) {
                 $nickname = $data->messageex[1];
                 $channel = $data->channel;
@@ -101,7 +105,7 @@ class mybot
 
     function deop(&$irc, &$data)
     {
-        if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
             if(isset($data->messageex[1])) {
                 $nickname = $data->messageex[1];
                 $channel = $data->channel;
@@ -114,7 +118,7 @@ class mybot
 
     function join(&$irc, &$data)
     {
-        if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
             if(isset($data->messageex[1])) {
                 $channel = $data->messageex[1];
                 $irc->join($channel);
@@ -126,7 +130,7 @@ class mybot
 
     function part(&$irc, &$data)
     {
-        if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
             if(isset($data->messageex[1])) {
                 $channel = $data->messageex[1];
                 $irc->part($channel);
@@ -138,7 +142,7 @@ class mybot
 
     function rejoin(&$irc, &$data)
     {
-        if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
             if(isset($data->messageex[1])) {
                 $channel = $data->messageex[1];
                 $irc->part($channel);
@@ -151,7 +155,7 @@ class mybot
 
     function ban(&$irc, &$data)
     {
-        if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
             if(isset($data->messageex[1])) {
                 $hostmask = $data->messageex[1];
                 $channel = $data->channel;
@@ -167,7 +171,7 @@ class mybot
 
     function nick(&$irc, &$data)
     {
-        if(($data->nick == "glaucom" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
+        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
             if(isset($data->messageex[1])) {
                 $newnick = $data->messageex[1];
                 $channel = $data->channel;
@@ -184,15 +188,13 @@ class mybot
         $this->_nick = $newnick;
     }
 
-
 /*End the Bot-class*/
 
-}
 }
 
 /*Start the bot and set some settings*/
 
-$bot = &new mybot();
+$bot = new Delirio();
 $irc = new Net_SmartIRC();
 $irc->setDebug(SMARTIRC_DEBUG_ALL);
 $irc->setUseSockets(TRUE);
@@ -214,9 +216,10 @@ $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!rejoin', $bot, 'rejoin');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!ban', $bot, 'ban');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!nick', $bot, 'nick');
 
+
 // nick , nome , realname , ident, senha do nick
-$irc->login('Delirante', 'name'.'realname', 8, 'ident','password');
-$irc->join(array($chan));
+$irc->login('Delirante', 'ilDelirante'.'delirio', 8, 'delirioNetwork','');
+$irc->join($chan);
 $irc->listen( );
 $irc->disconnect( );
 

@@ -1,13 +1,13 @@
 <?php
 /**
- * $Id: irccommands.php,v 1.1.2.1 2003/10/10 20:20:58 meebey Exp $
- * $Revision: 1.1.2.1 $
- * $Author: meebey $
- * $Date: 2003/10/10 20:20:58 $
+ * $Id: irccommands.php 241047 2007-08-10 15:10:30Z amir $
+ * $Revision: 241047 $
+ * $Author: amir $
+ * $Date: 2007-08-11 00:40:30 +0930 (Sat, 11 Aug 2007) $
  *
- * Copyright (c) 2002-2003 Mirco "MEEBEY" Bauer <mail@meebey.net> <http://www.meebey.net>
+ * Copyright (c) 2002-2004 Mirco Bauer <meebey@meebey.net> <http://www.meebey.net>
  * 
- * Full LGPL License: <http://www.meebey.net/lgpl.txt>
+ * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,34 +34,48 @@ class Net_SmartIRC_irccommands extends Net_SmartIRC_base
      * @see DOCUMENTATION
      * @param integer $type specifies the type, like QUERY/ACTION or CTCP see 'Message Types'
      * @param string $destination can be a user or channel
-     * @param string $message the message
+     * @param mixed $message the message
      * @return boolean
      * @access public
      */
-    function message($type, $destination, $message, $priority = SMARTIRC_MEDIUM)
+    function message($type, $destination, $messagearray, $priority = SMARTIRC_MEDIUM)
     {
+        if (!is_array($messagearray)) {
+            $messagearray = array($messagearray);
+        }
+        
         switch ($type) {
             case SMARTIRC_TYPE_CHANNEL:
             case SMARTIRC_TYPE_QUERY:
-                $this->_send('PRIVMSG '.$destination.' :'.$message, $priority);
+                foreach ($messagearray as $message) {
+                    $this->_send('PRIVMSG '.$destination.' :'.$message, $priority);
+                }
             break;
             case SMARTIRC_TYPE_ACTION:
-                $this->_send('PRIVMSG '.$destination.' :'.chr(1).'ACTION '.$message.chr(1), $priority);
+                foreach ($messagearray as $message) {
+                    $this->_send('PRIVMSG '.$destination.' :'.chr(1).'ACTION '.$message.chr(1), $priority);
+                }
             break;
             case SMARTIRC_TYPE_NOTICE:
-                $this->_send('NOTICE '.$destination.' :'.$message, $priority);
+                foreach ($messagearray as $message) {
+                    $this->_send('NOTICE '.$destination.' :'.$message, $priority);
+                }
             break;
             case SMARTIRC_TYPE_CTCP: // backwards compatibilty
             case SMARTIRC_TYPE_CTCP_REPLY:
-                $this->_send('NOTICE '.$destination.' :'.chr(1).$message.chr(1), $priority);
+                foreach ($messagearray as $message) {
+                    $this->_send('NOTICE '.$destination.' :'.chr(1).$message.chr(1), $priority);
+                }
             break;
             case SMARTIRC_TYPE_CTCP_REQUEST:
-                $this->_send('PRIVMSG '.$destination.' :'.chr(1).$message.chr(1), $priority);
+                foreach ($messagearray as $message) {
+                    $this->_send('PRIVMSG '.$destination.' :'.chr(1).$message.chr(1), $priority);
+                }
             break;
             default:
                 return false;
         }
-            
+        
         return true;
     }
     
@@ -417,17 +431,19 @@ class Net_SmartIRC_irccommands extends Net_SmartIRC_base
      * sends QUIT to IRC server and disconnects
      *
      * @param string $quitmessage optional quitmessage
-     * @param integer $priority message priority, default is SMARTIRC_MEDIUM
+     * @param integer $priority message priority, default is SMARTIRC_CRITICAL
      * @return void
      * @access public
      */
-    function quit($quitmessage = null, $priority = SMARTIRC_MEDIUM)
+    function quit($quitmessage = null, $priority = SMARTIRC_CRITICAL)
     {
         if ($quitmessage !== null) {
             $this->_send('QUIT :'.$quitmessage, $priority);
         } else {
             $this->_send('QUIT', $priority);
         }
+
+        $this->disconnect(true);
     }
 }
 ?>
