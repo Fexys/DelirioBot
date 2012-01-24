@@ -28,7 +28,7 @@ class Delirio {
     function quit(&$irc, &$data)
     {
 	// Only run the command if the nick is an owner.
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 		$irc->message(SMARTIRC_TYPE_CHANNEL, $data->channel, "Addio mondo crudele!");
 		exit();
 		Return ;
@@ -39,7 +39,7 @@ class Delirio {
 
     function kick(&$irc, &$data)
     {
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 	    if(isset($data->messageex[1],$data->messageex[2])) {
 		$nickname = $data->messageex[1];
 		$reason = $data->messageex[2];
@@ -79,7 +79,7 @@ class Delirio {
 
     function devoice(&$irc, &$data)
     {
-	  if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	  if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 	  if(isset($data->messageex[1])) {
 	  $nickname = $data->messageex[1];
 	   $channel = $data->channel;
@@ -92,7 +92,7 @@ class Delirio {
 
     function op(&$irc, &$data)
     {
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 	    if(isset($data->messageex[1])) {
 		$nickname = $data->messageex[1];
 		$channel = $data->channel;
@@ -105,7 +105,7 @@ class Delirio {
 
     function deop(&$irc, &$data)
     {
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 	    if(isset($data->messageex[1])) {
 		$nickname = $data->messageex[1];
 		$channel = $data->channel;
@@ -118,7 +118,7 @@ class Delirio {
 
     function join(&$irc, &$data)
     {
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 	    if(isset($data->messageex[1])) {
 		$channel = $data->messageex[1];
 		$irc->join($channel);
@@ -130,7 +130,7 @@ class Delirio {
 
     function part(&$irc, &$data)
     {
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 	    if(isset($data->messageex[1])) {
 		$channel = $data->messageex[1];
 		$irc->part($channel);
@@ -142,7 +142,7 @@ class Delirio {
 
     function rejoin(&$irc, &$data)
     {
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 	    if(isset($data->messageex[1])) {
 		$channel = $data->messageex[1];
 		$irc->part($channel);
@@ -155,7 +155,7 @@ class Delirio {
 
     function ban(&$irc, &$data)
     {
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 	    if(isset($data->messageex[1])) {
 		$hostmask = $data->messageex[1];
 		$channel = $data->channel;
@@ -171,7 +171,7 @@ class Delirio {
 
     function nick(&$irc, &$data)
     {
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
 	    if(isset($data->messageex[1])) {
 		$newnick = $data->messageex[1];
 		$channel = $data->channel;
@@ -182,9 +182,9 @@ class Delirio {
 
     function saluta(&$irc, &$data)
     {
-	if($data->nick == "Mte90" || $data->nick == "PTKDev" || $data->nick == "Fexys") {
-	    if(isset($data->messageex)) {
-		$irc->message(SMARTIRC_TYPE_CHANNEL, $data->channel, "Fottiti ".$data->messageex);
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1])) {
+		$irc->message(SMARTIRC_TYPE_CHANNEL, $data->channel, "Fottiti ".$data->messageex[1]);
 	    }
 	}
     }
