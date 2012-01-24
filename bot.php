@@ -2,9 +2,9 @@
    include_once('SmartIRC.php');
 
 /* Variabile che contiene il nome del chan */
- //$chan = "#DeliriNotturni";
+ $chan = "#DeliriNotturni";
 
- $chan = "#delirinotturni2";
+ //$chan = "#delirinotturni2";
 
  /*Next, create the bot-class:*/
 class Delirio {
@@ -13,13 +13,13 @@ class Delirio {
 
     function onjoin_greeting(&$irc, &$data)
     { // if we join, don't greet ourself, just jump out via return
-        if ($data->nick == $irc->_nick)
-           return;
+	if ($data->nick == $irc->_nick)
+	   return;
 
-        // now check if this is the right channel
-        if ($data->channel == $chan)
-        // it is, lets greet the joined user
-           $irc->message(SMARTIRC_TYPE_CHANNEL, $chan, 'hi '.$data->nick);
+	// now check if this is the right channel
+	if ($data->channel == $chan)
+	// it is, lets greet the joined user
+	   $irc->message(SMARTIRC_TYPE_CHANNEL, $chan, 'hi '.$data->nick);
     }
 
 
@@ -27,40 +27,40 @@ class Delirio {
 
     function quit(&$irc, &$data)
     {
-        // Only run the command if the nick is an owner.
-        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-             $irc->message(SMARTIRC_TYPE_QUERY, $data->nick, "adios.");
-             exit();
-             Return ;
-        }
+	// Only run the command if the nick is an owner.
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+		$irc->message(SMARTIRC_TYPE_CHANNEL, $data->channel, "Addio mondo crudele!");
+		exit();
+		Return ;
+	}
     }
 
 /*Kick-Function*/
 
     function kick(&$irc, &$data)
     {
-        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-            if(isset($data->messageex[1],$data->messageex[2])) {
-                $nickname = $data->messageex[1];
-                $reason = $data->messageex[2];
-                $channel = $data->channel;
-                $irc->kick($channel, $nickname, $reason);
-            } else {
-                $irc->message( $data->type, $data->nick, 'Invalid Parameter' );
-                $irc->message( $data->type, $data->nick, 'use: !kick $nick' );
-            }
-        }
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1],$data->messageex[2])) {
+		$nickname = $data->messageex[1];
+		$reason = $data->messageex[2];
+		$channel = $data->channel;
+		$irc->kick($channel, $nickname, $reason);
+	    } else {
+		$irc->message( $data->type, $data->nick, 'Invalid Parameter' );
+		$irc->message( $data->type, $data->nick, 'use: !kick $nick' );
+	    }
+	}
     }
 
 /*If the bot gets kicked, let it rejoin*/
 
     function kick_response(&$irc, &$data)
     { //if bot is kicked
-       if ($data->nick == $irc->_nick) {
-           $irc->join(array($chan));
-           $irc->message(SMARTIRC_TYPE_CHANNEL, $data->channel, "dont kick me... please");
-           Return ;
-       }
+	  if ($data->nick == $irc->_nick) {
+	   $irc->join(array($chan));
+	   $irc->message(SMARTIRC_TYPE_CHANNEL, $data->channel, "dont kick me... please");
+	   Return ;
+	  }
     }
 
 
@@ -68,124 +68,124 @@ class Delirio {
 
     function mode($channel, $newmode = null, $priority = SMARTIRC_MEDIUM)
     {
-       if ($newmode !== null) {
-          $irc->_send('MODE '.$channel.' '.$newmode, $priority);
-       } else {
-          $irc->_send('MODE '.$channel, $priority);
-       }
+	  if ($newmode !== null) {
+	  $irc->_send('MODE '.$channel.' '.$newmode, $priority);
+	  } else {
+	  $irc->_send('MODE '.$channel, $priority);
+	  }
     }
 
 /*Devoice Function*/
 
     function devoice(&$irc, &$data)
     {
-       if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-       if(isset($data->messageex[1])) {
-       $nickname = $data->messageex[1];
-           $channel = $data->channel;
-           $irc->devoice($channel, $nickname );
-       }
-       }
+	  if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	  if(isset($data->messageex[1])) {
+	  $nickname = $data->messageex[1];
+	   $channel = $data->channel;
+	   $irc->devoice($channel, $nickname );
+	  }
+	  }
     }
 
 /*Op Function*/
 
     function op(&$irc, &$data)
     {
-        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-            if(isset($data->messageex[1])) {
-                $nickname = $data->messageex[1];
-                $channel = $data->channel;
-                $irc->op($channel, $nickname );
-            }
-        }
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1])) {
+		$nickname = $data->messageex[1];
+		$channel = $data->channel;
+		$irc->op($channel, $nickname );
+	    }
+	}
     }
 
 /*Deop Function*/
 
     function deop(&$irc, &$data)
     {
-        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-            if(isset($data->messageex[1])) {
-                $nickname = $data->messageex[1];
-                $channel = $data->channel;
-                $irc->deop($channel, $nickname );
-            }
-        }
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1])) {
+		$nickname = $data->messageex[1];
+		$channel = $data->channel;
+		$irc->deop($channel, $nickname );
+	    }
+	}
     }
 
 /*Join Function*/
 
     function join(&$irc, &$data)
     {
-        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-            if(isset($data->messageex[1])) {
-                $channel = $data->messageex[1];
-                $irc->join($channel);
-            }
-        }
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1])) {
+		$channel = $data->messageex[1];
+		$irc->join($channel);
+	    }
+	}
     }
 
 /*Part Function*/
 
     function part(&$irc, &$data)
     {
-        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-            if(isset($data->messageex[1])) {
-                $channel = $data->messageex[1];
-                $irc->part($channel);
-            }
-        }
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1])) {
+		$channel = $data->messageex[1];
+		$irc->part($channel);
+	    }
+	}
     }
 
 /*Function to rejoin a channel*/
 
     function rejoin(&$irc, &$data)
     {
-        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-            if(isset($data->messageex[1])) {
-                $channel = $data->messageex[1];
-                $irc->part($channel);
-                $irc->join($channel);
-            }
-        }
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1])) {
+		$channel = $data->messageex[1];
+		$irc->part($channel);
+		$irc->join($channel);
+	    }
+	}
     }
 
 /*Ban Function*/
 
     function ban(&$irc, &$data)
     {
-        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-            if(isset($data->messageex[1])) {
-                $hostmask = $data->messageex[1];
-                $channel = $data->channel;
-                $irc->ban($channel, $hostmask);
-            } else {
-                $irc->message( $data->type, $data->nick, 'Invalid Parameter' );
-                $irc->message( $data->type, $data->nick, 'use: !ban $nick' );
-            }
-        }
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1])) {
+		$hostmask = $data->messageex[1];
+		$channel = $data->channel;
+		$irc->ban($channel, $hostmask);
+	    } else {
+		$irc->message( $data->type, $data->nick, 'Invalid Parameter' );
+		$irc->message( $data->type, $data->nick, 'use: !ban $nick' );
+	    }
+	}
     }
 
 /*Function for the nickchange-command*/
 
     function nick(&$irc, &$data)
     {
-        if(($data->nick == "Mte90" || $data->nick == "exOOr" || $data->nick == "PoOoL_" || $data->nick == "Angie")) {
-            if(isset($data->messageex[1])) {
-                $newnick = $data->messageex[1];
-                $channel = $data->channel;
-                $irc->changeNick($newnick );
-            }
-        }
+	if($data->nick == "Mte90" || $data->nick == "PTKDev") {
+	    if(isset($data->messageex[1])) {
+		$newnick = $data->messageex[1];
+		$channel = $data->channel;
+		$irc->changeNick($newnick );
+	    }
+	}
     }
 
 /*Function that does the actual nickchange*/
 
     function changeNick($newnick, $priority = SMARTIRC_MEDIUM)
     {
-        $this->_send('NICK '.$newnick, $priority);
-        $this->_nick = $newnick;
+	$this->_send('NICK '.$newnick, $priority);
+	$this->_nick = $newnick;
     }
 
 /*End the Bot-class*/
@@ -218,7 +218,7 @@ $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!nick', $bot, 'nick');
 
 
 // nick , nome , realname , ident, senha do nick
-$irc->login('Delirante', 'ilDelirante'.'delirio', 8, 'delirioNetwork','');
+$irc->login('ilDelirante', 'ilDelirante'.'delirio', 8, 'delirioNetwork','');
 $irc->join($chan);
 $irc->listen( );
 $irc->disconnect( );
