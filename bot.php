@@ -21,15 +21,8 @@ class Delirio {
 	function onjoin_greeting( &$irc, &$data ) {
 		// if we join, don't greet ourself, just jump out via return
 
-		if( $data->nick == $irc->_nick ) {
-			return;
-		}
-
-		// now check if this is the right channel
-
-		if( $data->channel == $data->channel ) {
-			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'hi '.$data->nick );
-		}
+		if( $data->nick == $irc->_nick ) {return;}
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Ciao '.$data->nick );
 	}
 
 	/*Quit Function*/
@@ -38,7 +31,6 @@ class Delirio {
 		if( in_array( $data->nick, $this->op ) ) {
 			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Addio mondo crudele!" );
 			exit( );
-			Return;
 		}
 	}
 
@@ -181,11 +173,15 @@ class Delirio {
 	}
 
 	function saluta( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
-				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Fottiti ".$data->messageex[1] );
+				$poggio=$data->messageex;
+				unset($poggio[0]);
+				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Fottiti ".implode(" ",$poggio) );
 			}
-		}
+	}
+
+	function help( &$irc, &$data ) {
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Comandi:!saluta,!help" );
 	}
 
 	/*Function that does the actual nickchange*/
@@ -223,6 +219,7 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!rejoin', $bot, 'rejoin' )
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!ban', $bot, 'ban' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!nick', $bot, 'nick' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!saluta', $bot, 'saluta' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!help', $bot, 'help' );
 
 // nick , nome , realname , ident, senha do nick
 
