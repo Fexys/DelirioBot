@@ -10,10 +10,10 @@ $chan = "#DeliriNotturni";
 
 class Delirio {
 
-	public $op;
+	var $op = array();
 
 	function setVar( ) {
-		$op = file( 'op.php' );
+		$this->op = file( 'op.php' );
 	}
 
 	/*A Greet function*/
@@ -35,7 +35,7 @@ class Delirio {
 	/*Quit Function*/
 
 	function restart( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Addio mondo crudele!" );
 			exit( );
 			Return;
@@ -45,7 +45,7 @@ class Delirio {
 	/*Kick-Function*/
 
 	function kick( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1], $data->messageex[2] ) ) {
 				$nickname = $data->messageex[1];
 				$reason   = $data->messageex[2];
@@ -85,7 +85,7 @@ class Delirio {
 	/*Devoice Function*/
 
 	function devoice( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$nickname = $data->messageex[1];
 				$channel = $data->channel;
@@ -97,7 +97,7 @@ class Delirio {
 	/*Op Function*/
 
 	function op( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$nickname = $data->messageex[1];
 				$channel = $data->channel;
@@ -109,7 +109,7 @@ class Delirio {
 	/*Deop Function*/
 
 	function deop( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$nickname = $data->messageex[1];
 				$channel = $data->channel;
@@ -121,7 +121,7 @@ class Delirio {
 	/*Join Function*/
 
 	function join( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$channel = $data->messageex[1];
 				$irc->join( $channel );
@@ -132,7 +132,7 @@ class Delirio {
 	/*Part Function*/
 
 	function part( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$channel = $data->messageex[1];
 				$irc->part( $channel );
@@ -143,7 +143,7 @@ class Delirio {
 	/*Function to rejoin a channel*/
 
 	function rejoin( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$channel = $data->messageex[1];
 				$irc->part( $channel );
@@ -155,7 +155,7 @@ class Delirio {
 	/*Ban Function*/
 
 	function ban( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$hostmask = $data->messageex[1];
 				$channel = $data->channel;
@@ -171,7 +171,7 @@ class Delirio {
 	/*Function for the nickchange-command*/
 
 	function nick( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$newnick = $data->messageex[1];
 				$channel = $data->channel;
@@ -181,7 +181,7 @@ class Delirio {
 	}
 
 	function saluta( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->$op ) ) {
+		if( in_array( $data->nick, $this->op ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Fottiti ".$data->messageex[1] );
 			}
