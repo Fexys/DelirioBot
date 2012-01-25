@@ -181,14 +181,22 @@ class Delirio {
 	}
 
 	function whoami( &$irc, &$data ) {
-			if( isset( $data->messageex[1] ) ) {
-				global $bio;
+		global $bio;
+			if( isset( $data->messageex[1] ) && isset($bio[$data->messageex[1]]['bio'])) {
 				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $bio[$data->messageex[1]]['bio'] );
+			} elseif(!isset($data->messageex[1]) && isset($bio[$data->nick]['bio'])) {
+					$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $bio[$data->nick]['bio'] );
+			}else{
+					$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Utente non inserito nel sistema. Tentativo di intrusione rilevato!" );
 			}
 	}
 
 	function help( &$irc, &$data ) {
-			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Comandi: !saluta, !help, !whoami" );
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Comandi: !saluta, !help, !whoami, !versione" );
+	}
+
+	function versione( &$irc, &$data ) {
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Sono cavoli miei... 0.0.2" );
 	}
 
 	/*Function that does the actual nickchange*/
@@ -228,6 +236,7 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!nick', $bot, 'nick' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!saluta', $bot, 'saluta' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!help', $bot, 'help' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!whoami', $bot, 'whoami' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!versione', $bot, 'versione' );
 
 // nick , nome , realname , ident, senha do nick
 
