@@ -1,6 +1,6 @@
 <?php
 include_once( 'SmartIRC.php' );
-
+include( 'bio.php' );
 /* Variabile che contiene il nome del chan */
 
 $chan = "#DeliriNotturni";
@@ -180,8 +180,15 @@ class Delirio {
 			}
 	}
 
+	function whoami( &$irc, &$data ) {
+			if( isset( $data->messageex[1] ) ) {
+				global $bio;
+				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $bio[$data->messageex[1]]['bio'] );
+			}
+	}
+
 	function help( &$irc, &$data ) {
-			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Comandi:!saluta,!help" );
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Comandi: !saluta, !help, !whoami" );
 	}
 
 	/*Function that does the actual nickchange*/
@@ -220,6 +227,7 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!ban', $bot, 'ban' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!nick', $bot, 'nick' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!saluta', $bot, 'saluta' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!help', $bot, 'help' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!whoami', $bot, 'whoami' );
 
 // nick , nome , realname , ident, senha do nick
 
