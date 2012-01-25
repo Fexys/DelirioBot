@@ -201,6 +201,7 @@ class Delirio {
 /*Start the bot and set some settings*/
 
 $bot = new Delirio( );
+$bot->setVar( );
 $irc = new Net_SmartIRC( );
 $irc->setDebug( SMARTIRC_DEBUG_ALL );
 $irc->setUseSockets( TRUE );
