@@ -30,11 +30,12 @@ class Delirio {
 
 	function quit( &$irc, &$data ) {
 		if( in_array( $data->nick, $this->op ) ) {
-			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Addio mondo crudele!" );
-			exit();
-			return ;
+			//$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Addio mondo crudele!" );
+			$irc->quit("Addio mondo crudele!");
+			/*exit();
+			return ;*/
 		} else {
-			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Chi ti credi di essere per darmi questi comandi?????" );
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Chi ti credi di essere per darmi questi comandi?????".$this->op.$data->nick );
 		}
 	}
 
@@ -213,7 +214,7 @@ class Delirio {
 	}
 
 	function insulta( &$irc, &$data ) {
-	print_r($irc->user);
+	print_r($irc->channel[$data->channel]->user);
 		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $irc->user);
 	}
 
