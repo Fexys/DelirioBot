@@ -14,6 +14,8 @@ $bio['toketin']['bio']="Arciere convinto, studente universitario a Udine e juven
 
 $bio['quizzlo']['bio']="Fanatico di Gentoo. Toglietemi tutto, ma non la mia riga di comando <3.";
 
+$bio['blacktux']['bio']="Stupratore seriale di xterm. Adulatore di awesomewm. Masticatore di chip music. Nerd girls lover.";
+
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;
 }
