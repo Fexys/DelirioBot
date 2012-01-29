@@ -18,20 +18,17 @@ class Delirio {
 	var $op = array();
 	//Settiamo le varie proprietà del bot
 	function setVar( ) {
-		$this->op = file( 'op.php' );
+		$this->op = file( 'op.php',FILE_IGNORE_NEW_LINES );
 	}
 	//Saluto chi entra gentilmente
 	function onjoin_greeting( &$irc, &$data ) {
 		if( $data->nick == $irc->_nick ) {return;}
 		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Ciao '.$data->nick );
 	}
-	//Spengo il bot ***Non Funziona***
+	//Spengo il bot
 	function restart( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op , true) ) {
-			//$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Addio mondo crudele!" );
+		if( $data->nick === $this->op[0] ) {
 			$irc->quit("Addio mondo crudele!");
-			/*exit();
-			return ;*/
 		} else {
 			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Chi ti credi di essere per darmi questi comandi?????");
 		}
@@ -177,7 +174,7 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Sono cavoli miei... 0.0.3" );
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Sono cavoli miei... 0.0.4" );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -190,7 +187,7 @@ class Delirio {
 	}
 	//Insulta ***in lavorazione***
 	function insulta( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $irc->_event_nick($data));
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $irc->_send('NAMES '.$chan.',', SMARTIRC_MEDIUM));
 	}
 	//Cambia il nick attuale??
 	function changeNick( $newnick, $priority = SMARTIRC_MEDIUM ) {
