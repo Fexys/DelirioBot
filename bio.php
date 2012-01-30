@@ -16,6 +16,10 @@ $bio['quizzlo']['bio']="Fanatico di Gentoo. Toglietemi tutto, ma non la mia riga
 
 $bio['blacktux']['bio']="Stupratore seriale di xterm. Adulatore di awesomewm. Masticatore di chip music. Nerd girls lover.";
 
+$bio['ilDelirante']['bio']="Padre Mte90, Madre ignota. Questo ha creato in lui gravi turbe mentali.";
+
+$bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime";
+
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;
 }
@@ -24,6 +28,8 @@ foreach($bio as $key => $value) {
 foreach($bio as $key => $value) {
     $bio_[$key."_"]=$value;
 }
+
+$bio['v2_dev']['bio']=$bio['v2']['bio'];
 
 $bio = array_merge($bio,$bio_);
 
