@@ -174,7 +174,7 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Sono cavoli miei... 0.0.4" );
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Sono cavoli miei... 0.0.5" );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -194,7 +194,15 @@ class Delirio {
 		$this->_send( 'NICK '.$newnick, $priority );
 		$this->_nick = $newnick;
 	}
-
+	//Elenco Utenti ***in lavorazione***
+	function ls( &$irc, &$data ) {
+		$nicklist=$irc->_updateIrcUser($data);
+		$nicklist=$nicklist->nick;
+		foreach ($nicklist as &$value) {
+			$nickstring.=$value.',';
+		}
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Utenti nel sistema: ".$nickstring);
+	}
 	/*End the Bot-class*/
 }
 //Impostiamo e facciamo partire il bot
@@ -205,7 +213,8 @@ $irc->startBenchmark();
 $irc->setDebug( SMARTIRC_DEBUG_ALL );
 $irc->setBenchmark(TRUE);
 $irc->setUseSockets( TRUE );
-//$irc->setUserSyncing( TRUE );
+$irc->setUserSyncing( TRUE );
+$irc->setChannelSyncing( TRUE );
 //Configuriamo i vari comandi con le funzioni
 $irc->connect( 'irc.freenode.org', 6667 );
 $irc->registerActionhandler( SMARTIRC_TYPE_JOIN, '.*', $bot, 'onjoin_greeting' );
@@ -228,8 +237,9 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!whoami', $bot, 'whoami' )
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!versione', $bot, 'versione' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!github', $bot, 'github' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!insulta', $bot, 'insulta' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!ls', $bot, 'ls' );
 // nick , nome , realname , ident, boh
-$irc->login( 'ilDelirante', 'ilDelirante'.'delirio', 8, 'delirioNetwork', '' );
+$irc->login( 'ilDelirante', 'ilDelirante'.'delirio', 8, 'delirio', '' );
 $irc->join( $chan );
 $irc->listen( );
 $irc->disconnect( );
