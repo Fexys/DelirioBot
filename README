@@ -2,13 +2,14 @@ Il Delirante 0.0.5
 
 basato su http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP
 
-Bio presenti: Mte90,v2,gianguido,worst,toketin,quizzlo,blacktux
+Bio presenti: Mte90,v2,gianguido,worst,toketin,quizzlo,blacktux,ilDelirante,picchio
 
 
 Features:
 Saluta
 whoami
 who
+ls
 
 Todo:
 Elenco bio presenti

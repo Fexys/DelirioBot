@@ -170,7 +170,7 @@ class Delirio {
 	}
 	//Lista dei comandi
 	function help( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Comandi: !saluta, !help, !whoami, !versione, !github, !who" );
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Comandi: !saluta, !help, !whoami, !versione, !github, !who, !ls" );
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
@@ -197,11 +197,10 @@ class Delirio {
 	//Elenco Utenti ***in lavorazione***
 	function ls( &$irc, &$data ) {
 		$nicklist=$irc->_updateIrcUser($data);
-		$nicklist=$nicklist->nick;
 		foreach ($nicklist as &$value) {
-			$nickstring.=$value.',';
+			$nickstring.=$value->nick.',';
 		}
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Utenti nel sistema: ".$nickstring);
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Utenti nel sistema: ".substr($nickstring, 0, -9);
 	}
 	/*End the Bot-class*/
 }
