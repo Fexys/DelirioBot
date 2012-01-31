@@ -20,8 +20,8 @@ class Delirio {
 	var $insulti = array();
 	//Settiamo le varie proprietà del bot
 	function setVar( ) {
-		$this->op = file( 'op.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-		$this->op = file( 'insulti.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+		$this->op = array_map('rtrim',file( 'op.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+		$this->insulti = array_map('rtrim',file( 'insulti.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 	}
 	//Saluto chi entra gentilmente
 	function onjoin_greeting( &$irc, &$data ) {
@@ -30,8 +30,7 @@ class Delirio {
 	}
 	//Spengo il bot
 	function shutdown( &$irc, &$data ) {
-	print($this->op[1]);
-		if( $data->nick === $this->op ) {
+		if( in_array($data->nick, $this->op) ) {
 			$irc->quit("Addio mondo crudele!");
 		} else {
 			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Chi ti credi di essere per darmi questi comandi?????");
@@ -174,11 +173,11 @@ class Delirio {
 	}
 	//Lista dei comandi
 	function help( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Comandi: !saluta, !help, !whoami, !versione, !github, !who, !ls" );
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Comandi: !saluta, !help, !whoami, !versione, !github, !who, !ls, !insulta" );
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Sono cavoli miei... 0.0.5" );
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Sono cavoli miei... 0.0.6" );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -191,20 +190,31 @@ class Delirio {
 	}
 	//Insulta ***in lavorazione***
 	function insulta( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $irc->_send('NAMES '.$chan.',', SMARTIRC_MEDIUM));
+		if( isset( $data->messageex[1] )) {
+			if($data->messageex[1]=="-c") {
+				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, count($this->insulti)." insulti nel sistema");
+			}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)&&isset($data->messageex[2])) {
+				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $data->messageex[2]." ".$this->insulti[$data->messageex[1]]);
+			}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)) {
+				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $this->insulti[$data->messageex[1]]);
+			} else {
+				if(in_array($data->messageex[1], $irc->_updateIrcUser($data))) {
+					$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $data->messageex[1]." ".$this->insulti[array_rand($this->insulti)]);
+				}
+			}
+		} else {
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "-c Mostra il numero di insulti, !insulta NUMERO[non obbligatorio] NICK");
+		}
 	}
 	//Cambia il nick attuale??
 	function changeNick( $newnick, $priority = SMARTIRC_MEDIUM ) {
 		$this->_send( 'NICK '.$newnick, $priority );
 		$this->_nick = $newnick;
 	}
-	//Elenco Utenti ***in lavorazione***
+	//Elenco Utenti
 	function ls( &$irc, &$data ) {
-		$nicklist=$irc->_updateIrcUser($data);
-		foreach ($nicklist as &$value) {
-			$nickstring.=$value->nick.', ';
-		}
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Utenti nel sistema: ".substr($nickstring, 0, -11));
+		$nicklist=$irc->_updateIrcUser($data);print_R($nicklist);
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Utenti nel sistema: ".substr(implode(", ",$nicklist), 0, -10));
 	}
 	/*End the Bot-class*/
 }
@@ -236,7 +246,7 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!nick', $bot, 'nick' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!saluta', $bot, 'saluta' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!help$', $bot, 'help' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!who\s*$', $bot, 'who' );
-$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!whoami$', $bot, 'whoami' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!whoami', $bot, 'whoami' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!versione$', $bot, 'versione' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!github$', $bot, 'github' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!insulta', $bot, 'insulta' );
