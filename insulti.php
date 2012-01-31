@@ -40,3 +40,6 @@ Ti mollo una ceffa talmente forte che quando smetti di girare ti è già arrivat
 Ti decompongo a forza di legnate
 Non te sputo in faccia sennò temprofumerei
 Perchè vuoi morire proprio oggi se con la salute che ti ritrovi potresti campa' altri due/tre giorni?
+Quando t'acchiappo facciamo tutto un conto, e se ti ammazzo, andiamo pari!
+Sei così basso che devi fà l'orlo ai boxer
+Devi smetteterla di aggrovigliare i cavi del wireless!
