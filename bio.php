@@ -4,7 +4,7 @@ global $bio, $bio_tot;
 
 $bio['Mte90']['bio']="Fan sfegatato di Debian e KDE. Superpotere: Sente la puzza di Gnome da lontano un chilometro.";
 
-$bio['v2']['bio']="Nome in codice: V2. Ricercata e pericolosa Cyberpunker, psicolabile e squilibrata. ";
+$bio['v2']['bio']="Nome in codice: V2. Ricercata e pericolosa Cyberpunker, psicolabile e squilibrata.";
 
 $bio['gianguido']['bio']="I was chatting here, but then i took an arrow to the knee";
 
@@ -18,7 +18,11 @@ $bio['blacktux']['bio']="Stupratore seriale di xterm. Adulatore di awesomewm. Ma
 
 $bio['ilDelirante']['bio']="Padre Mte90, Madre ignota. Questo ha creato in lui gravi turbe mentali.";
 
-$bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime";
+$bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime.";
+
+$bio['alessandro1997']['bio']="Appassionato di informatica, programmazione, open source. E scrittura. Un paradosso vivente.";
+
+$bio['gigitux']['bio']="Sono un Nerd, amo l'informatica ed il mondo open-source.Mi piacciono i videogiochi.";
 
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;

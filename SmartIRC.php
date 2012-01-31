@@ -2554,7 +2554,11 @@ class Net_SmartIRC_base
     // Modified by Mte90
     function _updateIrcUser($data)
     {
-    return $this->channel[strtolower($data->channel)]->users;
+	$nicklist = $this->channel[strtolower($data->channel)]->users;
+	foreach ($nicklist as &$value) {
+		$nick[]=$value->nick;
+	}
+    return $nick;
     }
 
     function _removeIrcUser()
