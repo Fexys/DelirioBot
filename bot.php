@@ -16,9 +16,12 @@ $chan = "#DeliriNotturni";
 class Delirio {
 	//Variabile che conterrà i vari op
 	var $op = array();
+	//Variabile che conterrà i vari insulti
+	var $insulti = array();
 	//Settiamo le varie proprietà del bot
 	function setVar( ) {
-		$this->op = file( 'op.php',FILE_IGNORE_NEW_LINES );
+		$this->op = file( 'op.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+		$this->op = file( 'insulti.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 	}
 	//Saluto chi entra gentilmente
 	function onjoin_greeting( &$irc, &$data ) {
@@ -26,8 +29,9 @@ class Delirio {
 		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Ciao '.$data->nick );
 	}
 	//Spengo il bot
-	function restart( &$irc, &$data ) {
-		if( $data->nick === $this->op[0] ) {
+	function shutdown( &$irc, &$data ) {
+	print($this->op[1]);
+		if( $data->nick === $this->op ) {
 			$irc->quit("Addio mondo crudele!");
 		} else {
 			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Chi ti credi di essere per darmi questi comandi?????");
@@ -198,9 +202,9 @@ class Delirio {
 	function ls( &$irc, &$data ) {
 		$nicklist=$irc->_updateIrcUser($data);
 		foreach ($nicklist as &$value) {
-			$nickstring.=$value->nick.',';
+			$nickstring.=$value->nick.', ';
 		}
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Utenti nel sistema: ".substr($nickstring, 0, -9);
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Utenti nel sistema: ".substr($nickstring, 0, -11));
 	}
 	/*End the Bot-class*/
 }
@@ -218,7 +222,7 @@ $irc->setChannelSyncing( TRUE );
 $irc->connect( 'irc.freenode.org', 6667 );
 $irc->registerActionhandler( SMARTIRC_TYPE_JOIN, '.*', $bot, 'onjoin_greeting' );
 $irc->registerActionhandler( SMARTIRC_TYPE_KICK, '.*', $bot, 'kick_response' );
-$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '!restart', $bot, 'restart' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!shutdown$', $bot, 'shutdown' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!kick', $bot, 'kick' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!voice', $bot, 'voice' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!devoice', $bot, 'devoice' );
@@ -230,11 +234,11 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!rejoin', $bot, 'rejoin' )
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!ban', $bot, 'ban' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!nick', $bot, 'nick' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!saluta', $bot, 'saluta' );
-$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!help', $bot, 'help' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!help$', $bot, 'help' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!who\s*$', $bot, 'who' );
-$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!whoami', $bot, 'whoami' );
-$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!versione', $bot, 'versione' );
-$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!github', $bot, 'github' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!whoami$', $bot, 'whoami' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!versione$', $bot, 'versione' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!github$', $bot, 'github' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!insulta', $bot, 'insulta' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!ls', $bot, 'ls' );
 // nick , nome , realname , ident, boh
