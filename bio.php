@@ -3,6 +3,8 @@
 global $bio, $bio_tot;
 
 $bio['Mte90']['bio']="Fan sfegatato di Debian e KDE. Superpotere: Sente la puzza di Gnome da lontano un chilometro.";
+$bio['Mte90']['insulto'][]="Ti predo a calci col piedone puzzoso";
+$bio['Mte90']['insulto'][]="Ti sdrubilaggio la tua tastiera";
 
 $bio['v2']['bio']="Nome in codice: V2. Ricercata e pericolosa Cyberpunker, psicolabile e squilibrata.";
 
@@ -24,6 +26,10 @@ $bio['alessandro1997']['bio']="Appassionato di informatica, programmazione, open
 
 $bio['gigitux']['bio']="Sono un Nerd, amo l'informatica ed il mondo open-source.Mi piacciono i videogiochi.";
 
+$bio['PTKDev']['bio']="Non so usare windows. Non mangio le mele. Lascio che i bit scorrano velocemente sul mio debian. Penso troppo, sono pazzo, sono semplicemente io: vaffanculo!";
+
+$bio['PTKDev']['bio']="Studente di Informatica. Aspirante developer. Innamorato di Google. Pseudo blogger nel tempo libero.";
+
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;
 }
@@ -33,7 +39,9 @@ foreach($bio as $key => $value) {
     $bio_[$key."_"]=$value;
 }
 
+//Supporto nick diversi casi speciali
 $bio['v2_dev']['bio']=$bio['v2']['bio'];
+$bio['picchio']['bio']=$bio['picchiopc']['bio'];
 
 $bio = array_merge($bio,$bio_);
 
