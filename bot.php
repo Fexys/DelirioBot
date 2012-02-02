@@ -210,7 +210,7 @@ class Delirio {
 	}
 	//Insulto personalizzato a citazione
 	function insulto( &$irc, &$data ) {
-	if(rand(0, 4)==1){$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Mi servono molti insulti personalizzati e non!");}
+	if(rand(0, 10)==1){$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Mi servono molti insulti personalizzati e non!");}
 		if($this->stop && $data->messageex[0][0]!='!'){
 		$messaggio=implode(' ',$data->messageex);
 		global $bio;
