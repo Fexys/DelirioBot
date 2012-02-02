@@ -1,8 +1,8 @@
-Il Delirante 0.0.6
+Il Delirante 0.0.7
 
 basato su http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP
 
-Bio presenti: Mte90,v2,gianguido,worst,toketin,quizzlo,blacktux,ilDelirante,picchio,alessandro1997,gigitux
+Bio presenti: Mte90,v2,gianguido,worst,toketin,quizzlo,blacktux,ilDelirante,picchio,alessandro1997,gigitux,vencizOn
 
 
 Features:
@@ -11,6 +11,7 @@ whoami
 who
 ls
 insulta
+insulto a citazione
 
 Todo:
 Saluti personalizzati
