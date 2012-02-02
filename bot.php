@@ -175,7 +175,7 @@ class Delirio {
 	}
 	//Lista dei comandi
 	function help( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Comandi: !saluta, !help, !whoami, !versione, !github, !who, !ls, !insulta' );
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Comandi: !saluta, !help, !whoami, !versione, !github, !who, !ls, !insulta, !paste' );
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
@@ -243,6 +243,10 @@ class Delirio {
 			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Chi ti credi di essere per darmi questi comandi?????');
 		}
 	}
+	//Pastebin vari
+	function paste( &$irc, &$data ) {
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://pastebin.com , http://paste.kde.org');
+	}
 	/*End the Bot-class*/
 }
 //Impostiamo e facciamo partire il bot
@@ -280,6 +284,7 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!github$', $bot, 'github' 
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!insulta', $bot, 'insulta' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!ls', $bot, 'ls' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!stop', $bot, 'stop' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!paste', $bot, 'paste' );
 
 // nick , nome , realname , ident, boh
 $irc->login( 'ilDelirante', 'ilDelirante'.'delirio', 8, 'delirio', '' );
