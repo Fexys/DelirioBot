@@ -175,11 +175,11 @@ class Delirio {
 	}
 	//Lista dei comandi
 	function help( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Comandi: !saluta, !help, !whoami, !versione, !github, !who, !ls, !insulta, !paste' );
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Comandi: !saluta, !help, !whoami, !versione, !github, !who, !ls, !insulta, !paste, !google, !deb, !rpm' );
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Sono cavoli miei... 0.0.7' );
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'Sono cavoli miei... 0.0.8' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -196,7 +196,7 @@ class Delirio {
 			if($data->messageex[1]=='-c') {
 				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, count($this->insulti).' insulti nel sistema');
 			}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)&&isset($data->messageex[2])) {
-				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $data->messageex[2].''.$this->insulti[$data->messageex[1]]);
+				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $this->insulti[$data->messageex[1]].' '.$data->messageex[2]);
 			}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)) {
 				$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $this->insulti[$data->messageex[1]]);
 			} else {
@@ -210,7 +210,7 @@ class Delirio {
 	}
 	//Insulto personalizzato a citazione
 	function insulto( &$irc, &$data ) {
-	if(rand(0, 10)==1){$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Mi servono molti insulti personalizzati e non!");}
+	if(rand(0, 20)==1){$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, "Mi servono molti insulti personalizzati!");}
 		if($this->stop && $data->messageex[0][0]!='!'){
 		$messaggio=implode(' ',$data->messageex);
 		global $bio;
@@ -245,8 +245,27 @@ class Delirio {
 	}
 	//Pastebin vari
 	function paste( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://pastebin.com , http://paste.kde.org');
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://pastebin.com , http://paste.kde.org , http://nopaste.voric.com');
 	}
+	//Google
+	function google( &$irc, &$data ) {
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://www.google.it/search?q='.str_replace("!google ","",implode(' ',$data->messageex)));
+	}
+	//DEB
+	function deb( &$irc, &$data ) {
+		if($data->messageex[1]=='-ubu') {
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://packages.ubuntu.com/search?keywords='.$data->messageex[2]);
+		}elseif(!isset($data->messageex[1])) {
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, '!deb -ubu(per usare Ubuntu altrimenti Debian)');
+		}else{
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://packages.ubuntu.com/search?keywords='.$data->messageex[1]);
+		}
+	}
+	//RPM
+	function rpm( &$irc, &$data ) {
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://software.opensuse.org/search?q='.$data->messageex[1]);
+	}
+	//http://software.opensuse.org/search?q=
 	/*End the Bot-class*/
 }
 //Impostiamo e facciamo partire il bot
@@ -285,6 +304,9 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!insulta', $bot, 'insulta'
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!ls', $bot, 'ls' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!stop', $bot, 'stop' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!paste', $bot, 'paste' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!google', $bot, 'google' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!deb', $bot, 'deb' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!rpm', $bot, 'rpm' );
 
 // nick , nome , realname , ident, boh
 $irc->login( 'ilDelirante', 'ilDelirante'.'delirio', 8, 'delirio', '' );
