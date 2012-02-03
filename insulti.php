@@ -27,7 +27,7 @@ Te tiro na cinquina e ti faccio girare così tanto che quando ti fermi i tuoi ve
 Ti do' uno schiaffo che giri talmente tanto che ti arrestano per vagabondaggio
 Ti faccio un culo che se scoreggi in un sacco di coriandoli stiamo in carnevale per sei mesi!
 Ti do un pugno in testa che ti mischio i pensieri
-Ti faccio due occhi che,con il bambù in mano,il WWF ti protegge
+Ti faccio due occhi che, con il bambù in mano, il WWF ti protegge
 Ti tiro un pugno talmente forte che per ricordarti come ti chiami devi fare i corsi di recupero
 Lo sa tua mamma che stanotte dormi all' ospedale?
 Quando parli con me devi stare zitto!!
@@ -43,3 +43,31 @@ Perchè vuoi morire proprio oggi se con la salute che ti ritrovi potresti campa'
 Quando t'acchiappo facciamo tutto un conto, e se ti ammazzo, andiamo pari!
 Sei così basso che devi fà l'orlo ai boxer
 Devi smetteterla di aggrovigliare i cavi del wireless!
+Sei cosi brutto ma cosi brutto che tua mamma appena ti ha fatto pensava che fossi uscito dal culo
+Sei cosi brutto che se mai ti dovessi spostare le calcolatrici comicerannoa dividere per 0
+Le tue gambe sono così pelose che per farti la ceretta devi affittare un tagliaerba
+Le tue gambe sono così pelose che devi usare la spazzola per metterle in ordine
+Sono più bello io nudo che tu vestito
+Non sprecare tempo a cercare le parole per giustificare la tua ignoranza: accettati! Noi ti abbiamo già classificato
+Se i belli sono come te, i brutti devono ritenersi graziati
+Ti faremo finire su il http://www1.ilmortodelmese.com
+Se tu fossi alto quanto stronzo, il Sole ti brucerebbe i capelli
+Sembri un babbuino visto da dietro
+Sei cosi brutto che quando i maiali ti vedono vomitano
+Sei così brutto che quando carichi le tue foto sul computer, lui le riconosce come virus
+T.A.D.B. = Ti Ammazzo Di Botte
+Stanotte ho fatto un incubo... ho sognato di essere TE
+Essere stupidi è un diritto ma tu ne hai fatto un ABUSO
+Dio un giorno ti creò... e da quel giorno non si è più visto
+Tutti hanno un lato buono.. prova un pò a girarti
+Sei talmente scemo da essere secondo anche nella tua categoria
+Sei talmente brutto che la carta d'identità te l'hanno fatta senza foto
+Uno passa vicino a te, ti guarda bene in faccia.. e poi brontola: "Credevo che la cosa più brutta esistente fra gli uomini fosse la fame nel mondo"
+Mettiti un sacchetto in testa che fai un piacere al mondo intero
+T.V.B = Ti Voglio Bastonare
+Sei talmente brutto che quando vai a portare il cane in giro accarezzano te
+Se fossi in te starei zitto magari sembreresti anche simpatico e intelligente
+Senza di te il mondo sarebbe un posto migliore
+T.V.P = Ti Voglio Picchiare
+Sei così furbo che credi ancora che i tampax servono per il raffreddore
+Sei cosi ignorante che l'asino conta meglio di te
