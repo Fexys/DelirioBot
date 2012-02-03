@@ -37,14 +37,14 @@ $bio['picchio']['insulto'][]="Sei cosi scemo che se vai al cinema e leggi 'vieta
 $bio['alessandro1997']['bio']="Appassionato di informatica, programmazione, open source. E scrittura. Un paradosso vivente.";
 $bio['alessandro1997']['insulto'][]="sei brutto, ma così brutto che non ti sorridono neanche i sofficini";
 
-$bio['gigitux']['bio']="Sono un Nerd, amo l'informatica ed il mondo open-source.Mi piacciono i videogiochi.";
+$bio['gigitux']['bio']="Sono un Nerd, amo l'informatica ed il mondo open-source. Mi piacciono i videogiochi.";
 $bio['gigitux']['insulto'][]="Ti faccio conoscere 25 cm di simpatia se vieni qui";
 
 $bio['PTKDev']['bio']="Non so usare windows. Non mangio le mele. Lascio che i bit scorrano velocemente sul mio debian. Penso troppo, sono pazzo, sono semplicemente io: vaffanculo!";
 $bio['PTKDev']['insulto'][]="Ti faccio conoscere 25 cm di simpatia se vieni qui";
 
 $bio['vencizOn']['bio']="Studente di Informatica. Aspirante developer. Innamorato di Google. Pseudo blogger nel tempo libero.";
-$bio['vencizOn']['insulto'][]="L'unico tuo neurone soffre cosi tanto di depressione per la solitudine che ha scelto come amico immaginario la goccia di sodio della Lete, l'unica che secondo lui lo può capirequesto è";
+$bio['vencizOn']['insulto'][]="L'unico tuo neurone soffre cosi tanto di depressione per la solitudine che ha scelto come amico immaginario la goccia di sodio della Lete, l'unica che secondo lui lo può capire questo è";
 
 $bio['turlando']['bio']="Danghiù veri macc for riid mai bio bat i donnt spik prosciutti";
 $bio['turlando']['insulto'][]="Prima di conoscerti ero sull'orlo del precipizio... adesso che ti ho conosciuto credo che farò un passo in avanti";

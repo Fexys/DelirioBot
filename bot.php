@@ -258,14 +258,13 @@ class Delirio {
 		}elseif(!isset($data->messageex[1])) {
 			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, '!deb -ubu(per usare Ubuntu altrimenti Debian)');
 		}else{
-			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://packages.ubuntu.com/search?keywords='.$data->messageex[1]);
+			$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://packages.debian.org/search?keywords='.$data->messageex[1]);
 		}
 	}
 	//RPM
 	function rpm( &$irc, &$data ) {
-		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://software.opensuse.org/search?q='.$data->messageex[1]);
+		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, 'http://software.opensuse.org/search?q='.$data->messageex[1].'&baseproject=ALL');
 	}
-	//http://software.opensuse.org/search?q=
 	/*End the Bot-class*/
 }
 //Impostiamo e facciamo partire il bot
