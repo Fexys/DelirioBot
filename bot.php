@@ -45,6 +45,14 @@ class Delirio {
 			$this->scrivi_messaggio($irc, $data,'Non conosco questo comando, quindi fanculizzati da solo');
 		}
 	}
+	//Disattiva/Attiva l'insulto personalizzato
+	function stop( &$irc, &$data ) {
+		if( in_array($data->nick, $this->op) ) {
+			if($this->stop==false){$this->stop=true;}else{$this->stop=false;}
+		} else {
+			$this->scrivi_messaggio($irc, $data,'Chi ti credi di essere per darmi questi comandi?????');
+		}
+	}
 	//Saluto chi entra gentilmente
 	function onjoin_greeting( &$irc, &$data ) {
 		if( $data->nick == $irc->_nick ) {return;}
@@ -195,7 +203,7 @@ class Delirio {
 	}
 	//Lista dei comandi
 	function help( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !versione, !who, !insulta' );
+		$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !versione, !who, !insulta, !dado, !inalbera' );
 		$this->scrivi_messaggio($irc, $data,'Tool: !help, !versione, !github, !ls, !paste, !google, !deb, !rpm' );
 	}
 	//Versione
@@ -209,7 +217,7 @@ class Delirio {
 	//Utenti nel database
 	function who( &$irc, &$data ) {
 		global $bio_tot;
-		$this->scrivi_messaggio($irc, $data,'Utenti nel database: '.implode(', ', $bio_tot) );
+		$this->scrivi_messaggio($irc, $data,count($bio_tot).' Utenti nel database: '.implode(', ', $bio_tot) );
 	}
 	//Insulta
 	function insulta( &$irc, &$data ) {
@@ -253,16 +261,8 @@ class Delirio {
 	}
 	//Elenco Utenti
 	function ls( &$irc, &$data ) {
-		$nicklist=$irc->_updateIrcUser($data);
-		$this->scrivi_messaggio($irc, $data,'Utenti nel sistema: '.implode(', ', $this->remove_item_by_value($nicklist, "ChanServ")));
-	}
-	//Disattiva/Attiva l'insulto personalizzato
-	function stop( &$irc, &$data ) {
-		if( in_array($data->nick, $this->op) ) {
-			if($this->stop==false){$this->stop=true;}else{$this->stop=false;}
-		} else {
-			$this->scrivi_messaggio($irc, $data,'Chi ti credi di essere per darmi questi comandi?????');
-		}
+		$nicklist=$this->remove_item_by_value($irc->_updateIrcUser($data, "ChanServ"));
+		$this->scrivi_messaggio($irc, $data,count($nicklist).' Utenti nel sistema: '.implode(', ', $nicklist));
 	}
 	//Pastebin vari
 	function paste( &$irc, &$data ) {
@@ -286,7 +286,18 @@ class Delirio {
 	function rpm( &$irc, &$data ) {
 		$this->scrivi_messaggio($irc, $data,'http://software.opensuse.org/search?q='.$data->messageex[1].'&baseproject=ALL');
 	}
-
+	//Tira il dado
+	function dado( &$irc, &$data ) {
+		$this->scrivi_messaggio($irc, $data,'Ti devo dare '.rand(1, 6).' calci, preparati '.$data->nick);
+	}
+	//Inalbera
+	function inalbera( &$irc, &$data ) {
+		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+	}
 	/*End the Bot-class*/
 }
 //Impostiamo e facciamo partire il bot
@@ -299,6 +310,7 @@ $irc = new Net_SmartIRC( );
 $irc->setUseSockets( TRUE );
 $irc->setUserSyncing( TRUE );
 $irc->setChannelSyncing( TRUE );
+$irc->setSenddelay(600);
 //Configuriamo i vari comandi con le funzioni
 $irc->connect( 'irc.freenode.org', 6667 );
 $irc->registerActionhandler( SMARTIRC_TYPE_JOIN, '.*', $bot, 'onjoin_greeting' );
@@ -329,6 +341,8 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!paste', $bot, 'paste' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!google', $bot, 'google' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!deb', $bot, 'deb' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!rpm', $bot, 'rpm' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!dado', $bot, 'dado' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!inalbera', $bot, 'inalbera' );
 
 // nick , nome , realname , ident, boh
 $irc->login( 'ilDelirante', 'ilDelirante'.'delirio', 8, 'delirio', '' );

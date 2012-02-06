@@ -41,7 +41,7 @@ $bio['gigitux']['bio']="Sono un Nerd, amo l'informatica ed il mondo open-source.
 $bio['gigitux']['insulto'][]="Ti faccio conoscere 25 cm di simpatia se vieni qui";
 
 $bio['PTKDev']['bio']="Non so usare windows. Non mangio le mele. Lascio che i bit scorrano velocemente sul mio debian. Penso troppo, sono pazzo, sono semplicemente io: vaffanculo!";
-$bio['PTKDev']['insulto'][]="Ti faccio conoscere 25 cm di simpatia se vieni qui";
+$bio['PTKDev']['insulto'][]="Sei proprio incazzoso";
 
 $bio['vencizOn']['bio']="Studente di Informatica. Aspirante developer. Innamorato di Google. Pseudo blogger nel tempo libero.";
 $bio['vencizOn']['insulto'][]="L'unico tuo neurone soffre cosi tanto di depressione per la solitudine che ha scelto come amico immaginario la goccia di sodio della Lete, l'unica che secondo lui lo può capire questo è";
