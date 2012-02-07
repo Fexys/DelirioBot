@@ -203,7 +203,7 @@ class Delirio {
 	}
 	//Lista dei comandi
 	function help( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !versione, !who, !insulta, !dado, !inalbera' );
+		$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera' );
 		$this->scrivi_messaggio($irc, $data,'Tool: !help, !versione, !github, !ls, !paste, !google, !deb, !rpm' );
 	}
 	//Versione
@@ -290,7 +290,7 @@ class Delirio {
 	function dado( &$irc, &$data ) {
 		$this->scrivi_messaggio($irc, $data,'Ti devo dare '.rand(1, 6).' calci, preparati '.$data->nick);
 	}
-	//Inalbera
+	//Inalbera ***Da Vedere***
 	function inalbera( &$irc, &$data ) {
 		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
 		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);

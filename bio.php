@@ -27,7 +27,7 @@ $bio['blacktux']['insulto'][]="Sei l'anello mancante tra uomo e scimmia";
 $bio['ilDelirante']['bio']="Padre Mte90, Madre ignota. Questo ha creato in lui gravi turbe mentali.";
 $bio['ilDelirante']['insulto'][]="Non mi scassare le balle";
 $bio['ilDelirante']['insulto'][]="Ti piglio a sberle finchè non diventi bello e la vedo lunga";
-$bio['ilDelirante']['insulto'][]="Si vede che ti piace il tuo mestiere.. incassi tanto legnate";
+$bio['ilDelirante']['insulto'][]="Si vede che ti piace il tuo mestiere.. incassi tante legnate";
 
 $bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime.";
 $bio['picchio']['insulto'][]="Diventi cieco di questo passo";
