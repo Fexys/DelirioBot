@@ -36,7 +36,21 @@ class Delirio {
 	function scrivi_messaggio(&$irc, &$data, $message) {
 		$irc->message( SMARTIRC_TYPE_CHANNEL, $data->channel, $message);
 	}
-	//Verifica Funzione esistente
+	//Antiflood
+	function flood($data){
+	global $bio;
+	$poggiotempo=0;
+		if(isset($bio[$data->nick]['time'])){
+			$poggiotempo=$bio[$data->nick]['time'];
+		}
+		$bio[$data->nick]['time']= time();
+		if($bio[$data->nick]['time']-$poggiotempo<3){
+			return true;
+		}else {
+			return false;
+		}
+	}
+	//Verifica Funzione esistente e
 	function check( &$irc, &$data ) {
 		if($data->messageex[0][0]=='!'&&!in_array(str_replace("!","",$data->messageex[0]), get_class_methods($this))) {
 			$this->scrivi_messaggio($irc, $data,'Non conosco questo comando, quindi fanculizzati da solo');
@@ -189,6 +203,7 @@ class Delirio {
 	}
 	//Stampa la bio dell'utente o del parametro passato
 	function whoami( &$irc, &$data ) {
+		if(!$this->flood($data)){
 		global $bio;
 			if( isset( $data->messageex[1] ) && isset($bio[$data->messageex[1]]['bio'])) {
 				$this->scrivi_messaggio($irc, $data, $data->messageex[1].': '.$bio[$data->messageex[1]]['bio'] );
@@ -197,11 +212,14 @@ class Delirio {
 			}else{
 				$this->scrivi_messaggio($irc, $data,'Utente non inserito nel sistema. Tentativo di intrusione rilevato!' );
 			}
+		}
 	}
 	//Lista dei comandi
 	function help( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera' );
-		$this->scrivi_messaggio($irc, $data,'Tool: !help, !versione, !github, !ls, !paste, !google, !deb, !rpm' );
+		if(!$this->flood($data)){
+			$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera' );
+			$this->scrivi_messaggio($irc, $data,'Tool: !help, !versione, !github, !ls, !paste, !google, !deb, !rpm' );
+		}
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
@@ -213,8 +231,10 @@ class Delirio {
 	}
 	//Utenti nel database
 	function who( &$irc, &$data ) {
-		global $bio_tot;
-		$this->scrivi_messaggio($irc, $data,count($bio_tot).' Utenti nel database: '.implode(', ', $bio_tot) );
+		if(!$this->flood($data)){
+			global $bio_tot;
+			$this->scrivi_messaggio($irc, $data,count($bio_tot).' Utenti nel database: '.implode(', ', $bio_tot) );
+		}
 	}
 	//Insulta
 	function insulta( &$irc, &$data ) {
@@ -258,8 +278,10 @@ class Delirio {
 	}
 	//Elenco Utenti
 	function ls( &$irc, &$data ) {
-		$nicklist=$this->remove_item_by_value($irc->_updateIrcUser($data, "ChanServ"));
-		$this->scrivi_messaggio($irc, $data,count($nicklist).' Utenti nel sistema: '.implode(', ', $nicklist));
+		if(!$this->flood($data)){
+			$nicklist=$this->remove_item_by_value($irc->_updateIrcUser($data, "ChanServ"));
+			$this->scrivi_messaggio($irc, $data,count($nicklist).' Utenti nel sistema: '.implode(', ', $nicklist));
+		}
 	}
 	//Pastebin vari
 	function paste( &$irc, &$data ) {
@@ -267,25 +289,31 @@ class Delirio {
 	}
 	//Google
 	function google( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'http://www.google.it/search?q='.str_replace("!google ","",implode(' ',$data->messageex)));
+		if(!$this->flood($data)){
+			$this->scrivi_messaggio($irc, $data,'http://www.google.it/search?q='.str_replace("!google ","",implode(' ',$data->messageex)));
+		}
 	}
 	//DEB
 	function deb( &$irc, &$data ) {
-		if($data->messageex[1]=='-ubu') {
-			$this->scrivi_messaggio($irc, $data,'http://packages.ubuntu.com/search?keywords='.$data->messageex[2]);
-		}elseif(!isset($data->messageex[1])) {
-			$this->scrivi_messaggio($irc, $data,'!deb -ubu(per usare Ubuntu altrimenti Debian)');
-		}else{
-			$this->scrivi_messaggio($irc, $data,'http://packages.debian.org/search?keywords='.$data->messageex[1]);
+		if(!$this->flood($data)){
+			if($data->messageex[1]=='-ubu') {
+				$this->scrivi_messaggio($irc, $data,'http://packages.ubuntu.com/search?keywords='.$data->messageex[2]);
+			}elseif(!isset($data->messageex[1])) {
+				$this->scrivi_messaggio($irc, $data,'!deb -ubu(per usare Ubuntu altrimenti Debian)');
+			}else{
+				$this->scrivi_messaggio($irc, $data,'http://packages.debian.org/search?keywords='.$data->messageex[1]);
+			}
 		}
 	}
 	//RPM
 	function rpm( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'http://software.opensuse.org/search?q='.$data->messageex[1].'&baseproject=ALL');
+		if(!$this->flood($data)){
+			$this->scrivi_messaggio($irc, $data,'http://software.opensuse.org/search?q='.$data->messageex[1].'&baseproject=ALL');
+		}
 	}
 	//Tira il dado
 	function dado( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Ti devo dare '.rand(1, 6).' calci, preparati '.$data->nick);
+		$this->scrivi_messaggio($irc, $data,'Predi questi '.rand(1, 6).' calci '.$data->nick);
 	}
 	//Inalbera ***Da Vedere***
 	function inalbera( &$irc, &$data ) {
@@ -307,7 +335,7 @@ $irc = new Net_SmartIRC( );
 $irc->setUseSockets( TRUE );
 $irc->setUserSyncing( TRUE );
 $irc->setChannelSyncing( TRUE );
-$irc->setSenddelay(600);
+$irc->setSenddelay(500);
 //Configuriamo i vari comandi con le funzioni
 $irc->connect( 'irc.freenode.org', 6667 );
 $irc->registerActionhandler( SMARTIRC_TYPE_JOIN, '.*', $bot, 'onjoin_greeting' );

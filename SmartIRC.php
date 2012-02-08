@@ -2560,7 +2560,15 @@ class Net_SmartIRC_base
 	}
     return $nick;
     }
-
+    // Added by Mte90
+    function _GetIrcOp($data)
+    {
+	$nicklist = $this->channel[strtolower($data->channel)]->users;
+	foreach ($nicklist as &$value) {
+	if($value->op!=''){$nick[]=$value->nick;}
+	}
+    return $nick;
+    }
     function _removeIrcUser()
     {
     }
