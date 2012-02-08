@@ -36,7 +36,7 @@ Pestarti porta fortuna
 Mo te smonto e brucio il libbretto delle istruzioni
 Ti do uno schiaffo che ti levo l' audio
 Ti do fuoco per protesta
-Ti mollo una ceffa talmente forte che quando smetti di girare ti è già arrivata la pensione
+Ti mollo una ceffone talmente forte che quando smetti di girare ti è già arrivata la pensione
 Ti decompongo a forza di legnate
 Non te sputo in faccia sennò temprofumerei
 Perchè vuoi morire proprio oggi se con la salute che ti ritrovi potresti campa' altri due/tre giorni?
@@ -71,3 +71,6 @@ Senza di te il mondo sarebbe un posto migliore
 T.V.P = Ti Voglio Picchiare
 Sei così furbo che credi ancora che i tampax servono per il raffreddore
 Sei cosi ignorante che l'asino conta meglio di te
+Quando sei nato eri brutto, ma così brutto che hanno arrestato tua madre per favoreggiamento
+Guidi così male che alla tua auto hai aggiunto le rotelle di lato
+Hai così pochi capelli che usi uno stuzzicadenti come bigodino
