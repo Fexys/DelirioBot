@@ -4,7 +4,7 @@ global $bio, $bio_tot;
 
 $bio['Mte90']['bio']="Fan sfegatato di Debian e KDE. Superpotere: Sente la puzza di Gnome da lontano un chilometro.";
 $bio['Mte90']['insulto'][]="Ti predo a calci col piedone puzzoso";
-$bio['Mte90']['insulto'][]="Sempre a litigare con questa tastiera e usa il correttore automatico";
+$bio['Mte90']['insulto'][]="Sempre a litigare con questa tastiera, il correttore automatico è tuo amico";
 
 $bio['v2']['bio']="Nome in codice: V2. Ricercata e pericolosa Cyberpunker, psicolabile e squilibrata.";
 $bio['v2']['insulto'][]="Tagliati sti baffi";
@@ -33,6 +33,7 @@ $bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professioni
 $bio['picchio']['insulto'][]="Diventi cieco di questo passo";
 $bio['picchio']['insulto'][]="Ma io ti pacchio e anche forte";
 $bio['picchio']['insulto'][]="Sei cosi scemo che se vai al cinema e leggi 'vietato ai minori di 18' torni con 17 amici";
+$bio['picchio']['insulto'][]="Avrai anche una gran stima di Mte90 ma lui con te sta sempre spalle a muro!";
 
 $bio['alessandro1997']['bio']="Appassionato di informatica, programmazione, open source. E scrittura. Un paradosso vivente.";
 $bio['alessandro1997']['insulto'][]="sei brutto, ma così brutto che non ti sorridono neanche i sofficini";

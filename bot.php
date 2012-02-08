@@ -14,8 +14,6 @@ $chan = '#DeliriNotturni';
 
 // Classe con le funzioni del ilDelirante
 class Delirio {
-	//Variabile che conterrà i vari op
-	var $op = array();
 	//Variabile che conterrà i vari insulti
 	var $insulti = array();
 	//Variabile che blocca insulto personalizzato
@@ -24,7 +22,6 @@ class Delirio {
 	var $inalbera = 0;
 	//Settiamo le varie proprietà del bot
 	function setVar( ) {
-		$this->op = array_map('rtrim',file( 'op.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 		$this->insulti = array_map('rtrim',file( 'insulti.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 	}
 	//Rimuove elementi da array tramite il valore ***uso Interno***
@@ -47,7 +44,7 @@ class Delirio {
 	}
 	//Disattiva/Attiva l'insulto personalizzato
 	function stop( &$irc, &$data ) {
-		if( in_array($data->nick, $this->op) ) {
+		if( in_array($data->nick, $irc->_GetIrcOp($data)) ) {
 			if($this->stop==false){$this->stop=true;}else{$this->stop=false;}
 		} else {
 			$this->scrivi_messaggio($irc, $data,'Chi ti credi di essere per darmi questi comandi?????');
@@ -60,7 +57,7 @@ class Delirio {
 	}
 	//Spengo il bot
 	function shutdown( &$irc, &$data ) {
-		if( in_array($data->nick, $this->op) ) {
+		if( in_array($data->nick, $irc->_GetIrcOp($data)) ) {
 			$irc->quit('Addio mondo crudele!');
 		} else {
 			$this->scrivi_messaggio($irc, $data, 'Chi ti credi di essere per darmi questi comandi?????');
@@ -68,7 +65,7 @@ class Delirio {
 	}
 	//Kick
 	function kick( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
+		if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
 			if( isset( $data->messageex[1], $data->messageex[2] ) ) {
 				$nickname = $data->messageex[1];
 				$reason   = $data->messageex[2];
@@ -102,7 +99,7 @@ class Delirio {
 	}
 	//Devoice
 	function devoice( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
+		if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$nickname = $data->messageex[1];
 				$channel = $data->channel;
@@ -112,7 +109,7 @@ class Delirio {
 	}
 	//Op
 	function op( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
+		if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$nickname = $data->messageex[1];
 				$channel = $data->channel;
@@ -122,7 +119,7 @@ class Delirio {
 	}
 	//Deop
 	function deop( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
+		if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$nickname = $data->messageex[1];
 				$channel = $data->channel;
@@ -132,7 +129,7 @@ class Delirio {
 	}
 	//Join
 	function join( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
+		if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$channel = $data->messageex[1];
 				$irc->join( $channel );
@@ -141,7 +138,7 @@ class Delirio {
 	}
 	//Part ***Che cavolo è???***
 	function part( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
+		if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$channel = $data->messageex[1];
 				$irc->part( $channel );
@@ -150,7 +147,7 @@ class Delirio {
 	}
 	//Rejoin
 	function rejoin( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
+		if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$channel = $data->messageex[1];
 				$irc->part( $channel );
@@ -160,7 +157,7 @@ class Delirio {
 	}
 	//Ban ***deve essere insultante***
 	function ban( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
+		if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$hostmask = $data->messageex[1];
 				$channel = $data->channel;
@@ -174,7 +171,7 @@ class Delirio {
 	}
 	//Perchè cambiare il nick a ildelirante?
 	function nick( &$irc, &$data ) {
-		if( in_array( $data->nick, $this->op ) ) {
+		if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
 			if( isset( $data->messageex[1] ) ) {
 				$newnick = $data->messageex[1];
 				$channel = $data->channel;
@@ -208,7 +205,7 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.9' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.10' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
