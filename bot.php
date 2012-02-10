@@ -50,7 +50,7 @@ class Delirio {
 			return false;
 		}
 	}
-	//Verifica Funzione esistente e
+	//Verifica Funzione esistente
 	function check( &$irc, &$data ) {
 		if($data->messageex[0][0]=='!'&&!in_array(str_replace("!","",$data->messageex[0]), get_class_methods($this))) {
 			$this->scrivi_messaggio($irc, $data,'Non conosco questo comando, quindi fanculizzati da solo');
@@ -238,26 +238,28 @@ class Delirio {
 	}
 	//Insulta
 	function insulta( &$irc, &$data ) {
-		if( isset( $data->messageex[1] )) {
-			if($data->messageex[1]=='-c') {
-				$this->scrivi_messaggio($irc, $data,count($this->insulti).' insulti nel sistema');
-			}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)&&isset($data->messageex[2])) {
-				$this->scrivi_messaggio($irc, $data,$this->insulti[$data->messageex[1]].' '.$data->messageex[2]);
-			}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)) {
-				$this->scrivi_messaggio($irc, $data, $this->insulti[$data->messageex[1]]);
-			} else {
-				if(in_array($data->messageex[1], $irc->_updateIrcUser($data))) {
-					$this->scrivi_messaggio($irc, $data, $data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+		if(!$this->flood($data)){
+			if( isset( $data->messageex[1] )) {
+				if($data->messageex[1]=='-c') {
+					$this->scrivi_messaggio($irc, $data,count($this->insulti).' insulti nel sistema');
+				}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)&&isset($data->messageex[2])) {
+					$this->scrivi_messaggio($irc, $data,$this->insulti[$data->messageex[1]].' '.$data->messageex[2]);
+				}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)) {
+					$this->scrivi_messaggio($irc, $data, $this->insulti[$data->messageex[1]]);
+				} else {
+					if(in_array($data->messageex[1], $irc->_updateIrcUser($data))) {
+						$this->scrivi_messaggio($irc, $data, $data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+					}
 				}
+			} else {
+				$this->scrivi_messaggio($irc, $data,'-c Mostra il numero di insulti, !insulta NUMERO[non obbligatorio] NICK');
 			}
-		} else {
-			$this->scrivi_messaggio($irc, $data,'-c Mostra il numero di insulti, !insulta NUMERO[non obbligatorio] NICK');
 		}
 	}
 	//Insulto personalizzato a citazione
 	function insulto( &$irc, &$data ) {
 	if(rand(0, 20)==1&&$this->stop){$this->scrivi_messaggio($irc, $data,"Mi servono molti insulti personalizzati!");}
-		if($this->stop && $data->messageex[0][0]!='!'){
+	if($this->stop && $data->messageex[0][0]!='!'){
 		$messaggio=implode(' ',$data->messageex);
 		global $bio;
 			foreach($irc->_updateIrcUser($data) as $item){
