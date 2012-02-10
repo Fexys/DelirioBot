@@ -1,30 +1,38 @@
 Il Delirante 0.0.10
 
-basato su http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP
+Basato su http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP
 
 Bio presenti: 	Mte90,v2,gianguido,worst,toketin,quizzlo,blacktux,
 		ilDelirante,picchio,alessandro1997,gigitux,vencizOn,
 		turlando
 
-
 Features:
-Saluta
+Insulto a citazione
+Controllo comando inesistente
+Filtro antiflood
+Blocco Insulti
+
+Comandi:
+saluta
 whoami
 who
 ls
-insulta
-insulto a citazione
+insulto
 deb e rpm
 google
-Controllo comando inesistente
 dado
 inalbera
 
 Todo per 0.1:
 Comandi *nix
-filtro antiflood
-insulto ad uscita
+Insulto ad uscita
+ToDo
 
 Todo:
 Ultima visita
 Gestione Web
+
+Crediti:
+Sviluppatore:Mte90 @mte90net
+Aiuto nella programmazione: turlando, vencizOn
+Testing: Tutti gli utenti del chan <3
