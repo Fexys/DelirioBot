@@ -43,7 +43,7 @@ $bio['alessandro1997']['insulto'][]="sei brutto, ma così brutto che non ti sorr
 $bio['gigitux']['bio']="Sono un Nerd, amo l'informatica ed il mondo open-source. Mi piacciono i videogiochi.";
 $bio['gigitux']['insulto'][]="Ti faccio conoscere 25 cm di simpatia se vieni qui";
 
-$bio['PTKDev']['bio']="Non so usare windows. Non mangio le mele. Lascio che i bit scorrano velocemente sul mio debian. Penso troppo, sono pazzo, sono semplicemente io: vaffanculo!";
+$bio['PTKDev']['bio']="Non so usare windows. Non mangio le mele. Lascio che i bit scorrano velocemente sul mio debian. Penso troppo, sono pazzo, sono semplicemente io. #KickMe";
 $bio['PTKDev']['insulto'][]="Sei proprio incazzoso";
 $bio['PTKDev']['insulto'][]="Dott. Ing. Arch. On. Sen. Prof. Boss Gran Test. di Cazz. Figl. di Putt.";
 
@@ -68,6 +68,7 @@ foreach($bio as $key => $value) {
 $bio['v2_dev']=$bio['v2'];
 $bio['picchiopc']=$bio['picchio'];
 $bio['PTKDev-Droid']=$bio['PTKDev'];
+$bio['oniontux']=$bio['blacktux'];
 
 $bio = array_merge($bio,$bio_);
 

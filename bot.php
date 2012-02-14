@@ -70,7 +70,7 @@ class Delirio {
 		$this->scrivi_messaggio($irc, $data, 'Ciao '.$data->nick );
 	}
 	//Spengo il bot
-	function shutdown( &$irc, &$data ) {
+	function kill( &$irc, &$data ) {
 		if( in_array($data->nick, $irc->_GetIrcOp($data)) ) {
 			$irc->quit('Addio mondo crudele!');
 		} else {
@@ -344,7 +344,7 @@ $irc->registerActionhandler( SMARTIRC_TYPE_JOIN, '.*', $bot, 'onjoin_greeting' )
 $irc->registerActionhandler( SMARTIRC_TYPE_KICK, '.*', $bot, 'kick_response' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '.*', $bot, 'insulto' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!*', $bot, 'check' );
-$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!shutdown$', $bot, 'shutdown' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!kill$', $bot, 'kill' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!kick', $bot, 'kick' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!voice', $bot, 'voice' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!devoice', $bot, 'devoice' );
