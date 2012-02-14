@@ -15,7 +15,7 @@ Sei talmente brutto che le zanzare ti pungono ad occhi chiusi
 Come andò poi l'incidente? (quale incidente?) Perchè mi vorresti dire che sei nato così?!?!
 Sei talmente brutto che se i brutti iniziano a picchiarli alle 10.00 .. tu le prendi già dalle 8.00!!
 Hai il naso talmente lungo che se dici di no a tavola... sparecchi
-Fai talmente schifo che i tuoi capelli non cadono si suiciano
+Fai talmente schifo che i tuoi capelli non cadono si suicidano
 heilà, bella ragazza, esci con me? - no, io non faccio volontariato
 Sei così brutto che al prontosoccorso, per un taglio ad un dito, ti hanno detto:" chissà come è ridotta la macchina!
 Sei così brutto che quando ti guardi allo specchio, lo specchio preferisce riflettere un'altra persona!
@@ -24,7 +24,7 @@ Sei cosi' magro che quando fai la doccia devi centrare gli schizzi
 Sei cosi' magro che se c'e' vento devi andare in giro con le pietre nelle tasche.
 Segnati le ossa perchè adesso te le mischio
 Te tiro na cinquina e ti faccio girare così tanto che quando ti fermi i tuoi vestiti sono passati di moda
-Ti do' uno schiaffo che giri talmente tanto che ti arrestano per vagabondaggio
+Ti do' uno schiaffo che giri talmente tanto forte che ti arrestano per vagabondaggio
 Ti faccio un culo che se scoreggi in un sacco di coriandoli stiamo in carnevale per sei mesi!
 Ti do un pugno in testa che ti mischio i pensieri
 Ti faccio due occhi che, con il bambù in mano, il WWF ti protegge
