@@ -44,7 +44,7 @@ Quando t'acchiappo facciamo tutto un conto, e se ti ammazzo, andiamo pari!
 Sei così basso che devi fà l'orlo ai boxer
 Devi smetteterla di aggrovigliare i cavi del wireless!
 Sei cosi brutto ma cosi brutto che tua mamma appena ti ha fatto pensava che fossi uscito dal culo
-Sei cosi brutto che se mai ti dovessi spostare le calcolatrici comicerannoa dividere per 0
+Sei cosi brutto che se mai ti dovessi spostare le calcolatrici comiceranno a dividere per 0
 Le tue gambe sono così pelose che per farti la ceretta devi affittare un tagliaerba
 Le tue gambe sono così pelose che devi usare la spazzola per metterle in ordine
 Sono più bello io nudo che tu vestito
