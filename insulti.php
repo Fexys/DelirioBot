@@ -8,8 +8,8 @@ Sei così brutto che quando arrivi a un incrocio in macchina il semaforo diventa
 Sei talmente brutto che sei stato abbandonato in una discarica e quest'ultima ti ha rifiutato
 Sei cosi' brutto che nun te sorridono manco li sofficini
 Sei cosi' brutto che quando sei nato gli schiaffi li hanno dati a tua madre
-Sei tarmente brutto che sulla tomba te ce mettono na foto de spalle
-Sei tarmente brutto che sulla tomba te ce mettono la foto de n'arto!
+Sei talmente brutto che sulla tomba te ce mettono una foto de spalle
+Sei talmente brutto che sulla tomba te ce mettono la foto di un altro!
 Sei così brutto che se lanci il boomerang manco te ritorna
 Sei talmente brutto che le zanzare ti pungono ad occhi chiusi
 Come andò poi l'incidente? (quale incidente?) Perchè mi vorresti dire che sei nato così?!?!
@@ -17,11 +17,11 @@ Sei talmente brutto che se i brutti iniziano a picchiarli alle 10.00 .. tu le pr
 Hai il naso talmente lungo che se dici di no a tavola... sparecchi
 Fai talmente schifo che i tuoi capelli non cadono si suicidano
 heilà, bella ragazza, esci con me? - no, io non faccio volontariato
-Sei così brutto che al prontosoccorso, per un taglio ad un dito, ti hanno detto:" chissà come è ridotta la macchina!
+Sei così brutto che al pronto soccorso, per un taglio ad un dito, ti hanno detto:" chissà come è ridotta la macchina!"
 Sei così brutto che quando ti guardi allo specchio, lo specchio preferisce riflettere un'altra persona!
 Sei cosi' magro che il tuo pigiama c'ha na striscia sola
 Sei cosi' magro che quando fai la doccia devi centrare gli schizzi
-Sei cosi' magro che se c'e' vento devi andare in giro con le pietre nelle tasche.
+Sei cosi' magro che se c'e' vento devi andare in giro con le pietre nelle tasche
 Segnati le ossa perchè adesso te le mischio
 Te tiro na cinquina e ti faccio girare così tanto che quando ti fermi i tuoi vestiti sono passati di moda
 Ti do' uno schiaffo che giri talmente tanto forte che ti arrestano per vagabondaggio
@@ -34,7 +34,7 @@ Quando parli con me devi stare zitto!!
 Ti annodo gli arti così ti ricordi di non rompere
 Pestarti porta fortuna
 Mo te smonto e brucio il libretto delle istruzioni
-Ti do uno schiaffo che ti levo l' audio
+Ti do uno schiaffo che ti levo l'audio
 Ti do fuoco per protesta
 Ti mollo una ceffone talmente forte che quando smetti di girare ti è già arrivata la pensione
 Ti decompongo a forza di legnate
@@ -74,3 +74,27 @@ Sei cosi ignorante che l'asino conta meglio di te
 Quando sei nato eri brutto, ma così brutto che hanno arrestato tua madre per favoreggiamento
 Guidi così male che alla tua auto hai aggiunto le rotelle di lato
 Hai così pochi capelli che usi uno stuzzicadenti come bigodino
+Userò la tecnologia genetica per poterti picchiare maggiormente
+Meglio che uso un proxy sennò vengo a casa tua e ti meno
+"Ami la natura?". Lui: "Si' ".Nonostante lo scherzo che ti ha fatto???
+A te il cervello serve solo per impedire al cranio di accartocciarsi!
+Ma watt farad meter in coulomb da un ohm 1000 volt
+Abbraccia la tazza del cesso e cantagli : "non son degno di te"
+C'hai un alito che te pettina
+E' in partenza una pizza dal binario cinque
+Giamaica = Già mai cacato 'r cazzo
+Ragioni come il traduttore di Google e non accetti le correzioni
+Occhio che ti parcheggio le mani in faccia
+Se te piglio te riciclo
+Se te piglio te riduco così male che lo sfasciacarrozze chiude e il medico passa a fare i sudoku
+L'antivirus ti mette subito in quarantena senza passare per il via
+Te do un cazzotto che te spengo
+Te sparecchio la faccia
+Ti decompilo a forza di legnate
+Tu hai ancora la scritta Insert Brain ma tu continui a mettere i gettoni
+Ti suono meglio di un Jokebox
+Sei un esempio di stupidita' artificiale fatta in visual basic e pascal
+Sei così stonato che Maria De Filippi ti ha ingaggiato come antifurto per la macchina
+Tutti hanno diritto di dire scioccezze, per cui lasciane qualcuna agli altri
+Dio creò la luce e fu ben fatto, poi creò notte e fu ben fatto, creò te e stava fatto
+La polizia sta ricercando una persona sexy, intelligente, affascinante, di bella presenza... e che faccia l'amore da Dio! Tu sei al sicuro... ma io dove mi nascondo?
