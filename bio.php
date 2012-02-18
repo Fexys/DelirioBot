@@ -3,8 +3,9 @@
 global $bio, $bio_tot;
 
 $bio['Mte90']['bio']="Fan sfegatato di Debian e KDE. Superpotere: Sente la puzza di Gnome da lontano un chilometro.";
-$bio['Mte90']['insulto'][]="Ti predo a calci col piedone puzzoso";
+$bio['Mte90']['insulto'][]="Ti prendo a calci col piedone puzzoso";
 $bio['Mte90']['insulto'][]="Sempre a litigare con questa tastiera, il correttore automatico è tuo amico";
+$bio['Mte90']['insulto'][]="Non fare il figo che alla prima occasione ti gorgo come una zapogna austroirlandese azteca";
 
 $bio['v2']['bio']="Nome in codice: V2. Ricercata e pericolosa Cyberpunker, psicolabile e squilibrata.";
 $bio['v2']['insulto'][]="Tagliati sti baffi";
@@ -24,6 +25,7 @@ $bio['quizzlo']['insulto'][]="Ma ti gentoizzo io <3";
 $bio['blacktux']['bio']="Stupratore seriale di xterm. Adulatore di awesomewm. Masticatore di chip music. Nerd girls lover.";
 $bio['blacktux']['insulto'][]="Sei l'anello mancante tra uomo e scimmia";
 $bio['blacktux']['insulto'][]="Questo mette bocca dappertutto peggio di [signorine in tangenziale che fanno yeye]";
+$bio['blacktux']['insulto'][]="Sei bello come una cipolla, quando ti guardo mi viene da piangere";
 
 $bio['ilDelirante']['bio']="Padre Mte90, Madre ignota. Questo ha creato in lui gravi turbe mentali.";
 $bio['ilDelirante']['insulto'][]="Non mi scassare le balle";
@@ -58,6 +60,9 @@ $bio['turlando']['insulto'][]="Ti faccio conoscere 25 cm di simpatia se vieni qu
 
 $bio['Fexys']['bio']="Sono un Mac che usa Linux ma non si capisce il perchè. Quando mi hanno internato per turbe mentali non sapevano cosa fare di me e adesso sono qui.";
 $bio['Fexys']['insulto'][]="Non insultare il Gran Cerimoniere, pestalo direttamente con il cric";
+
+$bio['Nanetta']['bio']="Adoro smontare i pc, mi fa rilassare ma in genere sono pazza.";
+$bio['Nanetta']['insulto'][]="Non avrai sconti quindi ti insulterà qualcun altro per me che ho da fare";
 
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;
