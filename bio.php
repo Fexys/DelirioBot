@@ -28,8 +28,9 @@ $bio['blacktux']['insulto'][]="Questo mette bocca dappertutto peggio di [signori
 $bio['ilDelirante']['bio']="Padre Mte90, Madre ignota. Questo ha creato in lui gravi turbe mentali.";
 $bio['ilDelirante']['insulto'][]="Non mi scassare le balle";
 $bio['ilDelirante']['insulto'][]="Ti piglio a sberle finchè non diventi bello e la vedo lunga";
-$bio['ilDelirante']['insulto'][]="Si vede che ti piace il tuo mestiere.. incassi tante legnate";
+$bio['ilDelirante']['insulto'][]="Si vede che ti piace il tuo mestiere... incassi tante legnate";
 $bio['ilDelirante']['insulto'][]="Ti stacco le dita e ci gioco a Shangai";
+$bio['ilDelirante']['insulto'][]="Ogni scarrafone è bello a mamma soja <3";
 
 $bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime.";
 $bio['picchio']['insulto'][]="Diventi cieco di questo passo";
@@ -38,7 +39,7 @@ $bio['picchio']['insulto'][]="Sei cosi scemo che se vai al cinema e leggi 'vieta
 $bio['picchio']['insulto'][]="Avrai anche una gran stima di Mte90 ma lui con te sta sempre spalle a muro!";
 
 $bio['alessandro1997']['bio']="Appassionato di informatica, programmazione, open source. E scrittura. Un paradosso vivente.";
-$bio['alessandro1997']['insulto'][]="sei brutto, ma così brutto che non ti sorridono neanche i sofficini";
+$bio['alessandro1997']['insulto'][]="Sei brutto, ma così brutto che non ti sorridono neanche i sofficini";
 
 $bio['gigitux']['bio']="Sono un Nerd, amo l'informatica ed il mondo open-source. Mi piacciono i videogiochi.";
 $bio['gigitux']['insulto'][]="Ti faccio conoscere 25 cm di simpatia se vieni qui";
@@ -55,13 +56,17 @@ $bio['turlando']['insulto'][]="Prima di conoscerti ero sull'orlo del precipizio.
 $bio['turlando']['insulto'][]="Sei simpatico come una famiglia di ricci intu u culu";
 $bio['turlando']['insulto'][]="Ti faccio conoscere 25 cm di simpatia se vieni qui";
 
+$bio['Fexys']['bio']="Sono un Mac che usa Linux ma non si capisce il perchè. Quando mi hanno internato per turbe mentali non sapevano cosa fare di me e adesso sono qui.";
+$bio['Fexys']['insulto'][]="Non insultare il Gran Cerimoniere, pestalo direttamente con il cric";
+
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;
 }
 
-/* supporto per i nick uguali ma con _ */
+/* supporto per i nick uguali ma con _ e minuscoli */
 foreach($bio as $key => $value) {
     $bio_[$key."_"]=$value;
+    $bio_[strtolower($key)]=$value;
 }
 
 //Supporto nick diversi casi speciali
