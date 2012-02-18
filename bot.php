@@ -56,7 +56,8 @@ class Delirio {
 			$this->scrivi_messaggio($irc, $data,'Non conosco questo comando, quindi fanculizzati da solo');
 		}
 	}
-	//Disattiva/Attiva l'insulto personalizzato
+	//Disattiva/Attiva l'insulto personalizzato solo gli olol
+
 	function stop( &$irc, &$data ) {
 		if( in_array($data->nick, $irc->_GetIrcOp($data)) ) {
 			if($this->stop==false){$this->stop=true;}else{$this->stop=false;}
@@ -208,7 +209,7 @@ class Delirio {
 			if( isset( $data->messageex[1] ) && isset($bio[$data->messageex[1]]['bio'])) {
 				$this->scrivi_messaggio($irc, $data, $data->messageex[1].': '.$bio[$data->messageex[1]]['bio'] );
 			} elseif(!isset($data->messageex[1]) && isset($bio[$data->nick]['bio'])) {
-				$this->scrivi_messaggio($irc, $data,$data->nick.': '.$bio[$data->nick]['bio'] );
+				$this->scrivi_messaggio($irc, $data,$data->nick.': '.$bio_[$data->nick]['bio'] );
 			}else{
 				$this->scrivi_messaggio($irc, $data,'Utente non inserito nel sistema. Tentativo di intrusione rilevato!' );
 			}
@@ -223,7 +224,7 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.10' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.11' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {

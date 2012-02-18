@@ -1,4 +1,4 @@
-Il Delirante 0.0.10
+Il Delirante 0.0.11
 
 Basato su http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP
 
@@ -25,11 +25,10 @@ inalbera
 
 Todo per 0.1:
 Comandi *nix
-Insulto ad uscita
+Log
 
 Todo:
 Ultima visita
-Gestione Web
 
 Crediti:
 Sviluppatore:Mte90 @mte90net

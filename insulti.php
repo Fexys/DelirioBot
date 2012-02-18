@@ -33,7 +33,7 @@ Lo sa tua mamma che stanotte dormi all' ospedale?
 Quando parli con me devi stare zitto!!
 Ti annodo gli arti così ti ricordi di non rompere
 Pestarti porta fortuna
-Mo te smonto e brucio il libbretto delle istruzioni
+Mo te smonto e brucio il libretto delle istruzioni
 Ti do uno schiaffo che ti levo l' audio
 Ti do fuoco per protesta
 Ti mollo una ceffone talmente forte che quando smetti di girare ti è già arrivata la pensione
