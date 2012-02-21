@@ -209,7 +209,7 @@ class Delirio {
 			if( isset( $data->messageex[1] ) && isset($bio[$data->messageex[1]]['bio'])) {
 				$this->scrivi_messaggio($irc, $data, $data->messageex[1].': '.$bio[$data->messageex[1]]['bio'] );
 			} elseif(!isset($data->messageex[1]) && isset($bio[$data->nick]['bio'])) {
-				$this->scrivi_messaggio($irc, $data,$data->nick.': '.$bio_[$data->nick]['bio'] );
+				$this->scrivi_messaggio($irc, $data,$data->nick.': '.$bio[$data->nick]['bio'] );
 			}else{
 				$this->scrivi_messaggio($irc, $data,'Utente non inserito nel sistema. Tentativo di intrusione rilevato!' );
 			}
@@ -224,7 +224,7 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.11' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.12' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -299,7 +299,7 @@ class Delirio {
 	//DEB
 	function deb( &$irc, &$data ) {
 		if(!$this->flood($data)){
-			if($data->messageex[1]=='-ubu') {
+			if($data->messageex[1]=='-ubu'&&isset($data->messageex[2])) {
 				$this->scrivi_messaggio($irc, $data,'http://packages.ubuntu.com/search?keywords='.$data->messageex[2]);
 			}elseif(!isset($data->messageex[1])) {
 				$this->scrivi_messaggio($irc, $data,'!deb -ubu(per usare Ubuntu altrimenti Debian)');
