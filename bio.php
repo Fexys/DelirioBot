@@ -64,6 +64,9 @@ $bio['Fexys']['insulto'][]="Non insultare il Gran Cerimoniere, pestalo direttame
 $bio['Nanetta']['bio']="Adoro smontare i pc, mi fa rilassare ma in genere sono pazza.";
 $bio['Nanetta']['insulto'][]="Non avrai sconti quindi ti insulterà qualcun altro per me che ho da fare";
 
+$bio['j1g3n']['bio']="Linuxaro dalla culla, sono scritto in C, e l'informatica è il mio linguaggio. Sono da internare perchè pazzo... Sento le voci..";
+$bio['j1g3n']['insulto'][]="Spegni il televisore e le voci non le sentirai più";
+
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;
 }
@@ -79,6 +82,7 @@ $bio['v2_dev']=$bio['v2'];
 $bio['picchiopc']=$bio['picchio'];
 $bio['PTKDev-Droid']=$bio['PTKDev'];
 $bio['oniontux']=$bio['blacktux'];
+$bio['Miu']=$bio['Nanetta'];
 
 $bio = array_merge($bio,$bio_);
 
