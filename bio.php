@@ -33,12 +33,13 @@ $bio['ilDelirante']['insulto'][]="Ti piglio a sberle finchè non diventi bello e
 $bio['ilDelirante']['insulto'][]="Si vede che ti piace il tuo mestiere... incassi tante legnate";
 $bio['ilDelirante']['insulto'][]="Ti stacco le dita e ci gioco a Shangai";
 $bio['ilDelirante']['insulto'][]="Ogni scarrafone è bello a mamma soja <3";
+$bio['ilDelirante']['insulto'][]="Girati dall'altra parte!  I miei occhi stavano crepandosi!";
 
 $bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime.";
 $bio['picchio']['insulto'][]="Diventi cieco di questo passo";
 $bio['picchio']['insulto'][]="Ma io ti pacchio e anche forte";
 $bio['picchio']['insulto'][]="Sei cosi scemo che se vai al cinema e leggi 'vietato ai minori di 18' torni con 17 amici";
-$bio['picchio']['insulto'][]="Avrai anche una gran stima di Mte90 ma lui con te sta sempre spalle a muro!";
+$bio['picchio']['insulto'][]="Povero caro, lo sapevo che prima o poi ti saresti slogato il polso, a furia di trafficare con quel computer";
 
 $bio['alessandro1997']['bio']="Appassionato di informatica, programmazione, open source. E scrittura. Un paradosso vivente.";
 $bio['alessandro1997']['insulto'][]="Sei brutto, ma così brutto che non ti sorridono neanche i sofficini";

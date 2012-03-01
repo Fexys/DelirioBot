@@ -57,7 +57,6 @@ class Delirio {
 		}
 	}
 	//Disattiva/Attiva l'insulto personalizzato solo gli olol
-
 	function stop( &$irc, &$data ) {
 		if( in_array($data->nick, $irc->_GetIrcOp($data)) ) {
 			if($this->stop==false){$this->stop=true;}else{$this->stop=false;}
@@ -224,7 +223,7 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.12' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.13' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -326,6 +325,15 @@ class Delirio {
 		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
 		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
 	}
+	//Battezza
+	function battezza( &$irc, &$data ) {
+	if( in_array( $data->nick, $irc->_GetIrcOp($data) ) ) {
+			if( isset( $data->messageex[1] ) ) {
+				$this->scrivi_messaggio($irc, $data, $data->messageex[1].' ti battezzo nel nome del channel, delle puppe e dello spirito perverso. A te insulto iniziandoti a questa comunità delirante. Vai in pace ed espandi il nostro credo.' );
+				$this->insulta( $irc, $data );
+			}
+		}
+	}
 	/*End the Bot-class*/
 }
 //Impostiamo e facciamo partire il bot
@@ -371,6 +379,7 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!deb', $bot, 'deb' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!rpm', $bot, 'rpm' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!dado', $bot, 'dado' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!inalbera', $bot, 'inalbera' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!battezza', $bot, 'battezza' );
 
 // nick , nome , realname , ident, boh
 $irc->login( 'ilDelirante', 'ilDelirante'.'delirio', 8, 'delirio', '' );

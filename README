@@ -1,4 +1,4 @@
-Il Delirante 0.0.12
+Il Delirante 0.0.13
 
 Basato su http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP
 
@@ -22,10 +22,11 @@ deb e rpm
 google
 dado
 inalbera
+battezza
 
 Todo per 0.1:
 Comandi *nix
-Log
+
 
 Todo:
 Ultima visita

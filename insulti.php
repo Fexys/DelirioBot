@@ -16,7 +16,7 @@ Come andò poi l'incidente? (quale incidente?) Perchè mi vorresti dire che sei 
 Sei talmente brutto che se i brutti iniziano a picchiarli alle 10.00 .. tu le prendi già dalle 8.00!!
 Hai il naso talmente lungo che se dici di no a tavola... sparecchi
 Fai talmente schifo che i tuoi capelli non cadono si suicidano
-heilà, bella ragazza, esci con me? - no, io non faccio volontariato
+Heilà, bella ragazza, esci con me? - No, io non faccio volontariato
 Sei così brutto che al pronto soccorso, per un taglio ad un dito, ti hanno detto:" chissà come è ridotta la macchina!"
 Sei così brutto che quando ti guardi allo specchio, lo specchio preferisce riflettere un'altra persona!
 Sei cosi' magro che il tuo pigiama c'ha na striscia sola
@@ -91,10 +91,18 @@ L'antivirus ti mette subito in quarantena senza passare per il via
 Te do un cazzotto che te spengo
 Te sparecchio la faccia
 Ti decompilo a forza di legnate
-Tu hai ancora la scritta Insert Brain ma tu continui a mettere i gettoni
+Hai ancora la scritta Insert Brain ma tu continui a mettere i gettoni
 Ti suono meglio di un Jokebox
 Sei un esempio di stupidita' artificiale fatta in visual basic e pascal
 Sei così stonato che Maria De Filippi ti ha ingaggiato come antifurto per la macchina
 Tutti hanno diritto di dire scioccezze, per cui lasciane qualcuna agli altri
 Dio creò la luce e fu ben fatto, poi creò notte e fu ben fatto, creò te e stava fatto
 La polizia sta ricercando una persona sexy, intelligente, affascinante, di bella presenza... e che faccia l'amore da Dio! Tu sei al sicuro... ma io dove mi nascondo?
+è inutile che ti fai crescere la barba, anche se ti esce dal cervello non diventi piu furbo
+Hai visto l'anime? Quale anime? L'anime de li mortacci tua!
+Sei lento più della linea 56k
+Sei così brutto che tua madre quand'eri piccolo ti mandava col passeggino radiocomandato
+Piccolo figlio di buona scheda madre e di processore sfasato
+Sei talmente sfigato che in Super Mario riusciresti a perdere vite contro un funghetto
+Sei così grasso che la tua foto pesa 8 gigabyte
+Hai preso un virus nel pc leggendo Topolino
