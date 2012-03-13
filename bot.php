@@ -223,7 +223,7 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.13' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.14' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -247,8 +247,10 @@ class Delirio {
 				}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)) {
 					$this->scrivi_messaggio($irc, $data, $this->insulti[$data->messageex[1]]);
 				} else {
-					if(in_array($data->messageex[1], $irc->_updateIrcUser($data))) {
+					if(in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1]!='ilDelirante') {
 						$this->scrivi_messaggio($irc, $data, $data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+					}elseif(in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1]=='ilDelirante') {
+						$this->scrivi_messaggio($irc, $data, $data->nick.' '.$this->insulti[array_rand($this->insulti)]);
 					}
 				}
 			} else {
@@ -317,13 +319,22 @@ class Delirio {
 	function dado( &$irc, &$data ) {
 		$this->scrivi_messaggio($irc, $data,'Predi questi '.rand(1, 6).' calci '.$data->nick);
 	}
-	//Inalbera ***Da Vedere***
+	//Inalbera
 	function inalbera( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
-		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
-		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
-		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
-		$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+		if(in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1]!='ilDelirante') {
+			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+		}elseif(in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1]=='ilDelirante') {
+			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+		}
+
 	}
 	//Battezza
 	function battezza( &$irc, &$data ) {
