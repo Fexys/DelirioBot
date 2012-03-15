@@ -32,8 +32,9 @@ $bio['ilDelirante']['insulto'][]="Non mi scassare le balle";
 $bio['ilDelirante']['insulto'][]="Ti piglio a sberle finchè non diventi bello e la vedo lunga";
 $bio['ilDelirante']['insulto'][]="Si vede che ti piace il tuo mestiere... incassi tante legnate";
 $bio['ilDelirante']['insulto'][]="Ti stacco le dita e ci gioco a Shangai";
-$bio['ilDelirante']['insulto'][]="Ogni scarrafone è bello a mamma soja <3";
+$bio['ilDelirante']['insulto'][]="Ma in tutti i posti in cui potevi rompe le palle proprio qua dovevi venire??";
 $bio['ilDelirante']['insulto'][]="Girati dall'altra parte!  I miei occhi stavano crepandosi!";
+$bio['ilDelirante']['insulto'][]="In arrivo un pugno sul binario 5 per te";
 
 $bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime.";
 $bio['picchio']['insulto'][]="Diventi cieco di questo passo";
@@ -83,6 +84,7 @@ $bio['v2_dev']=$bio['v2'];
 $bio['picchiopc']=$bio['picchio'];
 $bio['PTKDev-Droid']=$bio['PTKDev'];
 $bio['oniontux']=$bio['blacktux'];
+$bio['onion2x']=$bio['blacktux'];
 $bio['Miu']=$bio['Nanetta'];
 
 $bio = array_merge($bio,$bio_);

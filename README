@@ -1,4 +1,4 @@
-Il Delirante 0.0.14
+Il Delirante 0.0.15
 
 Basato su http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP
 
@@ -11,6 +11,7 @@ Insulto a citazione
 Controllo comando inesistente
 Filtro antiflood
 Blocco Insulti
+Verifica stato Utente all'entrata
 
 Comandi:
 saluta
@@ -23,10 +24,12 @@ google
 dado
 inalbera
 battezza
+birra
+unodinoi
+muori
 
 Todo per 0.1:
 Comandi *nix
-
 
 Todo:
 Ultima visita
