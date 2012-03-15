@@ -106,3 +106,15 @@ Piccolo figlio di buona scheda madre e di processore sfasato
 Sei talmente sfigato che in Super Mario riusciresti a perdere vite contro un funghetto
 Sei così grasso che la tua foto pesa 8 gigabyte
 Hai preso un virus nel pc leggendo Topolino
+Vai a giocare fuori che ci sono i tombini aperti
+Neanche fotosciop può fare miracoli con te
+Hai una pagina tutta tua su Nonciclopedia, peccato che l'abbiano censurata non seguiva le loro norme
+Potresti fare il manichino dei crash test tanto potresti solo migliorare
+Quando ti fotografano la macchinetta entra in modalità censura altrimenti si rompe
+La tua distro linux ti rileva come virus per quanto sei messo male
+Il nostro scemo del chan è
+Hai un paio di occhiali da sole? Te li faccio io a suon di pugni
+Su di te non si può nemmeno fare un fsck l'unica soluzione è formattarti
+Tu sei un grosso bug all'interno della matrice
+Il mio decompilatore è il tosaerba che ti passerò sopra
+Quando ti ha visto Stallman ha capito che non tutto deve essere libero
