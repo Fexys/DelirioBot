@@ -71,7 +71,7 @@ class Delirio {
 		if( $data->nick == $irc->_nick ) {return;}
 		global $bio;
 		$present = "Non sei presente nel nostro sistema!! Insultatelo nao!";
-		if(in_array($data->nick,$bio)){
+		if(isset($bio[$data->nick])){
 			$present = "Puoi prendere la birra gratis dal frigo bar";
 			if(count($bio[$data->nick]['insulto'])<3){
 				$present = "Hai meno di 4 insulti personali, per te niente Birra solo insulti";
@@ -364,13 +364,15 @@ class Delirio {
 	//Birra
 	function birra( &$irc, &$data ) {
 	global $bio;
-		if(count($bio[$data->nick]['insulto'])<3 && in_array($data->nick,$bio)){
+		if(count($bio[$data->nick]['insulto'])<3 && isset($bio[$data->nick])){
 			$this->scrivi_messaggio($irc, $data,'A te niente birra brutto stronzetto, senza insulti personali non vai da nessuna parte');
-			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
-		}else if(!in_array($data->nick,$bio_tot)){
+			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+		}else if(!isset($bio[$data->nick])){
 			$this->scrivi_messaggio($irc, $data,'Tu vorresti la nostra birra?? Non sei nel database brutta pustola');
-			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
-			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+		} else {
+			$this->scrivi_messaggio($irc, $data,'Eccoti una bella birra fredda marchio Delirio!');
 		}
 	}
 	//Morte
