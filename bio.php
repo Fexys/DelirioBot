@@ -35,6 +35,7 @@ $bio['ilDelirante']['insulto'][]="Ti stacco le dita e ci gioco a Shangai";
 $bio['ilDelirante']['insulto'][]="Ma in tutti i posti in cui potevi rompe le palle proprio qua dovevi venire??";
 $bio['ilDelirante']['insulto'][]="Girati dall'altra parte!  I miei occhi stavano crepandosi!";
 $bio['ilDelirante']['insulto'][]="In arrivo un pugno sul binario 5 per te";
+$bio['ilDelirante']['insulto'][]="Aspetta che accendo il segna pugni e ti gorgo";
 
 $bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime.";
 $bio['picchio']['insulto'][]="Diventi cieco di questo passo";
@@ -76,6 +77,7 @@ foreach($bio as $key => $value) {
 /* supporto per i nick uguali ma con _ e minuscoli */
 foreach($bio as $key => $value) {
     $bio_[$key."_"]=$value;
+    $bio_["_".$key]=$value;
     $bio_[strtolower($key)]=$value;
 }
 

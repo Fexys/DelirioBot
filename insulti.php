@@ -118,3 +118,6 @@ Su di te non si può nemmeno fare un fsck l'unica soluzione è formattarti
 Tu sei un grosso bug all'interno della matrice
 Il mio decompilatore è il tosaerba che ti passerò sopra
 Quando ti ha visto Stallman ha capito che non tutto deve essere libero
+Sei come un cd di Gigi D'Alessio, un rifiuto non riciclabile
+Sei così brutto che se ti butto nel cestino vieni mandato all'inceneritore
+Su 9GAG ti avevano fatto un Meme ma ti hanno censurato perchè sennò si infettava il sito

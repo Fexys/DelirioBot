@@ -61,7 +61,8 @@ class Delirio {
 	//Disattiva/Attiva l'insulto personalizzato solo gli op
 	function stop( &$irc, &$data ) {
 		if( in_array($data->nick, $irc->_GetIrcOp($data)) ) {
-			if($this->stop==false){$this->stop=true;}else{$this->stop=false;}
+			if($this->stop==false){$this->stop=true;$this->scrivi_messaggio($irc, $data,'Adesso vi insulto a tutti Muahahahahah');}
+			else{$this->stop=false;$this->scrivi_messaggio($irc, $data,'Mi sono stufato per adesso di insultarvi');}
 		} else {
 			$this->scrivi_messaggio($irc, $data,'Chi ti credi di essere per darmi questi comandi?????');
 		}
@@ -97,18 +98,16 @@ class Delirio {
 				$irc->kick( $channel, $nickname, $reason );
 			}
 			else {
-				$irc->message( $data->type, $data->nick, 'Invalid Parameter' );
-				$irc->message( $data->type, $data->nick, 'use: !kick $nick' );
+				$this->scrivi_messaggio($irc, $data, 'Sintassi comando errata: !kick $nick ragione' );
 			}
 		}
 	}
 	//Se il bot è kikato rientra
 	function kick_response( &$irc, &$data ) {
 		//if bot is kicked
-
 		if( $data->nick == $irc->_nick ) {
 			$irc->join( array( $chan ) );
-			$this->scrivi_messaggio($irc, $data, 'dont kick me... please' );
+			$this->scrivi_messaggio($irc, $data, '-1 :-P' );
 			Return;
 		}
 	}
@@ -227,17 +226,17 @@ class Delirio {
 	//Lista dei comandi
 	function help( &$irc, &$data ) {
 		if(!$this->flood($data)){
-			$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera, !noi, !birra, !muori' );
-			$this->scrivi_messaggio($irc, $data,'Tool: !help, !versione, !github, !ls, !paste, !google, !deb, !rpm' );
+			$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera, !noi, !birra, !muori, !gaio' );
+			$this->scrivi_messaggio($irc, $data,'Tool: !help, !versione, !github, !blog, !ls, !paste, !google, !deb, !rpm' );
 		}
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.15' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.16' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data, 'Sorgenti: https://github.com/Mte90/Delirante' );
+		$this->scrivi_messaggio($irc, $data, 'Sorgenti: https://github.com/Mte90/Delirante, fate ticket a volontà!' );
 	}
 	//Utenti nel database
 	function who( &$irc, &$data ) {
@@ -270,7 +269,7 @@ class Delirio {
 	}
 	//Insulto personalizzato a citazione
 	function insulto( &$irc, &$data ) {
-	if(rand(0, 20)==1&&$this->stop){$this->scrivi_messaggio($irc, $data,"Mi servono molti insulti personalizzati!");}
+	if(rand(0, 20)==1&&$this->stop){$this->scrivi_messaggio($irc, $data,"Mi servono molti insulti personalizzati brutti pescivendoli del cacchio!");}
 	if($this->stop && $data->messageex[0][0]!='!'){
 		$messaggio=implode(' ',$data->messageex);
 		global $bio;
@@ -365,7 +364,10 @@ class Delirio {
 	//Birra
 	function birra( &$irc, &$data ) {
 	global $bio;
-		if(count($bio[$data->nick]['insulto'])<3 && isset($bio[$data->nick])){
+		if( isset( $data->messageex[1] ) ) {
+			$this->scrivi_messaggio($irc, $data,$data->messageex[1]. ' Eccoti una bella birra fredda marchio Delirio offerta da '.$data->nick.' !');
+			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
+		}else if(count($bio[$data->nick]['insulto'])<3 && isset($bio[$data->nick])){
 			$this->scrivi_messaggio($irc, $data,'A te niente birra brutto stronzetto, senza insulti personali non vai da nessuna parte');
 			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
 		}else if(!isset($bio[$data->nick])){
@@ -384,6 +386,15 @@ class Delirio {
 		}elseif(in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1]=='ilDelirante') {
 			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->morte[array_rand($this->morte)]);
 		}
+	}
+	//Gaio
+	function gaio( &$irc, &$data ) {
+		$poggio = $irc->_updateIrcUser($data);
+		$this->scrivi_messaggio($irc, $data,'Il gay del giorno è '.$poggio[array_rand($poggio,1)]);
+	}
+	//Blog
+	function blog( &$irc, &$data ) {
+		$this->scrivi_messaggio($irc, $data,'Casa dolce casa... http://delirinotturni.tumblr.com/');
 	}
 	/*End the Bot-class*/
 }
@@ -434,7 +445,8 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!battezza', $bot, 'battezz
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!noi', $bot, 'noi' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!birra', $bot, 'birra' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!muori', $bot, 'muori' );
-
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!gaio', $bot, 'gaio' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!blog', $bot, 'blog' );
 // nick , nome , realname , ident, boh
 $irc->login( 'ilDelirante', 'ilDelirante'.'delirio', 8, 'delirio', '' );
 $irc->join( $chan );
