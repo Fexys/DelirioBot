@@ -121,3 +121,4 @@ Quando ti ha visto Stallman ha capito che non tutto deve essere libero
 Sei come un cd di Gigi D'Alessio, un rifiuto non riciclabile
 Sei così brutto che se ti butto nel cestino vieni mandato all'inceneritore
 Su 9GAG ti avevano fatto un Meme ma ti hanno censurato perchè sennò si infettava il sito
+Quando ti vedo mi fai venire voglia di usare windows

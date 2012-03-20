@@ -33,7 +33,7 @@ $bio['ilDelirante']['insulto'][]="Ti piglio a sberle finchè non diventi bello e
 $bio['ilDelirante']['insulto'][]="Si vede che ti piace il tuo mestiere... incassi tante legnate";
 $bio['ilDelirante']['insulto'][]="Ti stacco le dita e ci gioco a Shangai";
 $bio['ilDelirante']['insulto'][]="Ma in tutti i posti in cui potevi rompe le palle proprio qua dovevi venire??";
-$bio['ilDelirante']['insulto'][]="Girati dall'altra parte!  I miei occhi stavano crepandosi!";
+$bio['ilDelirante']['insulto'][]="Girati dall'altra parte! I miei occhi stavano cecando!";
 $bio['ilDelirante']['insulto'][]="In arrivo un pugno sul binario 5 per te";
 $bio['ilDelirante']['insulto'][]="Aspetta che accendo il segna pugni e ti gorgo";
 
@@ -63,11 +63,13 @@ $bio['turlando']['insulto'][]="Ti faccio conoscere 25 cm di simpatia se vieni qu
 
 $bio['Fexys']['bio']="Sono un Mac che usa Linux ma non si capisce il perchè. Quando mi hanno internato per turbe mentali non sapevano cosa fare di me e adesso sono qui.";
 $bio['Fexys']['insulto'][]="Non insultare il Gran Cerimoniere, pestalo direttamente con il cric";
+$bio['Fexys']['insulto'][]="Tu e il BNC che non ti funziona";
+$bio['Fexys']['insulto'][]="Ho letto robe che le suore avrebbero fatto meglio...";
 
 $bio['Nanetta']['bio']="Adoro smontare i pc, mi fa rilassare ma in genere sono pazza.";
 $bio['Nanetta']['insulto'][]="Non avrai sconti quindi ti insulterà qualcun altro per me che ho da fare";
 
-$bio['j1g3n']['bio']="Linuxaro dalla culla, sono scritto in C, e l'informatica è il mio linguaggio. Sono da internare perchè pazzo... Sento le voci..";
+$bio['j1g3n']['bio']="Linuxaro dalla culla, sono scritto in C, e l'informatica è il mio linguaggio. Sono da internare perchè pazzo... Sento le voci...";
 $bio['j1g3n']['insulto'][]="Spegni il televisore e le voci non le sentirai più";
 
 foreach($bio as $key => $value) {
