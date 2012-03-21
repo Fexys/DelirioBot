@@ -228,12 +228,12 @@ class Delirio {
 	function help( &$irc, &$data ) {
 		if(!$this->flood($data)){
 			$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera, !noi, !birra, !muori, !gaio' );
-			$this->scrivi_messaggio($irc, $data,'Tool: !help, !versione, !github, !blog, !ls, !paste, !google, !deb, !rpm' );
+			$this->scrivi_messaggio($irc, $data,'Tool: !help, !versione, !github, !blog, !ls, !paste, !google, !deb, !rpm, !pkg' );
 		}
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.16' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.17' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -329,6 +329,19 @@ class Delirio {
 	function rpm( &$irc, &$data ) {
 		if(!$this->flood($data)){
 			$this->scrivi_messaggio($irc, $data,'http://software.opensuse.org/search?q='.$data->messageex[1].'&baseproject=ALL');
+		}
+	}
+	//PKG
+	function pkg( &$irc, &$data ) {
+		if(!$this->flood($data)){
+			if($data->messageex[1]=='-aur'&&isset($data->messageex[2])) {
+				$this->scrivi_messaggio($irc, $data,' https://aur.archlinux.org/packages.php?O=0&K='.$data->messageex[2].'&do_Search=Go');
+			}elseif(!isset($data->messageex[1])) {
+				$this->scrivi_messaggio($irc, $data,'!pkg -aur(per usare i repo non ufficiali)');
+			}else{
+				$this->scrivi_messaggio($irc, $data,'http://www.archlinux.org/packages/?sort=&q='.$data->messageex[1].'&maintainer=&last_update=&flagged=&limit=50');
+
+			}
 		}
 	}
 	//Tira il dado
@@ -455,6 +468,7 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!paste', $bot, 'paste' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!google', $bot, 'google' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!deb', $bot, 'deb' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!rpm', $bot, 'rpm' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!pkg', $bot, 'pkg' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!dado', $bot, 'dado' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!inalbera', $bot, 'inalbera' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!battezza', $bot, 'battezza' );
