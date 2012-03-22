@@ -72,6 +72,13 @@ $bio['Nanetta']['insulto'][]="Non avrai sconti quindi ti insulterà qualcun altr
 $bio['j1g3n']['bio']="Linuxaro dalla culla, sono scritto in C, e l'informatica è il mio linguaggio. Sono da internare perchè pazzo... Sento le voci...";
 $bio['j1g3n']['insulto'][]="Spegni il televisore e le voci non le sentirai più";
 
+$bio['eMarco']['bio']="Fancazzista rilegato in winzozz. Tempio del random. Dovrebbe scrivere una bio più sensata, ma fottesega.";
+$bio['eMarco']['insulto'][]="Compensi le tue piccole misure con cellulari potenti";
+
+$bio['Chris_Zeta']['bio']="Cosplay lover, ecchi fan, anime watcher, arch Linux user. Ho ereditato La carne e il sangue da Kenshiro e la fortuna da Ataru Moroboshi.";
+$bio['Chris_Zeta']['insulto'][]="Guardi così tanti anime che sei un animale jappo";
+$bio['Chris_Zeta']['insulto'][]="Il tuo cosplay preferito è Sailor Moon. Uomo, con la barba e grasso. Ammettilo è per il tuo bene";
+
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;
 }
