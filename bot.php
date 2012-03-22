@@ -220,7 +220,7 @@ class Delirio {
 			} elseif(!isset($data->messageex[1]) && isset($bio[$data->nick]['bio'])) {
 				$this->scrivi_messaggio($irc, $data,$data->nick.': '.$bio[$data->nick]['bio'] );
 			}else{
-				$this->scrivi_messaggio($irc, $data,'Utente non inserito nel sistema. Tentativo di intrusione rilevato!' );
+				$this->scrivi_messaggio($irc, $data,'Utente non inserito nel database. Tentativo di intrusione rilevato!' );
 			}
 		}
 	}
@@ -392,7 +392,7 @@ class Delirio {
 		}else if( isset( $data->messageex[1] ) ) {
 			$this->scrivi_messaggio($irc, $data,$data->messageex[1]. ' Eccoti una bella birra fredda marchio Delirio offerta da '.$data->nick.'!');
 			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
-		}else if(count($bio[$data->nick]['insulto'])<3 && isset($bio[$data->nick])){
+		}else if(isset($bio[$data->nick]['insulto']) && count($bio[$data->nick]['insulto'])<3 && isset($bio[$data->nick])){
 			$this->scrivi_messaggio($irc, $data,'A te niente birra brutto stronzetto, senza insulti personali non vai da nessuna parte');
 			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
 		}else if(!isset($bio[$data->nick])){
