@@ -65,6 +65,7 @@ $bio['Fexys']['bio']="Sono un Mac che usa Linux ma non si capisce il perchè. Qu
 $bio['Fexys']['insulto'][]="Non insultare il Gran Cerimoniere, pestalo direttamente con il cric";
 $bio['Fexys']['insulto'][]="Tu e il BNC che non ti funziona";
 $bio['Fexys']['insulto'][]="Ho letto robe che le suore avrebbero fatto meglio...";
+$bio['Fexys']['insulto'][]="Smettila di dire cagate e fai AlphaCode";
 
 $bio['Nanetta']['bio']="Adoro smontare i pc, mi fa rilassare ma in genere sono pazza.";
 $bio['Nanetta']['insulto'][]="Non avrai sconti quindi ti insulterà qualcun altro per me che ho da fare";

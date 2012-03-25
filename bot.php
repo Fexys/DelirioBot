@@ -227,13 +227,13 @@ class Delirio {
 	//Lista dei comandi
 	function help( &$irc, &$data ) {
 		if(!$this->flood($data)){
-			$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera, !noi, !birra, !muori, !gaio' );
+			$this->scrivi_messaggio($irc, $data,'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera, !noi, !birra, !muori, !gaio, !amore, !nutella' );
 			$this->scrivi_messaggio($irc, $data,'Tool: !help, !versione, !github, !blog, !ls, !paste, !google, !deb, !rpm, !pkg' );
 		}
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.17' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.18' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -285,7 +285,7 @@ class Delirio {
 			}
 		}
 	}
-	//Cambia il nick attuale??
+	//Cambia il nick attuale
 	function changeNick( $newnick, $priority = SMARTIRC_MEDIUM ) {
 		$this->_send( 'NICK '.$newnick, $priority );
 		$this->_nick = $newnick;
@@ -388,7 +388,8 @@ class Delirio {
 		if( isset( $data->messageex[1] ) && $data->messageex[1]=='party' ) {
 			$poggio = $this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante');
 			$this->scrivi_messaggio($irc, $data,'Una bella damigiana di birra per tutti offerta da '.$data->nick.'!');
-			$this->scrivi_messaggio($irc, $data,'Per '.$poggio[array_rand($poggio,1)].' solo San Crispino u.u');
+			$alcol=array('San Crispino','Tavernello','Olio Cuore','Estathè');
+			$this->scrivi_messaggio($irc, $data,'Per '.$poggio[array_rand($poggio,1)].' solo '.$alcol[array_rand($alcol)].' u.u');
 		}else if( isset( $data->messageex[1] ) ) {
 			$this->scrivi_messaggio($irc, $data,$data->messageex[1]. ' Eccoti una bella birra fredda marchio Delirio offerta da '.$data->nick.'!');
 			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
@@ -424,6 +425,19 @@ class Delirio {
 	//Blog
 	function blog( &$irc, &$data ) {
 		$this->scrivi_messaggio($irc, $data,'Casa dolce casa... http://delirinotturni.tumblr.com/');
+	}
+	//Amore
+	function amore( &$irc, &$data ) {
+		if(!$this->flood($data)){
+			$poggio = $poggio = $this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante');
+			$this->scrivi_messaggio($irc, $data,$data->nick.' Lovva '.$poggio[array_rand($poggio,1)]);
+		}
+	}
+	//Nutella
+	function nutella( &$irc, &$data ) {
+		if(!$this->flood($data)){
+			$this->scrivi_messaggio($irc, $data,'Tirate fuori i vostri cucchiai! Nutella Party ON');
+		}
 	}
 	/*End the Bot-class*/
 }
@@ -477,7 +491,9 @@ $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!birra', $bot, 'birra' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!muori', $bot, 'muori' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!gaio', $bot, 'gaio' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!blog', $bot, 'blog' );
-// nick , nome , realname , ident, boh
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!amore', $bot, 'amore' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!nutella', $bot, 'nutella' );
+// nick , nome , realname , ident, password
 $irc->login( 'ilDelirante', 'ilDelirante'.'delirio', 8, 'delirio', '' );
 $irc->join( $chan );
 $irc->listen( );
