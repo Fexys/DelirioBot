@@ -33,9 +33,10 @@ $bio['ilDelirante']['insulto'][]="Ti piglio a sberle finchè non diventi bello e
 $bio['ilDelirante']['insulto'][]="Si vede che ti piace il tuo mestiere... incassi tante legnate";
 $bio['ilDelirante']['insulto'][]="Ti stacco le dita e ci gioco a Shangai";
 $bio['ilDelirante']['insulto'][]="Ma in tutti i posti in cui potevi rompe le palle proprio qua dovevi venire??";
-$bio['ilDelirante']['insulto'][]="Girati dall'altra parte! I miei occhi stavano cecando!";
+$bio['ilDelirante']['insulto'][]="Girati dall'altra parte! I miei occhi si stavano cecando!";
 $bio['ilDelirante']['insulto'][]="In arrivo un pugno sul binario 5 per te";
 $bio['ilDelirante']['insulto'][]="Aspetta che accendo il segna pugni e ti gorgo";
+$bio['ilDelirante']['insulto'][]="Tu sei un insulto che altro dovrei aggiungere?";
 
 $bio['picchio']['bio']="Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime.";
 $bio['picchio']['insulto'][]="Diventi cieco di questo passo";
@@ -67,8 +68,8 @@ $bio['Fexys']['insulto'][]="Tu e il BNC che non ti funziona";
 $bio['Fexys']['insulto'][]="Ho letto robe che le suore avrebbero fatto meglio...";
 $bio['Fexys']['insulto'][]="Smettila di dire cagate e fai AlphaCode";
 
-$bio['Nanetta']['bio']="Adoro smontare i pc, mi fa rilassare ma in genere sono pazza.";
-$bio['Nanetta']['insulto'][]="Non avrai sconti quindi ti insulterà qualcun altro per me che ho da fare";
+$bio['Miu']['bio']="Adoro smontare i pc, mi fa rilassare ma in genere sono pazza.";
+$bio['Miu']['insulto'][]="Non avrai sconti quindi ti insulterà qualcun altro per me che ho da fare";
 
 $bio['j1g3n']['bio']="Linuxaro dalla culla, sono scritto in C, e l'informatica è il mio linguaggio. Sono da internare perchè pazzo... Sento le voci...";
 $bio['j1g3n']['insulto'][]="Spegni il televisore e le voci non le sentirai più";
@@ -97,7 +98,6 @@ $bio['picchiopc']=$bio['picchio'];
 $bio['PTKDev-Droid']=$bio['PTKDev'];
 $bio['oniontux']=$bio['blacktux'];
 $bio['onion2x']=$bio['blacktux'];
-$bio['Miu']=$bio['Nanetta'];
 
 $bio = array_merge($bio,$bio_);
 

@@ -55,7 +55,7 @@ class Delirio {
 	//Verifica Funzione esistente
 	function check( &$irc, &$data ) {
 		if(isset($data->messageex[0])&&$data->messageex[0][0]=='!'&&!in_array(str_replace('!','',$data->messageex[0]), get_class_methods($this))) {
-			$poggio = $this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante');
+			$poggio = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante'),'ChanServ');
 			$this->scrivi_messaggio($irc, $data,'Non conosco questo comando '.$data->nick.', quindi sarai calciorotato da Chuck Norris, smontato da McGyver e insultato da '.$poggio[array_rand($poggio,1)]);
 		}
 	}
@@ -205,11 +205,13 @@ class Delirio {
 	}
 	//Saluta molto educatamente
 	function saluta( &$irc, &$data ) {
-			if( isset( $data->messageex[1] ) ) {
-				$poggio=$data->messageex;
-				unset($poggio[0]);
-				$this->scrivi_messaggio($irc, $data,'Fottiti '.implode('',$poggio) );
+		if( isset( $data->messageex[1] ) ) {
+			if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1]!='ilDelirante'){
+				$this->scrivi_messaggio($irc, $data,'Fottiti '.$data->messageex[1] );
+			} elseif ((in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1]=='ilDelirante')) {
+				$this->scrivi_messaggio($irc, $data,'Fottiti '.$data->nick );
 			}
+		}
 	}
 	//Stampa la bio dell'utente o del parametro passato
 	function whoami( &$irc, &$data ) {
@@ -233,7 +235,7 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.18' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.19' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -269,7 +271,7 @@ class Delirio {
 		}
 	}
 	//Insulto personalizzato a citazione
-	function insulto( &$irc, &$data ) {
+	function insulto_( &$irc, &$data ) {
 	if(rand(0, 20)==1&&$this->stop){$this->scrivi_messaggio($irc, $data,'Mi servono molti insulti personalizzati brutti pescivendoli del cacchio!');}
 	if($this->stop && $data->messageex[0][0]!='!'){
 		$messaggio=implode(' ',$data->messageex);
@@ -364,6 +366,8 @@ class Delirio {
 					$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
 					$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
 					$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+				}else {
+					$this->scrivi_messaggio($irc, $data,'Chi cacchio è '.$data->messageex[1].' tua suocera o la tua mano destra '.$data->nick.'??');
 				}
 			}
 		}
@@ -393,12 +397,12 @@ class Delirio {
 		}else if( isset( $data->messageex[1] ) ) {
 			$this->scrivi_messaggio($irc, $data,$data->messageex[1]. ' Eccoti una bella birra fredda marchio Delirio offerta da '.$data->nick.'!');
 			$this->scrivi_messaggio($irc, $data,$data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
-		}else if(isset($bio[$data->nick]['insulto']) && count($bio[$data->nick]['insulto'])<3 && isset($bio[$data->nick])){
-			$this->scrivi_messaggio($irc, $data,'A te niente birra brutto stronzetto, senza insulti personali non vai da nessuna parte');
-			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
 		}else if(!isset($bio[$data->nick])){
 			$this->scrivi_messaggio($irc, $data,'Tu vorresti la nostra birra?? Non sei nel database brutta pustola');
 			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+		}else if(isset($bio[$data->nick]['insulto']) && count($bio[$data->nick]['insulto'])<3){
+			$this->scrivi_messaggio($irc, $data,'A te niente birra brutto stronzetto, senza insulti personali non vai da nessuna parte');
 			$this->scrivi_messaggio($irc, $data,$data->nick.' '.$this->insulti[array_rand($this->insulti)]);
 		} else {
 			$this->scrivi_messaggio($irc, $data,'Eccoti una bella birra fredda marchio Delirio!');
@@ -418,7 +422,7 @@ class Delirio {
 	//Gaio
 	function gaio( &$irc, &$data ) {
 		if(!$this->flood($data)){
-			$poggio = $poggio = $this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante');
+			$poggio = $poggio = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante'),'ChanServ');
 			$this->scrivi_messaggio($irc, $data,'Il gay del giorno è '.$poggio[array_rand($poggio,1)]);
 		}
 	}
@@ -429,7 +433,7 @@ class Delirio {
 	//Amore
 	function amore( &$irc, &$data ) {
 		if(!$this->flood($data)){
-			$poggio = $poggio = $this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante');
+			$poggio = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante'),$data->nick);
 			$this->scrivi_messaggio($irc, $data,$data->nick.' Lovva '.$poggio[array_rand($poggio,1)]);
 		}
 	}
@@ -456,7 +460,7 @@ $irc->setSenddelay(500);
 $irc->connect( 'irc.freenode.org', 6667 );
 $irc->registerActionhandler( SMARTIRC_TYPE_JOIN, '.*', $bot, 'onjoin_greeting' );
 $irc->registerActionhandler( SMARTIRC_TYPE_KICK, '.*', $bot, 'kick_response' );
-$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '.*', $bot, 'insulto' );
+$irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '.*', $bot, 'insulto_' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!*', $bot, 'check' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!kill$', $bot, 'kill' );
 $irc->registerActionhandler( SMARTIRC_TYPE_CHANNEL, '^!kick', $bot, 'kick' );
