@@ -12,6 +12,7 @@ $bio['v2']['insulto'][]="Tagliati sti baffi";
 
 $bio['gianguido']['bio']="I was chatting here, but then i took an arrow to the knee";
 $bio['gianguido']['insulto'][]="Sto Android te lo frullo";
+$bio['gianguido']['insulto'][]="Mi stupisco che non ti siano ancora venuti i calli alle mani e la tendinite al pisello";
 
 $bio['worst']['bio']="Nerd mancato, apprendista smanettone, socialmente impedito. Innamorato di Debian&Openbox, detesta tutto ciò che è imposto.";
 $bio['worst']['insulto'][]="Ma ti pinnizzo io <3";
