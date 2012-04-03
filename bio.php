@@ -81,6 +81,9 @@ $bio['Chris_Zeta']['bio']="Cosplay lover, ecchi fan, anime watcher, arch Linux u
 $bio['Chris_Zeta']['insulto'][]="Guardi così tanti anime che sei un animale jappo";
 $bio['Chris_Zeta']['insulto'][]="Il tuo cosplay preferito è Sailor Moon. Uomo, con la barba e grasso. Ammettilo è per il tuo bene";
 
+$bio['Mikiwi93']['bio']="Psychosocial and I do sex with z80.";
+$bio['Mikiwi93']['insulto'][]="E' inutile che metti l'elastico al manico, suoni di merda comunque.";
+
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;
 }
