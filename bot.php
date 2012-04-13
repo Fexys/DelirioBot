@@ -54,7 +54,7 @@ class Delirio {
 	}
 	//Verifica Funzione esistente
 	function check( &$irc, &$data ) {
-		if(isset($data->messageex[0])&&$data->messageex[0][0]=='!'&&!in_array(str_replace('!','',$data->messageex[0]), get_class_methods($this))) {
+		if(isset($data->messageex[0])&&$data->messageex[0][0]=='!'&&!in_array(str_replace('!','',$data->messageex[0]), get_class_methods($this))&&!$this->flood($data)) {
 			$poggio = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante'),'ChanServ');
 			$this->scrivi_messaggio($irc, $data,'Non conosco questo comando '.$data->nick.', quindi sarai calciorotato da Chuck Norris, smontato da McGyver e insultato da '.$poggio[array_rand($poggio,1)]);
 		}
@@ -235,11 +235,11 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.19' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.20' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data, 'Sorgenti: https://github.com/Mte90/Delirante , fate ticket a volontà!' );
+		$this->scrivi_messaggio($irc, $data, 'Sorgenti: http://mte90.github.com/Delirante/ , fate ticket a volontà!' );
 	}
 	//Utenti nel database
 	function who( &$irc, &$data ) {
@@ -384,7 +384,14 @@ class Delirio {
 	}
 	//Uno di noi
 	function noi( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi');
+		if(!$this->flood($data)){
+			$nickad='';
+			if(in_array($data->messageex[1], $irc->_updateIrcUser($data))){
+				$this->scrivi_messaggio($irc, $data,$data->messageex[1].'! Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi Uno di noi');
+			}else {
+				$this->scrivi_messaggio($irc, $data,'Chi cacchio è '.$data->messageex[1].' tua suocera o la tua mano destra '.$data->nick.'??');
+			}
+		}
 	}
 	//Birra
 	function birra( &$irc, &$data ) {

@@ -17,3 +17,6 @@ blowjob
 lesbo
 anal
 milf
+nude
+adolescent
+sesso
