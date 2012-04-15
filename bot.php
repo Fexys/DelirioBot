@@ -235,7 +235,7 @@ class Delirio {
 	}
 	//Versione
 	function versione( &$irc, &$data ) {
-		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.20' );
+		$this->scrivi_messaggio($irc, $data,'Sono cavoli miei... 0.0.21' );
 	}
 	//Link su Github del bot
 	function github( &$irc, &$data ) {
@@ -272,7 +272,7 @@ class Delirio {
 	}
 	//Insulto personalizzato a citazione
 	function insulto_( &$irc, &$data ) {
-	if(rand(0, 20)==1&&$this->stop){$this->scrivi_messaggio($irc, $data,'Mi servono molti insulti personalizzati brutti pescivendoli del cacchio!');}
+	if(rand(0, 24)==1&&$this->stop){$this->scrivi_messaggio($irc, $data,'Sarete calciorotati il prima possibile se non mi date degli insulti personali!');}
 	if($this->stop && $data->messageex[0][0]!='!'){
 		$messaggio=implode(' ',$data->messageex);
 		global $bio;
@@ -307,9 +307,9 @@ class Delirio {
 	function google( &$irc, &$data ) {
 		if(!$this->flood($data)){
 			$filtrot=implode('|',$this->filtro);
-			$termine = preg_replace('/[^a-zA-Z0-9\s]/','',$data->messageex[1]);
+			$termine = preg_replace('/[^a-zA-Z0-9\s]/','',urldecode(str_replace('!google ','',implode(' ',$data->messageex))));
 			if(!preg_match('/('.$filtrot.')+/i',$termine)){
-				$this->scrivi_messaggio($irc, $data,'http://www.google.it/search?q='.str_replace('!google ','',implode(' ',$data->messageex)));
+				$this->scrivi_messaggio($irc, $data,'http://www.google.it/search?q='.$termine);
 			}else {
 				$this->scrivi_messaggio($irc, $data,'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
@@ -318,31 +318,48 @@ class Delirio {
 	//DEB
 	function deb( &$irc, &$data ) {
 		if(!$this->flood($data)){
-			if($data->messageex[1]=='-ubu'&&isset($data->messageex[2])) {
-				$this->scrivi_messaggio($irc, $data,'http://packages.ubuntu.com/search?keywords='.$data->messageex[2]);
-			}elseif(!isset($data->messageex[1])) {
-				$this->scrivi_messaggio($irc, $data,'!deb -ubu(per usare Ubuntu altrimenti Debian)');
-			}else{
-				$this->scrivi_messaggio($irc, $data,'http://packages.debian.org/search?keywords='.$data->messageex[1]);
+			$filtrot=implode('|',$this->filtro);
+			$termine = preg_replace('/[^a-zA-Z0-9\s]/','',urldecode(str_replace('!google ','',implode(' ',$data->messageex))));
+			if(!preg_match('/('.$filtrot.')+/i',$termine)){
+				if($data->messageex[1]=='-ubu'&&isset($data->messageex[2])) {
+					$this->scrivi_messaggio($irc, $data,'http://packages.ubuntu.com/search?keywords='.$data->messageex[2]);
+				}elseif(!isset($data->messageex[1])) {
+					$this->scrivi_messaggio($irc, $data,'!deb -ubu(per usare Ubuntu altrimenti Debian)');
+				}else{
+					$this->scrivi_messaggio($irc, $data,'http://packages.debian.org/search?keywords='.$data->messageex[1]);
+				}
+			}else {
+				$this->scrivi_messaggio($irc, $data,'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
 		}
 	}
 	//RPM
 	function rpm( &$irc, &$data ) {
 		if(!$this->flood($data)){
-			$this->scrivi_messaggio($irc, $data,'http://software.opensuse.org/search?q='.$data->messageex[1].'&baseproject=ALL');
+			$filtrot=implode('|',$this->filtro);
+			$termine = preg_replace('/[^a-zA-Z0-9\s]/','',urldecode(str_replace('!google ','',implode(' ',$data->messageex))));
+			if(!preg_match('/('.$filtrot.')+/i',$termine)){
+				$this->scrivi_messaggio($irc, $data,'http://software.opensuse.org/search?q='.$data->messageex[1].'&baseproject=ALL');
+			}else {
+				$this->scrivi_messaggio($irc, $data,'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
+			}
 		}
 	}
 	//PKG
 	function pkg( &$irc, &$data ) {
 		if(!$this->flood($data)){
-			if($data->messageex[1]=='-aur'&&isset($data->messageex[2])) {
-				$this->scrivi_messaggio($irc, $data,' https://aur.archlinux.org/packages.php?O=0&K='.$data->messageex[2].'&do_Search=Go');
-			}elseif(!isset($data->messageex[1])) {
-				$this->scrivi_messaggio($irc, $data,'!pkg -aur(per usare i repo non ufficiali)');
-			}else{
-				$this->scrivi_messaggio($irc, $data,'http://www.archlinux.org/packages/?sort=&q='.$data->messageex[1].'&maintainer=&last_update=&flagged=&limit=50');
-
+			$filtrot=implode('|',$this->filtro);
+			$termine = preg_replace('/[^a-zA-Z0-9\s]/','',urldecode(str_replace('!google ','',implode(' ',$data->messageex))));
+			if(!preg_match('/('.$filtrot.')+/i',$termine)){
+				if($data->messageex[1]=='-aur'&&isset($data->messageex[2])) {
+					$this->scrivi_messaggio($irc, $data,' https://aur.archlinux.org/packages.php?O=0&K='.$data->messageex[2].'&do_Search=Go');
+				}elseif(!isset($data->messageex[1])) {
+					$this->scrivi_messaggio($irc, $data,'!pkg -aur(per usare i repo non ufficiali)');
+				}else{
+					$this->scrivi_messaggio($irc, $data,'http://www.archlinux.org/packages/?sort=&q='.$data->messageex[1].'&maintainer=&last_update=&flagged=&limit=50');
+				}
+			}else {
+				$this->scrivi_messaggio($irc, $data,'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
 		}
 	}
@@ -430,7 +447,7 @@ class Delirio {
 	function gaio( &$irc, &$data ) {
 		if(!$this->flood($data)){
 			$poggio = $poggio = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), 'ilDelirante'),'ChanServ');
-			$this->scrivi_messaggio($irc, $data,'Il gay del giorno è '.$poggio[array_rand($poggio,1)]);
+			$this->scrivi_messaggio($irc, $data,'Il gay del momento è '.$poggio[array_rand($poggio,1)]);
 		}
 	}
 	//Blog
