@@ -11,8 +11,8 @@ $bio['v2']['bio']="Nome in codice: V2. Ricercata e pericolosa Cyberpunker, psico
 $bio['v2']['insulto'][]="Tagliati sti baffi";
 
 $bio['gianguido']['bio']="I was chatting here, but then i took an arrow to the knee";
-$bio['gianguido']['insulto'][]="Sto Android te lo frullo";
 $bio['gianguido']['insulto'][]="Mi stupisco che non ti siano ancora venuti i calli alle mani e la tendinite al pisello";
+$bio['gianguido']['insulto'][]="Sto Android te lo frullo";
 
 $bio['worst']['bio']="Nerd mancato, apprendista smanettone, socialmente impedito. Innamorato di Debian&Openbox, detesta tutto ciò che è imposto.";
 $bio['worst']['insulto'][]="Ma ti pinnizzo io <3";
@@ -84,6 +84,11 @@ $bio['Chris_Zeta']['insulto'][]="Il tuo cosplay preferito è Sailor Moon. Uomo, 
 
 $bio['Mikiwi93']['bio']="Psychosocial and I do sex with z80.";
 $bio['Mikiwi93']['insulto'][]="E' inutile che metti l'elastico al manico, suoni di merda comunque.";
+$bio['Mikiwi93']['insulto'][]="Ma vai a trombarti lo z80";
+
+$bio['RaydenDev']['bio']="Informatico dal gusto Nerdico. Web Developer 2.0 HTML5/CSS3/Php/MySQL/Js/jQuery";
+$bio['RaydenDev']['insulto'][]="Hai il mal di testa? Poverino ha le sue cose";
+$bio['RaydenDev']['insulto'][]="Tanto alto, tanto coglione";
 
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;

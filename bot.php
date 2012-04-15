@@ -254,10 +254,10 @@ class Delirio {
 			if( isset( $data->messageex[1] )) {
 				if($data->messageex[1]=='-c') {
 					$this->scrivi_messaggio($irc, $data,count($this->insulti).' insulti nel sistema');
-				}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)&&isset($data->messageex[2])) {
-					$this->scrivi_messaggio($irc, $data,$this->insulti[$data->messageex[1]].' '.$data->messageex[2]);
-				}elseif(is_numeric($data->messageex[1])&&$data->messageex[1]<count($this->insulti)) {
-					$this->scrivi_messaggio($irc, $data, $this->insulti[$data->messageex[1]]);
+				}elseif(is_numeric($data->messageex[1])&&str_replace('-','',(int)$data->messageex[1])<count($this->insulti)&&isset($data->messageex[2])) {
+					$this->scrivi_messaggio($irc, $data,$data->messageex[2].' '.$this->insulti[str_replace('-','',(int)$data->messageex[1])]);
+				}elseif(is_numeric($data->messageex[1])&&str_replace('-','',(int)$data->messageex[1])<count($this->insulti)) {
+					$this->scrivi_messaggio($irc, $data, $this->insulti[str_replace('-','',(int)$data->messageex[1])]);
 				} else {
 					if(in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1]!='ilDelirante') {
 						$this->scrivi_messaggio($irc, $data, $data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
