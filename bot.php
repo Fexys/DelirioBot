@@ -5,12 +5,12 @@ include_once('SmartIRC/irccommands.php');
 include_once('SmartIRC/messagehandler.php'); //queste funzioni sono extra ma non funzionano
 
 //includo il file con le bio
-include( 'bio.php' );
+include('bio.php');
 
 // Variabile che contiene il nome del chan
 $chan = '#DeliriNotturni';
 
-//$chan = '#delirinotturni2';
+//$chan = '#DeliriNotturni2';
 
 // Classe con le funzioni del ilDelirante
 class Delirio {
@@ -18,13 +18,15 @@ class Delirio {
 	var $insulti = array();
 	var $morte = array();
 	var $filtro = array();
+	
 	//Variabile che blocca insulto personalizzato
-	var $stop = true;
+	var $stop = false;
+	
 	//Settiamo le varie proprietà del bot
-	function setVar( ) {
-		$this->insulti = array_map('rtrim',file( 'insulti.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
-		$this->morte = array_map('rtrim',file( 'morte.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
-		$this->filtro = array_map('rtrim',file( 'filtro.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+	function setVar() {
+		$this->insulti = array_map('rtrim', file( 'insulti.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+		$this->morte = array_map('rtrim', file( 'morte.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+		$this->filtro = array_map('rtrim', file( 'filtro.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 	}
 	//Rimuove elementi da array tramite il valore ***uso Interno***
 	function remove_item_by_value($array, $val = '') {
