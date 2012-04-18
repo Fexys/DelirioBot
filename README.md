@@ -2,18 +2,17 @@
 
 ## Info
 Versione: 0.0.21
+
 Basato su: [Net_SmartIRC](http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP)
 
-Bio presenti:
-> ilDelirante, Mte90, v2, gianguido, worst, toketin, quizzlo, oniontux,
-> picchio, alessandro1997, gigitux, vencizOn, turlando, Fexys, Miu, j1g3n,
-> eMarco, Chris_Zeta, Mikiwi93, RaydenDev
+Biografie presenti:
+> ilDelirante, Mte90, v2, gianguido, worst, toketin, quizzlo, oniontux, picchio, alessandro1997, gigitux, vencizOn, turlando, Fexys, Miu, j1g3n, eMarco, Chris_Zeta, Mikiwi93, RaydenDev
 
 ## Uso
 Per usarlo, avviatelo tramite shell.
 
-### Bug conosciuti
-Qualcuno lo fà partire ma non si accorge che è completamente vuoto senza i vari file di database.
+## Bug conosciuti
+1. Qualcuno lo fà partire ma non si accorge che è completamente vuoto senza i vari file di database.
 
 ## Features
 * Insulto a citazione
@@ -43,11 +42,11 @@ Qualcuno lo fà partire ma non si accorge che è completamente vuoto senza i var
 
 ## ToDo
 * Ultima visita
-
-### ToDo per 0.1:
 * Comandi *nix
 
 ## Credits
 Sviluppatore: [Mte90](https://twitter.com/Mte90Net)
+
 Aiuto nella programmazione: turlando, vencizOn
+
 Testing: tutti gli utenti del chan <3
