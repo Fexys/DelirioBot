@@ -12,7 +12,7 @@ $bio['v2']['insulto'][]="Tagliati sti baffi";
 
 $bio['gianguido']['bio']="I was chatting here, but then i took an arrow to the knee";
 $bio['gianguido']['insulto'][]="Mi stupisco che non ti siano ancora venuti i calli alle mani e la tendinite al pisello";
-$bio['gianguido']['insulto'][]="Sto Android te lo frullo";
+$bio['gianguido']['insulto'][]="Sei così negato con android che quelli di xda ti vogliono fregare il telefono per darlo a qualcun'altro";
 
 $bio['worst']['bio']="Nerd mancato, apprendista smanettone, socialmente impedito. Innamorato di Debian&Openbox, detesta tutto ciò che è imposto.";
 $bio['worst']['insulto'][]="Ma ti pinnizzo io <3";
@@ -27,6 +27,7 @@ $bio['blacktux']['bio']="Stupratore seriale di xterm. Adulatore di awesomewm. Ma
 $bio['blacktux']['insulto'][]="Sei l'anello mancante tra uomo e scimmia";
 $bio['blacktux']['insulto'][]="Questo mette bocca dappertutto peggio di [signorine in tangenziale che fanno yeye]";
 $bio['blacktux']['insulto'][]="Sei bello come una cipolla, quando ti guardo mi viene da piangere";
+$bio['blacktux']['insulto'][]="Hai così tanti nick che quando ti svegli la mattina devi decidere chi essere o cambiare le mutande";
 
 $bio['ilDelirante']['bio']="Padre Mte90, Madre ignota. Questo ha creato in lui gravi turbe mentali.";
 $bio['ilDelirante']['insulto'][]="Non mi scassare le balle";
@@ -68,6 +69,7 @@ $bio['Fexys']['insulto'][]="Non insultare il Gran Cerimoniere, pestalo direttame
 $bio['Fexys']['insulto'][]="Tu e il BNC che non ti funziona";
 $bio['Fexys']['insulto'][]="Ho letto robe che le suore avrebbero fatto meglio...";
 $bio['Fexys']['insulto'][]="Smettila di dire cagate e fai AlphaCode";
+$bio['Fexys']['insulto'][]="Il tuo mac vuole il tuo bene quindi buttalo altrimenti niente mcflurry";
 
 $bio['Miu']['bio']="Adoro smontare i pc, mi fa rilassare ma in genere sono pazza.";
 $bio['Miu']['insulto'][]="Non avrai sconti quindi ti insulterà qualcun altro per me che ho da fare";
@@ -89,6 +91,7 @@ $bio['Mikiwi93']['insulto'][]="Ma vai a trombarti lo z80";
 $bio['RaydenDev']['bio']="Informatico dal gusto Nerdico. Web Developer 2.0 HTML5/CSS3/Php/MySQL/Js/jQuery";
 $bio['RaydenDev']['insulto'][]="Hai il mal di testa? Poverino ha le sue cose";
 $bio['RaydenDev']['insulto'][]="Tanto alto, tanto coglione";
+$bio['RaydenDev']['insulto'][]="è inutile il tuo logger non sarà mai trollante come ilDelirante";
 
 foreach($bio as $key => $value) {
     $bio_tot[]=$key;
@@ -107,6 +110,7 @@ $bio['picchiopc']=$bio['picchio'];
 $bio['PTKDev-Droid']=$bio['PTKDev'];
 $bio['oniontux']=$bio['blacktux'];
 $bio['onion2x']=$bio['blacktux'];
+$bio['v2Dev']=$bio['v2'];
 
 $bio = array_merge($bio,$bio_);
 

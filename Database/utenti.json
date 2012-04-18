@@ -94,7 +94,7 @@
 		},
 		{
 			"id": 2, 
-			"testo": "Sto Android te lo frullo."
+			"testo": "Sei così negato con android che quelli di xda ti vogliono fregare il telefono per darlo a qualcun'altro"
 		}
 	]
 },
@@ -159,6 +159,10 @@
 		{
 			"id": 3, 
 			"testo": "Sei bello come una cipolla, quando ti guardo mi viene da piangere."
+		},
+		{
+			"id": 4,
+			"testo": "Hai così tanti nick che quando ti svegli la mattina devi decidere chi essere o cambiare le mutande."
 		}
 	]
 },
@@ -293,6 +297,10 @@
 		{
 			"id": 4, 
 			"testo": "Smettila di dire cagate e fai AlphaCode."
+		},
+		{
+			"id": 5,
+			"testo": "Il tuo Mac vuole il tuo bene quindi buttalo altrimenti niente McFlurry."
 		}
 	]
 },
@@ -389,6 +397,10 @@
 		{
 			"id": 2, 
 			"testo": "Tanto alto, tanto coglione."
+		},
+		{
+			"id": 3,
+			"testo": "E' inutile, il tuo logger non sarà mai trollante come ilDelirante."
 		}
 	]
 }
