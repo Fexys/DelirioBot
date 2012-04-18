@@ -1,7 +1,7 @@
 # [ilDelirante](http://mte90.github.com/Delirante/)
 
 ## Info
-Versione: 0.0.21
+Versione: 0.0.23
 
 Basato su: [Net_SmartIRC](http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP)
 
@@ -21,6 +21,7 @@ Per usarlo, avviatelo tramite shell.
 * Blocco Insulti
 * Verifica stato Utente all'entrata
 * Filtro parole in alcuni comandi
+* Aggiorna i file database senza riavvio
 
 ## Comandi
 * saluta
@@ -39,6 +40,7 @@ Per usarlo, avviatelo tramite shell.
 * gaio
 * amore
 * nutella
+* refresh
 
 ## ToDo
 * Ultima visita

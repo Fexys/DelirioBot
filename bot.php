@@ -15,7 +15,7 @@ $chan = '#DeliriNotturni';
 class Delirio
 {
 	//Versione
-	var $version = '0.0.21';
+	var $version = '0.0.23';
 
 	//Variabili liste
 	var $insulti = array();
@@ -340,6 +340,24 @@ class Delirio
 	}
 
 	/**
+	 * Aggiorna i file del database (insulti, morti, biografie).
+	 * (Riservata agli operatori)
+	 *
+	 * @param	string
+	 * @return	string
+	 */
+	function refresh(&$irc, &$data)
+	{
+		if (in_array($data->nick, $irc->_GetIrcOp($data))) {
+			include('Database/bio.php');
+			$this->setVar();
+			$this->scrivi_messaggio($irc, $data, 'Aggiornato e più stronzo di prima!');
+		} else {
+			$this->scrivi_messaggio($irc, $data, 'Chi ti credi di essere per darmi questi comandi?');
+		}
+	}
+
+	/**
 	 * Nick.
 	 * (Riservata agli operatori)
 	 *
@@ -416,7 +434,7 @@ class Delirio
 	 */
 	function versione(&$irc, &$data)
 	{
-		$this->scrivi_messaggio($irc, $data, 'Sono cavoli miei...'.$version);
+		$this->scrivi_messaggio($irc, $data, 'Sono cavoli miei...'.$this->version);
 	}
 
 	/**
@@ -836,12 +854,13 @@ $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!join', $bot, 'join');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!part', $bot, 'part');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!rejoin', $bot, 'rejoin');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!rm', $bot, 'ban');
+$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!refresh', $bot, 'refresh');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!nick', $bot, 'nick');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!saluta', $bot, 'saluta');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!help$', $bot, 'help');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!who\s*$', $bot, 'who');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!whoami', $bot, 'whoami');
-$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL,	'^!versione$', $bot, 'versione');
+$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!versione$', $bot, 'versione');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!github$', $bot, 'github');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!insulta', $bot, 'insulta');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!ls', $bot, 'ls');
