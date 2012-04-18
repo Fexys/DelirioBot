@@ -2,8 +2,7 @@
 include_once('DelirioCore.php');
 
 //Variabile che contiene il nome del chan
-$chan = '#DeliriNotturni';
-//$chan = '#DeliriNotturni2'
+$chan = '#DeliriNotturni2';
 
 //Creiamo la classe e facciamo partire il bot
 $bot = new Delirio( );
@@ -47,9 +46,11 @@ $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!stop', $bot, 'stop');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!paste', $bot, 'paste');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!google', $bot, 'google');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!youtube', $bot, 'youtube');
+$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!porn', $bot, 'porn');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!deb', $bot, 'deb');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!rpm', $bot, 'rpm');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!pkg', $bot, 'pkg');
+$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!translate', $bot, 'translate');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!dado', $bot, 'dado');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!inalbera', $bot, 'inalbera');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!battezza', $bot, 'battezza');

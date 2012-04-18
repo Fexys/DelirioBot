@@ -1,7 +1,7 @@
 # [ilDelirante](http://mte90.github.com/Delirante/)
 
 ## Info
-Versione: 0.0.25
+Versione: 0.0.26
 
 Basato su: [Net_SmartIRC](http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP)
 
@@ -43,11 +43,13 @@ Per usarlo, avviatelo tramite shell.
 * nutella
 * refresh
 * youtube
+* porn
 
 ## ToDo
 * Ultima visita
 * Comandi *nix
 * Manuale
+* Traduttore multilingua
 
 ## Credits
 Sviluppatore: [Mte90](https://twitter.com/Mte90Net)

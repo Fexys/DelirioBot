@@ -587,7 +587,7 @@ class Delirio
 				$termine = str_replace(' ', '+', $termine);
 			}
 
-			if (!preg_match('/('.$filtrot.')+/i', $termine) && isset($data->messageex[2])) {
+			if (!preg_match('/('.$filtrot.')+/i', $termine)) {
 				$this->scrivi_messaggio($irc, $data,'https://www.google.it/search?q='.$termine.$adds_vars);
 			} elseif (!isset($data->messageex[1])) {
 				$this->scrivi_messaggio($irc, $data, '!google seguito da uno spazio e dalla frase/parola che vuoi cercare');
@@ -610,12 +610,46 @@ class Delirio
 			$termine = preg_replace('/[^a-zA-Z0-9\s]/', '', urldecode(str_replace('!youtube ', '', implode(' ', $data->messageex))));
 			$termine = str_replace(' ', '+', $termine);
 
-			if (!preg_match('/('.$filtrot.')+/i', $termine)) {
+			if (!preg_match('/('.$filtrot.')+/i', $termine) && isset($data->messageex[1])) {
 				$this->scrivi_messaggio($irc, $data, 'http://www.youtube.com/results?search_query='.$termine);
 			} elseif (!isset($data->messageex[1])) {
-					$this->scrivi_messaggio($irc, $data, '!youtube seguito da uno spazio e dalla frase/parola che vuoi cercare');
+					$this->scrivi_messaggio($irc, $data, '!youtube <query>');
 			} else {
 				$this->scrivi_messaggio($irc, $data, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
+			}
+		}
+	}
+
+	/**
+	 * Ricerca p0rn.
+	 *
+	 * @param	string
+	 * @return	string
+	 */
+	function porn(&$irc, &$data)
+	{
+		if (!$this->flood($data)) {
+			$termine = urldecode(str_replace('!porn ', '', implode(' ', $data->messageex)));
+			$termine = trim(preg_replace("/\-([^ ]*)/", '', $termine));
+			$termine = str_replace(' ', '+', $termine);
+
+			if (isset($data->messageex[2])) {
+				if ($data->messageex[1] == '-yp') {
+					$this->scrivi_messaggio($irc, $data, 'http://www.youporn.com/search/?query='.$termine.'&type=straight');
+				} elseif ($data->messageex[1] == '-yj') {
+					$termine = str_replace('+', '-', $termine);
+					$this->scrivi_messaggio($irc, $data, 'http://www.youjizz.com/search/'.$termine.'-1.html');
+				} elseif ($data->messageex[1] == '-t8') {
+					$this->scrivi_messaggio($irc, $data, 'http://www.tube8.com/search.html?q='.$termine);
+				} elseif ($data->messageex[1] == '-rt') {
+					$this->scrivi_messaggio($irc, $data, 'http://www.redtube.com/?search='.$termine);
+				} elseif ($data->messageex[1] == '-ph') {
+					$this->scrivi_messaggio($irc, $data, 'http://www.pornhub.com/video/search?search='.$termine);
+				}
+			} elseif (isset($data->messageex[1])) {
+				$this->scrivi_messaggio($irc, $data, 'http://findtubes.com/search/?q='.$termine);
+			} else {
+				$this->scrivi_messaggio($irc, $data, '!porn [-yp -yj -t8 -rt -ph] <query>');
 			}
 		}
 	}
@@ -689,6 +723,43 @@ class Delirio
 			} else {
 				$this->scrivi_messaggio($irc, $data, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
+		}
+	}
+	
+	/**
+	 * Google Translate.
+	 *
+	 * @param	string
+	 * @return	string
+	 */
+	function translate(&$irc, &$data)
+	{
+		if (!$this->flood($data)) {
+			
+			$termine = urldecode(str_replace('!translate ', '', implode(' ', $data->messageex)));
+
+			$str = preg_match("/\([^ ]*) (.*)/", $termine, $output);
+			print_r($output);
+
+			/*$str = preg_match("/\-([^ ]*) (.*)/", $termine, $output);
+			if (isset($output[1])) {
+				if ($output[1] == 'image')
+					$adds_vars .= '&tbm=isch';
+
+				if ($output[1] == 'video')
+					$adds_vars .= '&tbm=vid';
+
+				$termine = str_replace(' ', '+', trim($output[2]));
+			} else {
+				$termine = str_replace(' ', '+', $termine);
+			}*/
+
+			if (!isset($data->messageex[1])) {
+				$this->scrivi_messaggio($irc, $data, '!translate it|en seguito dalla frase/parola che vuoi tradurre');
+			} else {
+				$termine = str_replace(' ', '+', $termine);
+				$this->scrivi_messaggio($irc, $data,'http://translate.google.it/#'.$langs.'|'.$termine);
+			}	
 		}
 	}
 
