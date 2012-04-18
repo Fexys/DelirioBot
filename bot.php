@@ -15,7 +15,7 @@ $chan = '#DeliriNotturni';
 class Delirio
 {
 	//Versione
-	var $version = '0.0.23';
+	var $version = '0.0.24';
 
 	//Variabili liste
 	var $insulti = array();
@@ -137,7 +137,7 @@ class Delirio
 		if (isset($bio[$data->nick])) {
 			$present = 'Puoi prendere la birra gratis dal frigobar.';
 			if (count($bio[$data->nick]['insulto']) < 3){
-				$present = 'Hai meno di 4 insulti personali, per te niente birra solo insulti.';
+				$present = 'hai meno di 4 insulti personali, per te niente birra solo insulti.';
 			}
 		}
 
@@ -434,7 +434,7 @@ class Delirio
 	 */
 	function versione(&$irc, &$data)
 	{
-		$this->scrivi_messaggio($irc, $data, 'Sono cavoli miei...'.$this->version);
+		$this->scrivi_messaggio($irc, $data, 'Sono cavoli miei... '.$this->version);
 	}
 
 	/**
@@ -566,11 +566,35 @@ class Delirio
 	function google(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$filtrot = implode('|', $this->filtro);
-			$termine = preg_replace('/[^a-zA-Z0-9\s]/', '', urldecode(str_replace('!google ', '', implode(' ', $data->messageex))));
+
+			$adds_vars = '';
 			
-			if (!preg_match('/('.$filtrot.')+/i', $termine)) {
-				$this->scrivi_messaggio($irc, $data, 'http://www.google.it/search?q='.$termine);
+			$filtrot = implode('|', $this->filtro);
+			$termine = urldecode(str_replace('!google ', '', implode(' ', $data->messageex)));
+
+			$str = preg_match("/\-lang:([^ ]*)/", $termine, $lang);
+			if (isset($lang[1])) {
+				$adds_vars .= '&hl='.$lang[1];
+				$termine = trim(preg_replace("/\-lang([^ ]*)/", '', $termine));
+			}
+
+			$str = preg_match("/\-([^ ]*) (.*)/", $termine, $output);
+			if (isset($output[1])) {
+				if ($output[1] == 'image')
+					$adds_vars .= '&tbm=isch';
+
+				if ($output[1] == 'video')
+					$adds_vars .= '&tbm=vid';
+
+				$termine = str_replace(' ', '+', trim($output[2]));
+			} else {
+				$termine = str_replace(' ', '+', $termine);
+			}
+
+			if (!preg_match('/('.$filtrot.')+/i', $termine) && isset($data->messageex[2])) {
+				$this->scrivi_messaggio($irc, $data,'https://www.google.it/search?q='.$termine.$adds_vars);
+			} elseif (!isset($data->messageex[1])) {
+				$this->scrivi_messaggio($irc, $data, '!google seguito da uno spazio e dalla frase/parola che vuoi cercare');
 			} else {
 				$this->scrivi_messaggio($irc, $data, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
