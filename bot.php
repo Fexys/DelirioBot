@@ -15,7 +15,7 @@ $chan = '#DeliriNotturni';
 class Delirio
 {
 	//Versione
-	var $version = '0.0.24';
+	var $version = '0.0.25';
 
 	//Variabili liste
 	var $insulti = array();
@@ -602,6 +602,29 @@ class Delirio
 	}
 
 	/**
+	 * Ricerca YouTube.
+	 *
+	 * @param	string
+	 * @return	string
+	 */
+	function youtube(&$irc, &$data)
+	{
+		if (!$this->flood($data)) {
+			$filtrot = implode('|', $this->filtro);
+			$termine = preg_replace('/[^a-zA-Z0-9\s]/', '', urldecode(str_replace('!youtube ', '', implode(' ', $data->messageex))));
+			$termine = str_replace(' ', '+', $termine);
+
+			if (!preg_match('/('.$filtrot.')+/i', $termine)) {
+				$this->scrivi_messaggio($irc, $data, 'http://www.youtube.com/results?search_query='.$termine);
+			} elseif (!isset($data->messageex[1])) {
+					$this->scrivi_messaggio($irc, $data, '!youtube seguito da uno spazio e dalla frase/parola che vuoi cercare');
+			} else {
+				$this->scrivi_messaggio($irc, $data, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
+			}
+		}
+	}
+
+	/**
 	 * DEB.
 	 *
 	 * @param	string
@@ -891,6 +914,7 @@ $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!ls', $bot, 'ls');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!stop', $bot, 'stop');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!paste', $bot, 'paste');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!google', $bot, 'google');
+$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!youtube', $bot, 'youtube');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!deb', $bot, 'deb');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!rpm', $bot, 'rpm');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!pkg', $bot, 'pkg');
