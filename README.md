@@ -23,6 +23,8 @@ Per usarlo, avviatelo tramite shell.
 * Filtro parole in alcuni comandi
 * Aggiorna i file database senza riavvio
 * Ricerca avanzata su Google e ricerca classica su YouTube, Deb e RPM
+* Traduttore multilingua
+* Supercazzola random
 
 ## Comandi
 * saluta
@@ -44,16 +46,17 @@ Per usarlo, avviatelo tramite shell.
 * refresh
 * youtube
 * porn
+* translate
+* supercazzola
 
 ## ToDo
 * Ultima visita
 * Comandi *nix
 * Manuale
-* Traduttore multilingua
 
 ## Credits
 Sviluppatore: [Mte90](https://twitter.com/Mte90Net)
 
-Aiuto nella programmazione: turlando, vencizOn
+Aiuto nella programmazione: turlando, vencizOn, Fexys
 
 Testing: tutti gli utenti del chan <3

@@ -1,0 +1,1 @@
+Ma il Bot è scritto in PHP, perchè IRC è bastato su PHP? O è scritto in IRC perché PHP è basato su IRC!?

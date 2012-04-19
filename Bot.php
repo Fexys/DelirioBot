@@ -61,6 +61,7 @@ $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!gaio', $bot, 'gaio');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!tumblr', $bot, 'tumblr');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!amore', $bot, 'amore');
 $irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!nutella', $bot, 'nutella');
+$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!supercazzola', $bot, 'supercazzola');
 
 //Nickname, Nome , RealName, Ident, Password
 $irc->login('ilDelirante', 'ilDelirante'.'delirio', 8, 'delirio', '');

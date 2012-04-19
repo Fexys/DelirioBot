@@ -25,6 +25,7 @@ class Delirio
 	function setVar()
 	{
 		$this->insulti = array_map('rtrim', file('Database/insulti.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+		$this->supercazzole = array_map('rtrim', file('Database/supercazzole.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 		$this->morte = array_map('rtrim', file('Database/morte.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 		$this->filtro = array_map('rtrim', file('Database/filtro.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 	}
@@ -495,7 +496,6 @@ class Delirio
 	 */
 	function insulto_(&$irc, &$data)
 	{
-		//da eliminare?! mi sembra solo una rottura di cabasisi
 		if (rand(0, 24) == 1 && $this->stop) {
 			$this->scrivi_messaggio($irc, $data, 'Sarete calciorotati il prima possibile se non mi date degli insulti personali!');
 		}
@@ -735,30 +735,14 @@ class Delirio
 	function translate(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			
 			$termine = urldecode(str_replace('!translate ', '', implode(' ', $data->messageex)));
-
-			$str = preg_match("/\([^ ]*) (.*)/", $termine, $output);
-			print_r($output);
-
-			/*$str = preg_match("/\-([^ ]*) (.*)/", $termine, $output);
-			if (isset($output[1])) {
-				if ($output[1] == 'image')
-					$adds_vars .= '&tbm=isch';
-
-				if ($output[1] == 'video')
-					$adds_vars .= '&tbm=vid';
-
-				$termine = str_replace(' ', '+', trim($output[2]));
-			} else {
-				$termine = str_replace(' ', '+', $termine);
-			}*/
+			$termine = trim(str_replace($data->messageex[1], '', $termine));
+			$termine = str_replace(' ', '+', $termine);
 
 			if (!isset($data->messageex[1])) {
-				$this->scrivi_messaggio($irc, $data, '!translate it|en seguito dalla frase/parola che vuoi tradurre');
+				$this->scrivi_messaggio($irc, $data, '!translate lang_soure|lang_destination <query>');
 			} else {
-				$termine = str_replace(' ', '+', $termine);
-				$this->scrivi_messaggio($irc, $data,'http://translate.google.it/#'.$langs.'|'.$termine);
+				$this->scrivi_messaggio($irc, $data,'http://translate.google.it/#'.$data->messageex[1].'|'.$termine);
 			}	
 		}
 	}
@@ -936,6 +920,35 @@ class Delirio
 	{
 		if (!$this->flood($data)) {
 			$this->scrivi_messaggio($irc, $data, 'Tirate fuori i vostri cucchiai! Nutella Party ON');
+		}
+	}
+
+	/**
+	 * Supercazzola.
+	 *
+	 * @param	string
+	 * @return	string
+	 */
+	function supercazzola(&$irc, &$data)
+	{
+		if (!$this->flood($data)) {
+			if (isset($data->messageex[1])) {
+				if ($data->messageex[1] == '-c') {
+					$this->scrivi_messaggio($irc, $data, count($this->supercazzole).' supercazzole nel sistema');
+				} elseif (is_numeric($data->messageex[1]) && str_replace('-', '', (int)$data->messageex[1]) < count($this->supercazzole) && isset($data->messageex[2])) {
+					$this->scrivi_messaggio($irc, $data, $data->messageex[2].' '.$this->supercazzole[str_replace('-','',(int)$data->messageex[1])]);
+				} elseif (is_numeric($data->messageex[1]) && str_replace('-', '', (int)$data->messageex[1]) < count($this->supercazzole)) {
+					$this->scrivi_messaggio($irc, $data, $this->supercazzole[str_replace('-', '' ,(int)$data->messageex[1])]);
+				} else {
+					if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != 'ilDelirante') {
+						$this->scrivi_messaggio($irc, $data, $data->messageex[1].' '.$this->supercazzole[array_rand($this->supercazzole)]);
+					} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == 'ilDelirante') {
+						$this->scrivi_messaggio($irc, $data, $data->nick.' '.$this->supercazzole[array_rand($this->supercazzole)]);
+					}
+				}
+			} else {
+				$this->scrivi_messaggio($irc, $data, '-c Mostra il numero di supercazzole, !supercazzole NUMERO [non obbligatorio] NICK');
+			}
 		}
 	}
 }
