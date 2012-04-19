@@ -2,7 +2,7 @@
 include_once('DelirioCore.php');
 
 //Variabile che contiene il nome del chan
-$chan = '#DelirioDev';
+$chan = '#DeliriNotturni';
 
 //Creiamo la classe e facciamo partire il bot
 $bot = new Delirio( );

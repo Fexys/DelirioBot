@@ -14,6 +14,7 @@ class Delirio
 	var $version = '0.0.25';
 
 	//Variabili liste
+	var $users = array();
 	var $insulti = array();
 	var $morte = array();
 	var $filtro = array();
@@ -24,6 +25,10 @@ class Delirio
 	//Settiamo le varie proprietà del bot
 	function setVar()
 	{
+		$pathfile = 'Database/users.json';
+		$data = file_get_contents($pathfile);
+		$this->users = json_decode($data, true);
+
 		$this->insulti = array_map('rtrim', file('Database/insulti.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 		$this->supercazzole = array_map('rtrim', file('Database/supercazzole.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 		$this->morte = array_map('rtrim', file('Database/morte.php',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
@@ -128,12 +133,11 @@ class Delirio
 			return;
 		}
 
-		global $bio;
 		$present = 'non sei presente nel nostro sistema. Insultatelo, nao!';
 
-		if (isset($bio[$data->nick])) {
-			$present = 'Puoi prendere la birra gratis dal frigobar.';
-			if (count($bio[$data->nick]['insulto']) < 3){
+		if (isset($this->users[$data->nick])) {
+			$present = 'puoi prendere la birra gratis dal frigobar.';
+			if (count($this->users[$data->nick]['insulto']) < 3){
 				$present = 'hai meno di 4 insulti personali, per te niente birra solo insulti.';
 			}
 		}
@@ -398,11 +402,10 @@ class Delirio
 	function whoami(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			global $bio;
-			if (isset($data->messageex[1]) && isset($bio[$data->messageex[1]]['bio'])) {
-				$this->scrivi_messaggio($irc, $data, 'Biografia di '.$data->messageex[1].' -- '.$bio[$data->messageex[1]]['bio']);
-			} elseif (!isset($data->messageex[1]) && isset($bio[$data->nick]['bio'])) {
-				$this->scrivi_messaggio($irc, $data, 'Biografia di '.$data->nick.' -- '.$bio[$data->nick]['bio']);
+			if (isset($data->messageex[1]) && isset($this->users[$data->messageex[1]]['bio'])) {
+				$this->scrivi_messaggio($irc, $data, 'Biografia di '.$data->messageex[1].' -- '.$this->users[$data->messageex[1]]['bio']);
+			} elseif (!isset($data->messageex[1]) && isset($this->users[$data->nick]['bio'])) {
+				$this->scrivi_messaggio($irc, $data, 'Biografia di '.$data->nick.' -- '.$this->users[$data->nick]['bio']);
 			} else {
 				$this->scrivi_messaggio($irc, $data, 'L\'utente non inserito nel database. Tentativo di intrusione rilevato!');
 			}
@@ -419,7 +422,7 @@ class Delirio
 	{
 		if (!$this->flood($data)) {
 			$this->scrivi_messaggio($irc, $data, 'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera, !noi, !birra, !muori, !gaio, !amore, !nutella, !supercazzola, !porn');
-			$this->scrivi_messaggio($irc, $data, 'Tool: !help, !versione, !github, !blog, !ls, !paste, !google, !deb, !rpm, !pkg, !yt, !translate');
+			$this->scrivi_messaggio($irc, $data, 'Tool: !help, !versione, !github, !tumblr, !ls, !paste, !google, !deb, !rpm, !pkg, !yt, !translate');
 		}
 	}
 
@@ -442,7 +445,8 @@ class Delirio
 	 */
 	function github(&$irc, &$data)
 	{
-		$this->scrivi_messaggio($irc, $data, 'Sorgenti: http://mte90.github.com/Delirante/ - Fate ticket a volontà!');
+		$this->scrivi_messaggio($irc, $data, 'Sorgenti disponibili su https://mte90.github.com/Delirante/ - Fate ticket a volontà!');
+		$this->scrivi_messaggio($irc, $data, 'Volendo c\'è il fork di quel cazzone di Fexys https://github.com/Fexys/Delirante');
 	}
 
 	/**
