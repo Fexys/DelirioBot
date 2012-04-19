@@ -129,7 +129,7 @@ class Delirio
 		}
 
 		global $bio;
-		$present = 'Non sei presente nel nostro sistema!! Insultatelo, nao!';
+		$present = 'non sei presente nel nostro sistema. Insultatelo, nao!';
 
 		if (isset($bio[$data->nick])) {
 			$present = 'Puoi prendere la birra gratis dal frigobar.';
@@ -138,7 +138,7 @@ class Delirio
 			}
 		}
 
-		$this->scrivi_messaggio($irc, $data, 'Ciao '.$data->nick.' '.$present);
+		$this->scrivi_messaggio($irc, $data, 'Ciao '.$data->nick.', '.$present);
 	}
 
 	/**
@@ -400,11 +400,11 @@ class Delirio
 		if (!$this->flood($data)) {
 			global $bio;
 			if (isset($data->messageex[1]) && isset($bio[$data->messageex[1]]['bio'])) {
-				$this->scrivi_messaggio($irc, $data, $data->messageex[1].': '.$bio[$data->messageex[1]]['bio']);
+				$this->scrivi_messaggio($irc, $data, 'Biografia di '.$data->messageex[1].' -- '.$bio[$data->messageex[1]]['bio']);
 			} elseif (!isset($data->messageex[1]) && isset($bio[$data->nick]['bio'])) {
-				$this->scrivi_messaggio($irc, $data, $data->nick.': '.$bio[$data->nick]['bio']);
+				$this->scrivi_messaggio($irc, $data, 'Biografia di '.$data->nick.' -- '.$bio[$data->nick]['bio']);
 			} else {
-				$this->scrivi_messaggio($irc, $data, 'Utente non inserito nel database. Tentativo di intrusione rilevato!');
+				$this->scrivi_messaggio($irc, $data, 'L\'utente non inserito nel database. Tentativo di intrusione rilevato!');
 			}
 		}
 	}
@@ -418,8 +418,8 @@ class Delirio
 	function help(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$this->scrivi_messaggio($irc, $data, 'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera, !noi, !birra, !muori, !gaio, !amore, !nutella');
-			$this->scrivi_messaggio($irc, $data, 'Tool: !help, !versione, !github, !blog, !ls, !paste, !google, !deb, !rpm, !pkg');
+			$this->scrivi_messaggio($irc, $data, 'Comandi da cazzeggio: !saluta, !whoami, !who, !insulta, !dado, !inalbera, !noi, !birra, !muori, !gaio, !amore, !nutella, !supercazzola, !porn');
+			$this->scrivi_messaggio($irc, $data, 'Tool: !help, !versione, !github, !blog, !ls, !paste, !google, !deb, !rpm, !pkg, !yt, !translate');
 		}
 	}
 
@@ -562,24 +562,23 @@ class Delirio
 	function google(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-
 			$adds_vars = '';
 			
 			$filtrot = implode('|', $this->filtro);
 			$termine = urldecode(str_replace('!google ', '', implode(' ', $data->messageex)));
 
-			$str = preg_match("/\-lang:([^ ]*)/", $termine, $lang);
+			$str = preg_match("/\-l:([^ ]*)/", $termine, $lang);
 			if (isset($lang[1])) {
 				$adds_vars .= '&hl='.$lang[1];
-				$termine = trim(preg_replace("/\-lang([^ ]*)/", '', $termine));
+				$termine = trim(preg_replace("/\-l([^ ]*)/", '', $termine));
 			}
 
 			$str = preg_match("/\-([^ ]*) (.*)/", $termine, $output);
 			if (isset($output[1])) {
-				if ($output[1] == 'image')
+				if ($output[1] == 'img')
 					$adds_vars .= '&tbm=isch';
 
-				if ($output[1] == 'video')
+				if ($output[1] == 'vid')
 					$adds_vars .= '&tbm=vid';
 
 				$termine = str_replace(' ', '+', trim($output[2]));
@@ -587,10 +586,10 @@ class Delirio
 				$termine = str_replace(' ', '+', $termine);
 			}
 
-			if (!preg_match('/('.$filtrot.')+/i', $termine)) {
+			if (!preg_match('/('.$filtrot.')+/i', $termine) && isset($data->messageex[1])) {
 				$this->scrivi_messaggio($irc, $data,'https://www.google.it/search?q='.$termine.$adds_vars);
 			} elseif (!isset($data->messageex[1])) {
-				$this->scrivi_messaggio($irc, $data, '!google seguito da uno spazio e dalla frase/parola che vuoi cercare');
+				$this->scrivi_messaggio($irc, $data, '!google [-img | -vid | -l:it] <query>');
 			} else {
 				$this->scrivi_messaggio($irc, $data, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
@@ -603,17 +602,17 @@ class Delirio
 	 * @param	string
 	 * @return	string
 	 */
-	function youtube(&$irc, &$data)
+	function yt(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
 			$filtrot = implode('|', $this->filtro);
-			$termine = preg_replace('/[^a-zA-Z0-9\s]/', '', urldecode(str_replace('!youtube ', '', implode(' ', $data->messageex))));
+			$termine = preg_replace('/[^a-zA-Z0-9\s]/', '', urldecode(str_replace('!yt ', '', implode(' ', $data->messageex))));
 			$termine = str_replace(' ', '+', $termine);
 
 			if (!preg_match('/('.$filtrot.')+/i', $termine) && isset($data->messageex[1])) {
 				$this->scrivi_messaggio($irc, $data, 'http://www.youtube.com/results?search_query='.$termine);
 			} elseif (!isset($data->messageex[1])) {
-					$this->scrivi_messaggio($irc, $data, '!youtube <query>');
+					$this->scrivi_messaggio($irc, $data, '!yt <query>');
 			} else {
 				$this->scrivi_messaggio($irc, $data, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
@@ -947,7 +946,129 @@ class Delirio
 					}
 				}
 			} else {
-				$this->scrivi_messaggio($irc, $data, '-c Mostra il numero di supercazzole, !supercazzole NUMERO [non obbligatorio] NICK');
+				$this->scrivi_messaggio($irc, $data, '!supercazzola [n | -c] <username>');
+			}
+		}
+	}
+
+	/**
+	 * DDoS.
+	 * Da rivedere con onion2x
+	 *
+	 * @param	string
+	 * @return	string
+	 */
+	function ddos(&$irc, &$data)
+	{
+		if (!$this->flood($data)) {
+			if (isset($data->messageex[1])) {
+				$nickname = $data->messageex[1];
+				$channel = $data->channel;
+				$irc->mode($channel, '+q '.$nickname, SMARTIRC_MEDIUM);
+			} else {
+				$this->scrivi_messaggio($irc, $data, '!ddos <username>');
+			}
+			print_r($data->messageex);
+		}
+	}
+
+	/**
+	 * Manuale.
+	 *
+	 * @param	string
+	 * @return	string
+	 */
+	function man(&$irc, &$data)
+	{
+		if (!$this->flood($data)) {
+			if (isset($data->messageex[1])) {
+				switch ($data->messageex[1]) {
+					case 'saluta':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] saluta -- Saluta l\'utente scelto.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !saluta <nickname>');
+						break;
+
+					case 'who':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] who -- Mostra il totale della biografie contenute nel database.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !who');
+						break;
+
+					case 'whoami':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] whoami -- Mostra la biografia dell\'utente scelto se indiciato altrimenti mostra la propria.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !whoami <query>');
+						break;
+					
+					case 'versione':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] versione -- Restituisce la versione attuale de ilDelirante.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !versione');
+						break;
+
+					case 'github':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] github -- Restituisce il link al repository de ilDelirante su GitHub.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !github');
+						break;
+
+					case 'tumblr':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] tumblr -- Restituisce il link al tumblr con i migliori log di #DeliriNotturni.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !tumblr');
+						break;
+
+					case 'paste':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] paste -- Restituisce il link ai migliori servizi di one paste online.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !paste');
+						break;
+					
+					case 'google':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] google -- Effettua la ricerca su Google.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !google [-img | -vid | -l:it] <query>');
+						break;
+					
+					case 'yt':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] yt -- Effettua la ricerca su YouTube.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !yt <query>');
+						break;
+					
+					case 'translate':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] translate -- Restituisce il link alla traduzione di una determinata parola/frase.');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !translate lang_soure|lang_destination <query>');
+						break;
+					
+					case 'porn':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione] porn -- Effettua la ricerca su vari siti pornografici (YouPorn, YouJizz, Tube8, RedTube, PornHub).');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] !porn [-yp | -yj | -t8 | -rt | -ph] <query>');
+						break;
+					
+					case 'value':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione]  -- .');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] ! <>');
+						break;
+					
+					case 'value':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione]  -- .');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] ! <>');
+						break;
+					
+					case 'value':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione]  -- .');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] ! <>');
+						break;
+					
+					case 'value':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione]  -- .');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] ! <>');
+						break;
+					
+					case 'value':
+						$this->scrivi_messaggio($irc, $data, '[Descrizione]  -- .');
+						$this->scrivi_messaggio($irc, $data, '[Sinossi] ! <>');
+						break;
+					
+					default:
+						# code...
+						break;
+				}
+			} else {
+				$this->scrivi_messaggio($irc, $data, '!man <query>');
 			}
 		}
 	}
