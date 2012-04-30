@@ -8,8 +8,9 @@ ilDelirante [versione 0.1a], il Bot del canale #DeliriNotturni (irc.freenode.net
 Quick start
 -----------
 
-Clona il repo, `git clone git@github.com:Mte90/Delirante.git`, oppure [scarica l'ultima release](https://github.com/Mte90/Delirante/zipball/master).
-Avvia il file `bot.php` da terminale.
+Clona il repo, `git clone git@github.com:Fexys/Delirante.git`, oppure [scarica l'ultima release](https://github.com/Fexys/Delirante/zipball/master).
+
+Avvia il file `bot.php` da terminale. Nel caso si voglia avviare anche il logger, avviare il file `logger.php` da terminale (Work-In-Progress).
 
 
 
@@ -18,7 +19,7 @@ Bug tracker
 
 Per segnalare un bug o idee per nuove funzionalità, c'è l'issue system di GitHub!
 
-https://github.com/Mte90/Delirante/issues
+https://github.com/Fexys/Delirante/issues
 
 
 
@@ -37,7 +38,7 @@ Funzionalità
 
 Biografie presenti
 ------------------
-> ilDelirante, Mte90, v2, gianguido, worst, toketin, quizzlo, oniontux, picchio, alessandro1997, gigitux, vencizOn, turlando, Fexys, Miu, j1g3n, eMarco, Chris_Zeta, Mikiwi93, RaydenDev
+> ilDelirante, Mte90, v2, gianguido, worst, toketin, quizzlo, oniontux, picchio, alessandro1997, gigitux, vencizOn, turlando, Fexys, Miu, j1g3n, eMarco, Chris_Zeta, Mikiwi93, GianBalex, Pimo, Ryccardo
 
 
 
@@ -70,7 +71,7 @@ Sviluppatori
 + http://twitter.com/Fexys
 + http://github.com/Fexys
 
-Inoltre, un ringraziamente particolare per l'aiuto nella programmazione a: turlando, vencizOn e GianBalex. Un ringraziamento anche a tutti gli utenti del chan per il testing <3
+Inoltre, un ringraziamente particolare per l'aiuto nella programmazione a: turlando, vencizOn e GianBalex. Un ringraziamento anche a tutti gli utenti del chan per il testing.
 
 
 
