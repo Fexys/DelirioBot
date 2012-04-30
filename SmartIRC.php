@@ -686,7 +686,7 @@ class Net_SmartIRC_base
      * @return void
      * @access public
      */
-    function setReceivedelay($milliseconds)
+    function setReceiveDelay($milliseconds)
     {
         if (is_integer($milliseconds) && $milliseconds >= 100) {
             $this->_receivedelay = $milliseconds;
@@ -706,7 +706,7 @@ class Net_SmartIRC_base
      * @return void
      * @access public
      */
-    function setSenddelay($milliseconds)
+    function setSendDelay($milliseconds)
     {
         if (is_integer($milliseconds)) {
             $this->_senddelay = $milliseconds;

@@ -1,0 +1,182 @@
+{
+	"info":{
+		"description": "Restituisce la versione attuale de ilDelirante e dove reperire il sorgente.",
+		"synopsis": "!info"
+	},
+	"tumblr":{
+		"description": "Restituisce il link al tumblr con i migliori log di #DeliriNotturni.",
+		"synopsis": "!tumblr"
+	},
+	"help":{
+		"description": "",
+		"synopsis": ""
+	},
+	"man":{
+		"description": "",
+		"synopsis": ""
+	},
+	"saluta":{
+		"description": "Saluta l'utente scelto.",
+		"synopsis": "!saluta <nickname>"
+	},
+	"ls":{
+		"description": "",
+		"synopsis": ""
+	},
+	"who":{
+		"description": "Mostra il totale della biografie contenute nel database.",
+		"synopsis": "!who"
+	},
+	"whoami":{
+		"description": "Mostra la biografia dell'utente scelto se indiciato altrimenti mostra la propria.",
+		"synopsis": "!whoami <nickname>"
+	},
+	"noi":{
+		"description": "",
+		"synopsis": ""
+	},
+	"insulta":{
+		"description": "",
+		"synopsis": ""
+	},
+	"inalbera":{
+		"description": "",
+		"synopsis": ""
+	},
+	"muori":{
+		"description": "",
+		"synopsis": ""
+	},
+	"supercazzola":{
+		"description": "",
+		"synopsis": ""
+	},
+	"calcio":{
+		"description": "",
+		"synopsis": ""
+	},
+	"gaio":{
+		"description": "",
+		"synopsis": ""
+	},
+	"amore":{
+		"description": "",
+		"synopsis": ""
+	},
+	"birra":{
+		"description": "",
+		"synopsis": ""
+	},
+	"nutella":{
+		"description": "",
+		"synopsis": ""
+	},
+	"google":{
+		"description": "Effettua la ricerca su Google.",
+		"synopsis": "!google [-img | -vid | -l:it] <query>"
+	},
+	"yt":{
+		"description": "Effettua la ricerca su YouTube.",
+		"synopsis": "!yt <query>"
+	},
+	"porn":{
+		"description": "Effettua la ricerca su vari siti pornografici (YouPorn, YouJizz, Tube8, RedTube, PornHub, Fakku, TubeGalore, TubeMonsoon).",
+		"synopsis": "!porn [-yp | -yj | -t8 | -rt | -ph | -fk | -tg | -tm] <query>"
+	},
+	"anime":{
+		"description": "",
+		"synopsis": "!anime [-mal -ac -fansub] <query>"
+	},
+	"pkg":{
+		"description": "",
+		"synopsis": ""
+	},
+	"translate":{
+		"description": "Restituisce il link alla traduzione di una determinata parola/frase.",
+		"synopsis": "!translate lang_soure|lang_destination <query>"
+	},
+	"paste":{
+		"description": "Restituisce il link ai migliori servizi di one paste online.",
+		"synopsis": "!paste"
+	},
+	"dado":{
+		"description": "",
+		"synopsis": ""
+	},
+	"nick":{
+		"description": "",
+		"synopsis": ""
+	},
+	"set":{
+		"description": "",
+		"synopsis": ""
+	},
+	"refresh":{
+		"description": "",
+		"synopsis": ""
+	},
+	"join":{
+		"description": "",
+		"synopsis": ""
+	},
+	"part":{
+		"description": "",
+		"synopsis": ""
+	},
+	"rejoin":{
+		"description": "",
+		"synopsis": ""
+	},
+	"op":{
+		"description": "",
+		"synopsis": ""
+	},
+	"deop":{
+		"description": "",
+		"synopsis": ""
+	},
+	"voice":{
+		"description": "",
+		"synopsis": ""
+	},
+	"devoice":{
+		"description": "",
+		"synopsis": ""
+	},
+	"kick":{
+		"description": "",
+		"synopsis": ""
+	},
+	"roulette":{
+		"description": "",
+		"synopsis": ""
+	},
+	"clear":{
+		"description": "",
+		"synopsis": ""
+	},
+	"mute":{
+		"description": "",
+		"synopsis": ""
+	},
+	"unmute":{
+		"description": "",
+		"synopsis": ""
+	},
+	"ban":{
+		"description": "",
+		"synopsis": ""
+	},
+	"unban":{
+		"description": "",
+		"synopsis": ""
+	},
+	"battezza":{
+		"description": "",
+		"synopsis": ""
+	},
+	"kill":{
+		"description": "",
+		"synopsis": ""
+	}
+}
