@@ -46,7 +46,6 @@ Bug conosciuti
 --------------
 
 + Attualmente il Bot è in testing quindi molte funzioni potrebbero essere incomplete o non funzionanti
-+ Birra incompleto
 + Dado mancante
 
 
@@ -80,7 +79,6 @@ Inoltre, un ringraziamente particolare per l'aiuto nella programmazione a: turla
 Copyright e licenza
 -------------------
 
-ilDelirante, il Bot del canale #DeliriNotturni
 Copyright (C) 2012  Mte90
 
 This program is free software: you can redistribute it and/or modify

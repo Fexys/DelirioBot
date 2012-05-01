@@ -3,8 +3,6 @@
 //Libreria di SmartIRC
 include('SmartIRC.php');
 
-include('Database/bio.php'); //da rimuovere
-
 class DelirioBot
 {
 	//Inizializzazione variabili di configurazione
@@ -791,7 +789,7 @@ class DelirioBot
 	{
 		if (!$this->flood($data)) {
 			$nicklist = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']), $data->nick);
-			$love = $love[array_rand($love, 1)];
+			$love = $nicklist[array_rand($nicklist, 1)];
 			$this->talk($irc, $data, $data->nick . ' Lovva ' . $love . ' <3');
 		}
 	}
@@ -805,7 +803,12 @@ class DelirioBot
 	function birra(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-		global $bio;
+			$result = $this->is_user_exists($data->nick);
+
+			$condition = $result['condition'];
+			$nickname = $result['user'];
+
+			$insult_rand = $this->insulti[array_rand($this->insulti)];
 
 			if (isset($data->messageex[1]) && $data->messageex[1] == 'party') {
 				$nicklist = $this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']);
@@ -821,12 +824,12 @@ class DelirioBot
 				for ($i=0; $i < count($draw); $i++) { 
 					$this->talk($irc, $data, $draw[$i]);
 				}
-			} elseif (!isset($bio[$data->nick])) {
+			} elseif (!isset($this->users[$nickname])) {
 				$this->talk($irc, $data, 'Tu vorresti la nostra birra?? Non sei nel database brutta pustola.');
-				$this->talk($irc, $data, $data->nick.' '.$this->insulti[array_rand($this->insulti)]);
-			} elseif (isset($bio[$data->nick]['insulto']) && count($bio[$data->nick]['insulto']) < 3){
+				$this->talk($irc, $data, $data->nick . ' ' . lcfirst($insult_rand));
+			} elseif (isset($this->users[$nickname]['insulti']) && count($this->users[$nickname]['insulti']) < 3){
 				$this->talk($irc, $data, 'A te niente birra brutto stronzetto, senza insulti personali non vai da nessuna parte,');
-				$this->talk($irc, $data, $data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+				$this->talk($irc, $data, $data->nick . ' ' . lcfirst($insult_rand));
 			} else {
 				$this->talk($irc, $data, $data->nick . ', eccoti una bella birra fredda marchio "Delirio" offerta dalla casa!');
 
