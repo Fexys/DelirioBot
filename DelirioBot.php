@@ -1,17 +1,24 @@
 <?php
 
+//Libreria di SmartIRC
 include('SmartIRC.php');
 
-include('Database/bio.php');
+include('Database/bio.php'); //da rimuovere
 
 class DelirioBot
 {
+	//Inizializzazione variabili di configurazione
 	var $config = array();
+	var $server = array();
+
+	//Inizializzazione variabili database
 	var $users = array();
 	var $manual = array();
 	var $insulti = array();
 	var $morte = array();
 	var $filtro = array();
+
+	//Inizializzazione variabili di impostazione
 	var $stop = FALSE;
 
 	function DelirioBot(&$irc) {

@@ -1,22 +1,36 @@
 <?php
-error_reporting (E_ALL);
 
+//Libreria di SmartIRC
 include('SmartIRC.php');
 
 class DelirioLogger
 {
+	//Inizializzazione variabili di configurazione
+	var $config = array();
+	var $server = array();
+
+	function DelirioLogger(&$irc) {
+		$this->run($irc);
+	}
+
 	function run(&$irc)
 	{
-		//File di configurazione
 		require_once('config.php');
+
+		//Set variabili di connessione
+		foreach ($config as $key => $value) {
+			$this->server[$key] = $value;
+		}
+
+		//Set variabili Bot
 		foreach ($config['logger'] as $key => $value) {
 			$this->config[$key] = $value;
 		}
 
 		//Setup di SmartIRC
 		$irc->setDebug(SMARTIRC_DEBUG_ALL);
-		$irc->setLogfile(LOG_DIR . 'debug_logger.log');
-		$irc->setLogdestination(SMARTIRC_FILE);
+		//$irc->setLogfile(LOG_DIR . 'debug_logger.log');
+		//$irc->setLogdestination(SMARTIRC_FILE);
 		$irc->setUseSockets(TRUE);
 		$irc->setUserSyncing(TRUE);
 		$irc->setChannelSyncing(TRUE);
@@ -27,9 +41,9 @@ class DelirioLogger
 		$irc->setCtcpVersion($this->config['nickname'] . ' [ver ' . VERSION . ']');
 		$irc->setSendDelay(500);
 
-		$irc->connect($this->config['server'], $this->config['port']);
+		$irc->connect($this->server['server'], $this->server['port']);
 		$irc->login($this->config['nickname'], $this->config['realname'], $this->config['usermode'], $this->config['username'], $this->config['password']);
-		$irc->join($this->config['join']);
+		$irc->join($this->server['channel']);
 		if (LOGGER) {
 			$this->startlog($irc);
 		}
