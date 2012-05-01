@@ -626,7 +626,7 @@ class DelirioBot
 				$insult_rand = $this->insulti[array_rand($this->insulti)];
 
 				if (is_numeric($data->messageex[1]))
-					$n = str_replace('-', '', (int)$data->messageex[1]);
+					$n = abs((int)$data->messageex[1]);
 
 				if ($data->messageex[1] == '-c') {
 					$this->talk($irc, $data, $total_insults . ' insulti presenti nel database.');
@@ -684,7 +684,7 @@ class DelirioBot
 				$death_rand = $this->deaths[array_rand($this->deaths)];
 
 				if (is_numeric($data->messageex[1]))
-					$n = str_replace('-', '', (int)$data->messageex[1]);
+					$n = abs((int)$data->messageex[1]);
 
 				if ($data->messageex[1] == '-c') {
 					$this->talk($irc, $data, $total_deaths . ' morti presenti nel database.');
@@ -719,7 +719,7 @@ class DelirioBot
 				$supercazzola_rand = $this->supercazzole[array_rand($this->supercazzole)];
 
 				if (is_numeric($data->messageex[1]))
-					$n = str_replace('-', '', (int)$data->messageex[1]);
+					$n = abs((int)$data->messageex[1]);
 
 				if ($data->messageex[1] == '-c') {
 					$this->talk($irc, $data, $total_supercazzole . ' supercazzole presenti nel database.');
@@ -741,10 +741,9 @@ class DelirioBot
 	}
 
 	/**
-	 * Calcio.
+	 * L'utente riceve N calcio random.
 	 *
-	 * @param	string
-	 * @return	string
+	 * @return	message
 	 */
 	function calcio(&$irc, &$data)
 	{
@@ -765,10 +764,9 @@ class DelirioBot
 	}
 
 	/**
-	 * Gaio.
+	 * Decreta il gaio del momento.
 	 *
-	 * @param	string
-	 * @return	string
+	 * @return	message
 	 */
 	function gaio(&$irc, &$data)
 	{
@@ -780,10 +778,9 @@ class DelirioBot
 	}
 
 	/**
-	 * Amore.
+	 * Chi ama chi!
 	 *
-	 * @param	string
-	 * @return	string
+	 * @return	message
 	 */
 	function amore(&$irc, &$data)
 	{
@@ -795,10 +792,10 @@ class DelirioBot
 	}
 
 	/**
-	 * Birra.
+	 * Offre la birra a tutto il chan o un singolo utente o a se stessi.
 	 *
-	 * @param	string
-	 * @return	string
+	 * @param	nickanme
+	 * @return	message
 	 */
 	function birra(&$irc, &$data)
 	{
@@ -842,11 +839,9 @@ class DelirioBot
 	}
 
 	/**
-	 * Nutella.
-	 * Attiva il Nutella Party
+	 * Attiva il Nutella Party.
 	 *
-	 * @param	string
-	 * @return	string
+	 * @return	message
 	 */
 	function nutella(&$irc, &$data)
 	{
@@ -856,10 +851,10 @@ class DelirioBot
 	}
 
 	/**
-	 * Sex.
+	 * XXX!
 	 *
-	 * @param	string
-	 * @return	string
+	 * @param	nickname
+	 * @return	message
 	 */
 	function sex(&$irc, &$data)
 	{
@@ -883,7 +878,7 @@ class DelirioBot
 	}
 
 	/**
-	 * Ricerca su Google.
+	 * Ricerca avanzata su Google.
 	 *
 	 * @param	string
 	 * @return	string
@@ -926,7 +921,7 @@ class DelirioBot
 	}
 
 	/**
-	 * Ricerca YouTube.
+	 * Ricerca su YouTube.
 	 *
 	 * @param	string
 	 * @return	string
@@ -949,7 +944,7 @@ class DelirioBot
 	}
 
 	/**
-	 * Ricerca di materiale pornografico.
+	 * Ricerca su siti pornografici.
 	 *
 	 * @param	string
 	 * @return	string
@@ -1097,7 +1092,7 @@ class DelirioBot
 	}
 	
 	/**
-	 * Google Translate.
+	 * Traduzione di una stringa su Google Translate.
 	 *
 	 * @param	string
 	 * @return	string
@@ -1124,7 +1119,55 @@ class DelirioBot
 	 */
 	function paste(&$irc, &$data)
 	{
-		$this->talk($irc, $data, 'http://pastebin.com/ | http://paste.kde.org/ | http://nopaste.voric.com/');
+		if (!$this->flood($data)) {
+			$this->talk($irc, $data, 'http://pastebin.com/ | http://paste.kde.org/ | http://nopaste.voric.com/');
+		}
+	}
+
+
+	/**
+	 * Lancia N dadi da M facce.
+	 *
+	 * @param	int
+	 * @return	message
+	 */
+	function dado(&$irc, &$data)
+	{
+		if (!$this->flood($data)) {
+			$dadi = $data->messageex[1];
+			$facce = $data->messageex[2];
+
+			if (is_numeric($dadi) && is_numeric($facce)) {
+				$dadi = intval(abs($dadi));
+				$facce = intval(abs($facce));
+
+				if ($dadi < 1)
+					$dadi = 1;
+
+				if ($dadi > 10)
+					$dadi = 10;
+
+				if ($facce < 6)
+					$facce = 6;
+
+				if ($facce > 100)
+					$facce = 100;
+
+				for ($i=0; $i < $dadi; $i++) { 
+					$results[] = rand(1, $facce);
+				}
+
+				$display_results = implode(', ', $results);
+
+				if ($dadi == 1) {
+					$this->talk($irc, $data, $data->nick . ', hai lanciato ' . $dadi . ' dado da ' . $facce . ' facce e hai ottenuto: ' . $display_results);
+				} else {
+					$this->talk($irc, $data, $data->nick . ', hai lanciato ' . $dadi . ' dadi da ' . $facce . ' facce e hai ottenuto: ' . $display_results);
+				}
+			} else {
+				$this->talk($irc, $data, 'Sintassi comando errata. Per info !man dado');
+			}
+		}
 	}
 
 	/**

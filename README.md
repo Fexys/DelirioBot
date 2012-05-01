@@ -33,6 +33,7 @@ Funzionalità
 + Ricerca avanzata: Google, YouTube, ricerca di package, ricerca di materiale pornografico, ricerca di anime
 + Traduttore multilingua
 + Aggiorna i file database senza riavvio
++ Dado
 
 
 
@@ -45,8 +46,7 @@ Biografie presenti
 Bug conosciuti
 --------------
 
-+ Attualmente il Bot è in testing quindi molte funzioni potrebbero essere incomplete o non funzionanti
-+ Dado mancante
+Attualmente il Bot è in testing quindi alcune funzioni potrebbero riportare qualche malfunzionamento.
 
 
 
