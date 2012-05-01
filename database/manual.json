@@ -103,15 +103,15 @@
 		"description": "",
 		"synopsis": ""
 	},
-	"nick":{
-		"description": "",
-		"synopsis": ""
-	},
 	"set":{
 		"description": "",
 		"synopsis": ""
 	},
 	"refresh":{
+		"description": "",
+		"synopsis": ""
+	},
+	"nick":{
 		"description": "",
 		"synopsis": ""
 	},
