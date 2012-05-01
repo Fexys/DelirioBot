@@ -43,7 +43,7 @@
 	"gianguido":{
 		"alias":[
 		],
-		"saluto": "",
+		"saluto": "We! È venut chella mappin e' $nick! Teccat sta banan!",
 		"bio": "I was chatting here, but then i took an arrow to the knee.",
 		"twitter": "https://twitter.com/PeppeLaKappa",
 		"insulti":[
@@ -74,11 +74,12 @@
 	"quizzlo":{
 		"alias":[
 		],
-		"saluto": "",
+		"saluto": "Ave $nick, mortacci tua te salutant!",
 		"bio": "Fanatico di Gentoo. Toglietemi tutto, ma non la mia riga di comando <3",
 		"twitter": "https://twitter.com/marcopaolone",
 		"insulti":[
-			"Ma ti gentoizzo io <3"
+			"Ma ti gentoizzo io <3",
+			"Non potevano farti con un solo dente e 32 piselli? Almeno trombavi e non rompevi le palle a noi!"
 		]
 	},
 	"sickmind2x":{
@@ -190,7 +191,7 @@
 		"alias":[
 		],
 		"saluto": "Ave $nick sommo kickatore, gli insulti sono messi al caldo e l'ascia per decapitare iKim è lucida.",
-		"bio": "Linuxaro dalla culla, sono scritto in C, e l'informatica è il mio linguaggio. Odia a morte iKim. Sono da internare perché pazzo... Sento le voci...",
+		"bio": "Linuxaro dalla culla, sono scritto in C, e l'informatica è il mio linguaggio. Odia a morte iKim. Sono da internare perché pazzo... sento le voci!",
 		"twitter": "https://twitter.com/j1g3n",
 		"insulti":[
 			"Spegni il televisore e le voci non le sentirai più."
@@ -220,7 +221,7 @@
 	"Mikiwi93":{
 		"alias":[
 		],
-		"saluto": "",
+		"saluto": "Benvenuto a $nick, bello grosso e capoccione, tu che sei un po' fri fri dimme un po' che c'hai da dì!",
 		"bio": "Psychosocial and I do sex with z80.",
 		"twitter": "https://twitter.com/Mikiwi93",
 		"insulti":[
@@ -247,16 +248,17 @@
 		"bio": "Appassionato di informatica, cinema e fotografia. OpenSuse12.1+XFCE4.10, Android user.",
 		"twitter": "https://twitter.com/pimuzzo",
 		"insulti":[
-			"E smettila di parlare sempre e solo della Canducci!"
+			"E smettila di parlare sempre e solo di fava!"
 		]
 	},
 	"Ryccardo":{
 		"alias":[
 		],
-		"saluto": "",
+		"saluto": "Ecco qui $nick, lo sfidante al The Game di turno!",
 		"bio": "Studente, nerd, elettricista, fotografo, e fudanshi. Sono multiculturale perciò uso Lion, Debian e Win98.",
 		"twitter": "https://twitter.com/rboninsegna",
 		"insulti":[
+			"Sei utile quanto lo è Sasha Grey al giorno d'oggi."
 		]
 	},
 	"nannes":{
@@ -267,6 +269,25 @@
 		"twitter": "NULL",
 		"insulti":[
 		]
+	},
+	"Carmine":{
+		"alias":[
+		],
+		"saluto": "Salutate tutti $nick! Il pupparo open source!",
+		"bio": "Un malato di figa e appassionato di open source.",
+		"twitter": "https://twitter.com/carminelnx",
+		"insulti":[
+			"Tua sorella è open source, tutti la modificano a modo loro!"
+		]
+	},
+	"Fabiospecial":{
+		"alias":[
+		],
+		"saluto": "Ciao $nick, sei tu quello con la passione di cancellare i <center>?",
+		"bio": "Studio informatica, sono Napoletano.",
+		"twitter": "https://twitter.com/Fabiospecial",
+		"insulti":[
+			"Hai rotto con sto manuale per mettere lo sfondo."
+		]
 	}
-
 }

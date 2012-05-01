@@ -9,6 +9,9 @@ class DelirioLogger
 	var $config = array();
 	var $server = array();
 
+	//Varie
+	var $log;
+
 	function DelirioLogger(&$irc) {
 		$this->run($irc);
 	}

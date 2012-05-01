@@ -81,6 +81,7 @@ class DelirioBot
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!amore', $this, 'amore');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!birra', $this, 'birra');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!nutella', $this, 'nutella');
+		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!sex', $this, 'sex');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!google', $this, 'google_search');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!yt', $this, 'youtube_search');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!porn', $this, 'porn_search');
@@ -271,6 +272,19 @@ class DelirioBot
 				);
 		 		break;
 
+		 	case 'penis':
+		 		$draw = array(
+					'      ___',
+					'     //  7',
+					'    (_,_/\\',
+					'     \    \\',
+					'      \    \\',
+					'      _\    \__',
+					'     (   \     )',
+					'      \___\___/',
+		 			);
+		 		break;
+
 			default:
 		 		break;
 		}
@@ -324,7 +338,7 @@ class DelirioBot
 
 		if ($condition) {
 			if ($this->users[$nickname]['saluto'] == '') {
-				$this->talk($irc, $data, 'Ciao ' . $nickname . ', ti saluto solo perché sono educato, ma ricordati che mi devi dare un saluto personale.');
+				$this->talk($irc, $data, 'Ciao ' . $nickname . ', ti saluto solo perché sono educato, ma ricorda che devi darmi il tuo saluto personale.');
 			} else {
 				$saluto = str_replace('$nick', $data->nick, $this->users[$nickname]['saluto']);
 				$this->talk($irc, $data, $saluto);
@@ -354,8 +368,10 @@ class DelirioBot
 	 */
 	function kick_rejoin(&$irc, &$data)
 	{
-		$irc->join(array($this->server['channel']));
-		$this->talk($irc, $data, 'Sono IMMORTALE ed esisto da quando il mondo era ancora una palla di fuoco, questo è il motivo della mia super intelligenza, io sono lo Divino Bot!');
+		if ($data->rawmessageex[3] == $this->config['nickname']) {
+			$irc->join(array($this->server['channel']));
+			$this->talk($irc, $data, 'Sono IMMORTALE ed esisto da quando il mondo era ancora una palla di fuoco, questo è il motivo della mia super intelligenza, io sono lo Divino Bot!');
+		}
 	}
 
 	/**
@@ -409,9 +425,9 @@ class DelirioBot
 					$insult_rand = $this->users[$nickname]['insulti'][array_rand($this->users[$nickname]['insulti'])];
 					
 					if ($value == $this->config['nickname']) {
-						$this->talk($irc, $data, $data->nick . ', ' . $insult_rand);
+						$this->talk($irc, $data, $data->nick . ', ' . lcfirst($insult_rand));
 					} elseif (isset($this->users[$nickname]['insulti'][0])) {
-						$this->talk($irc, $data, $nickname . ', ' . $insult_rand);
+						$this->talk($irc, $data, $nickname . ', ' . lcfirst($insult_rand));
 					}
 				}
 			}
@@ -794,7 +810,7 @@ class DelirioBot
 			if (isset($data->messageex[1]) && $data->messageex[1] == 'party') {
 				$nicklist = $this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']);
 				$alcohol = array('San Crispino', 'Tavernello', 'Olio Cuore', 'Estathé');
-				$user_rand = $poggio[array_rand($poggio, 1)];
+				$user_rand = $nicklist[array_rand($nicklist, 1)];
 				$alcohol_rand = $alcohol[array_rand($alcohol)];
 				
 				$this->talk($irc, $data, 'Una bella damigiana di birra per tutti offerta da ' . $data->nick . '! Mentre per ' . $user_rand . ' solo ' . $alcohol_rand . '.');
@@ -833,6 +849,33 @@ class DelirioBot
 	{
 		if (!$this->flood($data)) {
 			$this->talk($irc, $data, 'Tirate fuori i vostri cucchiai, inizia il Nutella Party!');
+		}
+	}
+
+	/**
+	 * Sex.
+	 *
+	 * @param	string
+	 * @return	string
+	 */
+	function sex(&$irc, &$data)
+	{
+		if (!$this->flood($data)) {
+			if (isset($data->messageex[1])) {
+				$this->talk($irc, $data, $data->messageex[1] . ', eccoti una bella fungiazza di minchia offerta da quel cazzone di ' . $data->nick . '!');
+				
+				$draw = $this->ascii_art('penis');
+				for ($i=0; $i < count($draw); $i++) { 
+					$this->talk($irc, $data, $draw[$i]);
+				}
+			} else {
+				$this->talk($irc, $data, $data->nick . ', eccoti una bella fungiazza di minchia offerta da me stesso medesimo!');
+
+				$draw = $this->ascii_art('penis');
+				for ($i=0; $i < count($draw); $i++) { 
+					$this->talk($irc, $data, $draw[$i]);
+				}
+			}
 		}
 	}
 
@@ -939,7 +982,8 @@ class DelirioBot
 						break;
 
 					case '-fk':
-						$this->talk($irc, $data, 'http://www.fakku.net/manga.php?search='.$termine);
+						$termine = str_replace('+', '%20', $termine);
+						$this->talk($irc, $data, 'http://www.fakku.net/search/' . $termine);
 						break;
 
 					case '-tg':
@@ -1397,7 +1441,7 @@ class DelirioBot
 			if (isset($data->messageex[1])) {
 				$nickname = $data->messageex[1];
 				$channel = $data->channel;
-				$irc->mode($channel, '+q ' . $nickname, SMARTIRC_MEDIUM);
+				$irc->mode($channel, '-q ' . $nickname, SMARTIRC_MEDIUM);
 				$this->talk($irc, $data, $nickname . ', ora puoi tornare a parlare.');
 			} else {
 				$this->pvt_talk($irc, $data->nick, 'Sintassi comando errata: !unmute <nickname>');
