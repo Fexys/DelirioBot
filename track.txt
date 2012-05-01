@@ -1,4 +1,0 @@
-mute -- completo -- need test
-unmute -- completo -- need test
-ban -- completo -- need test
-unban -- completo -- need test
