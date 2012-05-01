@@ -4,10 +4,10 @@ date_default_timezone_set('Europe/Rome');
 
 define('VERSION', '0.1a');
 
-define('LOG_DIR', 'logs');
-define('COMMAND_DIR', 'commands');
-define('DATABASE_DIR', 'Database/');
-define('LOGGER', FALSE);
+define('LOG_DIR', 'logs/');
+define('COMMAND_DIR', 'commands/');
+define('DATABASE_DIR', 'database/');
+define('LOGGER', TRUE);
 
 $config['server']	= 'irc.freenode.net';
 $config['port']		= 6667;

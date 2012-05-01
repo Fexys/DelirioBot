@@ -38,7 +38,7 @@ Funzionalità
 
 Biografie presenti
 ------------------
-> ilDelirante, Mte90, v2, gianguido, worst, toketin, quizzlo, oniontux, picchio, alessandro1997, gigitux, vencizOn, turlando, Fexys, Miu, j1g3n, eMarco, Chris_Zeta, Mikiwi93, GianBalex, Pimo, Ryccardo
+> ilDelirante, Mte90, v2, gianguido, worst, toketin, quizzlo, sickmind2x, picchio, alessandro1997, gigitux, vencizOn, turlando, Fexys, Miu, j1g3n, eMarco, Chris_Zeta, Mikiwi93, GianBalex, Pimo, Ryccardo
 
 
 
@@ -63,13 +63,13 @@ Sviluppatori
 
 **Mte90**
 
-+ http://twitter.com/Mte90Net
-+ http://github.com/Mte90
++ https://twitter.com/Mte90Net
++ https://github.com/Mte90
 
 **Fexys**
 
-+ http://twitter.com/Fexys
-+ http://github.com/Fexys
++ https://twitter.com/Fexys
++ https://github.com/Fexys
 
 Inoltre, un ringraziamente particolare per l'aiuto nella programmazione a: turlando, vencizOn e GianBalex. Un ringraziamento anche a tutti gli utenti del chan per il testing.
 

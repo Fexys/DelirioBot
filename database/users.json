@@ -24,9 +24,9 @@
 		"bio": "Fan sfegatato di Debian e KDE. Superpotere: sente la puzza di GNOME da lontano un chilometro.",
 		"twitter": "https://twitter.com/Mte90Net",
 		"insulti":[
-			{"testo": "Ti prendo a calci col piedone puzzoso."},
-			{"testo": "Sempre a litigare con questa tastiera, il correttore automatico è tuo amico."},
-			{"testo": "Non fare il figo che alla prima occasione ti gorgo come una zapogna austroirlandese azteca."}
+			"Ti prendo a calci col piedone puzzoso.",
+			"Sempre a litigare con questa tastiera, il correttore automatico è tuo amico.",
+			"Non fare il figo che alla prima occasione ti gorgo come una zapogna austroirlandese azteca."
 		]
 	},
 	"v2":{
@@ -37,7 +37,7 @@
 		"bio": "Nome in codice: V2. Ricercata e pericolosa Cyberpunker, psicolabile e squilibrata.",
 		"twitter": "",
 		"insulti":[
-			{"testo": "Tagliati sti baffi."}
+			"Tagliati sti baffi."
 		]
 	},
 	"gianguido":{
@@ -47,8 +47,8 @@
 		"bio": "I was chatting here, but then i took an arrow to the knee.",
 		"twitter": "https://twitter.com/PeppeLaKappa",
 		"insulti":[
-			{"testo": "Mi stupisco che non ti siano ancora venuti i calli alle mani e la tendinite al pisello."},
-			{"testo": "Sei così negato con android che quelli di xda ti vogliono fregare il telefono per darlo a qualcun'altro"}
+			"Mi stupisco che non ti siano ancora venuti i calli alle mani e la tendinite al pisello.",
+			"Sei così negato con android che quelli di xda ti vogliono fregare il telefono per darlo a qualcun'altro"
 		]
 	},
 	"worst":{
@@ -58,7 +58,7 @@
 		"bio": "Nerd mancato, apprendista smanettone, socialmente impedito. Innamorato di Debian&Openbox, detesta tutto ciò che è imposto.",
 		"twitter": "",
 		"insulti":[
-			{"testo": "Ma ti pinnizzo io <3"}
+			"Ma ti pinnizzo io <3"
 		]
 	},
 	"toketin":{
@@ -68,7 +68,7 @@
 		"bio": "Arciere convinto, studente universitario a Udine e juventino. Amo la configurabilità e la leggerezza.",
 		"twitter": "https://twitter.com/toketin",
 		"insulti":[
-			{"testo": "Tu e sto calcio del minghia."}
+			"Tu e sto calcio del minghia."
 		]
 	},
 	"quizzlo":{
@@ -78,7 +78,7 @@
 		"bio": "Fanatico di Gentoo. Toglietemi tutto, ma non la mia riga di comando <3",
 		"twitter": "https://twitter.com/marcopaolone",
 		"insulti":[
-			{"testo": "Ma ti gentoizzo io <3"}
+			"Ma ti gentoizzo io <3"
 		]
 	},
 	"sickmind2x":{
@@ -86,14 +86,14 @@
 			"oniontux",
 			"onion2x"
 		],
-		"saluto": "Attenti alla cipolla!",
+		"saluto": "E' entrato $nick. Attenti alla cipolla!",
 		"bio": "Stupratore seriale di urxvt. Adulatore di awesomewm. Masticatore di chip music. Nerd girls lover.",
 		"twitter": "https://twitter.com/oniontux",
 		"insulti":[
-			{"testo": "Sei l'anello mancante tra uomo e scimmia."},
-			{"testo": "Questo mette bocca dappertutto peggio di signorine in tangenziale che fanno yeye."},
-			{"testo": "Sei bello come una cipolla, quando ti guardo mi viene da piangere."},
-			{"testo": "Hai così tanti nick che quando ti svegli la mattina devi decidere chi essere o cambiare le mutande."}
+			"Sei l'anello mancante tra uomo e scimmia.",
+			"Questo mette bocca dappertutto peggio di signorine in tangenziale che fanno yeye.",
+			"Sei bello come una cipolla, quando ti guardo mi viene da piangere.",
+			"Hai così tanti nick che quando ti svegli la mattina devi decidere chi essere o cambiare le mutande."
 		]
 	},
 	"picchio":{
@@ -103,10 +103,10 @@
 		"bio": "Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime.",
 		"twitter": "https://twitter.com/Picchiopc",
 		"insulti":[
-			{"testo": "Diventi cieco di questo passo."},
-			{"testo": "Ma io ti pacchio e anche forte."},
-			{"testo": "Sei così scemo che se vai al cinema e leggi 'vietato ai minori di 18' torni con 17 amici."},
-			{"testo": "Povero caro, lo sapevo che prima o poi ti saresti slogato il polso, a furia di trafficare con quel computer."}
+			"Diventi cieco di questo passo.",
+			"Ma io ti pacchio e anche forte.",
+			"Sei così scemo che se vai al cinema e leggi 'vietato ai minori di 18' torni con 17 amici.",
+			"Povero caro, lo sapevo che prima o poi ti saresti slogato il polso, a furia di trafficare con quel computer."
 		]
 	},
 	"alessandro1997":{
@@ -114,9 +114,9 @@
 		],
 		"saluto": "",
 		"bio": "Appassionato di informatica, programmazione, open source. E scrittura. Un paradosso vivente.",
-		"twitter": "https://twitter.com/alessandro1997",
+		"twitter": "",
 		"insulti":[
-			{"testo": "Sei brutto, ma così brutto che non ti sorridono neanche i sofficini."}
+			"Sei brutto, ma così brutto che non ti sorridono neanche i sofficini."
 		]
 	},
 	"gigitux":{
@@ -126,7 +126,7 @@
 		"bio": "Sono un Nerd, amo l'informatica ed il mondo open-source. Mi piacciono i videogiochi.",
 		"twitter": "https://twitter.com/",
 		"insulti":[
-			{"testo": "Ti faccio conoscere 25 cm di simpatia se vieni qui."}
+			"Ti faccio conoscere 25 cm di simpatia se vieni qui."
 		]
 	},
 	"PTKDev":{
@@ -136,8 +136,8 @@
 		"bio": "Non so usare windows. Non mangio le mele. Lascio che i bit scorrano velocemente sul mio debian. Penso troppo, sono pazzo, sono semplicemente io. #KickMe",
 		"twitter": "https://twitter.com/PTKDev",
 		"insulti":[
-			{"testo": "Sei proprio incazzoso."},
-			{"testo": "Dott. Ing. Arch. On. Sen. Prof. Boss Gran Test. di Cazz. Figl. di Putt."}
+			"Sei proprio incazzoso.",
+			"Dott. Ing. Arch. On. Sen. Prof. Boss Gran Test. di Cazz. Figl. di Putt."
 		]
 	},
 	"vencizOn":{
@@ -147,7 +147,7 @@
 		"bio": "Studente di Informatica. Aspirante developer. Innamorato di Google. Pseudo blogger nel tempo libero.",
 		"twitter": "https://twitter.com/vencizOn",
 		"insulti":[
-			{"testo": "L'unico tuo neurone soffre cosi tanto di depressione per la solitudine che ha scelto come amico immaginario la goccia di sodio della Lete, l'unica che secondo lui lo può capire questo è."}
+			"L'unico tuo neurone soffre cosi tanto di depressione per la solitudine che ha scelto come amico immaginario la goccia di sodio della Lete, l'unica che secondo lui lo può capire questo è."
 		]
 	},
 	"turlando":{
@@ -157,9 +157,9 @@
 		"bio": "Danghiù veri macc for riid mai bio bat i donnt spik prosciutti.",
 		"twitter": "https://twitter.com/turlando",
 		"insulti":[
-			{"testo": "Prima di conoscerti ero sull'orlo del precipizio... adesso che ti ho conosciuto credo che farò un passo in avanti."},
-			{"testo": "Sei simpatico come una famiglia di ricci intu u culu."},
-			{"testo": "Ti faccio conoscere 25 cm di simpatia se vieni qui."}
+			"Prima di conoscerti ero sull'orlo del precipizio... adesso che ti ho conosciuto credo che farò un passo in avanti.",
+			"Sei simpatico come una famiglia di ricci intu u culu.",
+			"Ti faccio conoscere 25 cm di simpatia se vieni qui."
 		]
 	},
 	"Fexys":{
@@ -169,11 +169,11 @@
 		"bio": "Sono un Mac che usa Linux ma non si capisce il perché. Quando mi hanno internato per turbe mentali non sapevano cosa fare di me e adesso sono qui.",
 		"twitter": "https://twitter.com/Fexys",
 		"insulti":[
-			{"testo": "Non insultare il Gran Cerimoniere, pestalo direttamente con il cric."},
-			{"testo": "Tu e il BNC che non ti funziona."},
-			{"testo": "Ho letto robe che le suore avrebbero fatto meglio..."},
-			{"testo": "Smettila di dire cagate e fai AlphaCode."},
-			{"testo": "Il tuo Mac vuole il tuo bene quindi buttalo altrimenti niente McFlurry."}
+			"Non insultare il Gran Cerimoniere, pestalo direttamente con il cric.",
+			"Tu e il BNC che non ti funziona.",
+			"Ho letto robe che le suore avrebbero fatto meglio...",
+			"Smettila di dire cagate e fai AlphaCode.",
+			"Il tuo Mac vuole il tuo bene quindi buttalo altrimenti niente McFlurry."
 		]
 	},
 	"Miu":{
@@ -183,17 +183,17 @@
 		"bio": "Adoro smontare i pc, mi fa rilassare ma in genere sono pazza.",
 		"twitter": "https://twitter.com/NaninnaNana",
 		"insulti":[
-			{"testo": "Non avrai sconti quindi ti insulterà qualcun altro per me che ho da fare."}
+			"Non avrai sconti quindi ti insulterà qualcun altro per me che ho da fare."
 		]
 	},
 	"j1g3n":{
 		"alias":[
 		],
-		"saluto": "Ave sommo kickatore, gli insulti sono messi al caldo e l'ascia per decapitare iKim è lucida.",
+		"saluto": "Ave $nick sommo kickatore, gli insulti sono messi al caldo e l'ascia per decapitare iKim è lucida.",
 		"bio": "Linuxaro dalla culla, sono scritto in C, e l'informatica è il mio linguaggio. Odia a morte iKim. Sono da internare perché pazzo... Sento le voci...",
 		"twitter": "https://twitter.com/j1g3n",
 		"insulti":[
-			{"testo": "Spegni il televisore e le voci non le sentirai più."}
+			"Spegni il televisore e le voci non le sentirai più."
 		]
 	},
 	"eMarco":{
@@ -203,7 +203,7 @@
 		"bio": "Fancazzista rilegato in winzozz. Tempio del random. Dovrebbe scrivere una bio più sensata, ma fottesega.",
 		"twitter": "https://twitter.com/theBlackEnd",
 		"insulti":[
-			{"testo": "Compensi le tue piccole misure con cellulari potenti."}
+			"Compensi le tue piccole misure con cellulari potenti."
 		]
 	},
 	"Chris_Zeta":{
@@ -256,6 +256,15 @@
 		"saluto": "",
 		"bio": "Studente, nerd, elettricista, fotografo, e fudanshi. Sono multiculturale perciò uso Lion, Debian e Win98.",
 		"twitter": "https://twitter.com/rboninsegna",
+		"insulti":[
+		]
+	},
+	"nannes":{
+		"alias":[
+		],
+		"saluto": "Ajòòòòòòò $nick",
+		"bio": "Unknown.",
+		"twitter": "NULL",
 		"insulti":[
 		]
 	}

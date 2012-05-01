@@ -1,7 +1,45 @@
 <?php
+error_reporting (E_ALL);
+
+include('SmartIRC.php');
 
 class DelirioLogger
 {
+	function run(&$irc)
+	{
+		//File di configurazione
+		require_once('config.php');
+		foreach ($config['logger'] as $key => $value) {
+			$this->config[$key] = $value;
+		}
+
+		//Setup di SmartIRC
+		$irc->setDebug(SMARTIRC_DEBUG_ALL);
+		$irc->setLogfile(LOG_DIR . 'debug_logger.log');
+		$irc->setLogdestination(SMARTIRC_FILE);
+		$irc->setUseSockets(TRUE);
+		$irc->setUserSyncing(TRUE);
+		$irc->setChannelSyncing(TRUE);
+		$irc->setAutoRetry(TRUE);
+		$irc->setAutoReconnect(TRUE);
+		$irc->setReceiveTimeout(6000);
+		$irc->setTransmitTimeout(6000);
+		$irc->setCtcpVersion($this->config['nickname'] . ' [ver ' . VERSION . ']');
+		$irc->setSendDelay(500);
+
+		$irc->connect($this->config['server'], $this->config['port']);
+		$irc->login($this->config['nickname'], $this->config['realname'], $this->config['usermode'], $this->config['username'], $this->config['password']);
+		$irc->join($this->config['join']);
+		if (LOGGER) {
+			$this->startlog($irc);
+		}
+		$irc->listen();
+		$irc->disconnect();
+		if (LOGGER) {
+			$this->stoplog();
+		}
+	}
+
 	function startlog(&$irc)
 	{
 		$irc->registerActionhandler(
@@ -13,7 +51,7 @@ class DelirioLogger
 		$month = date('F');
 		$day = date('d');
 
-		$file_log = LOG_DIR . '/' . $year . '/' . $month . '/' . $day . '.log';
+		$file_log = LOG_DIR . $year . '/' . $month . '/' . $day . '.log';
 
 		$this->log = fopen($file_log, 'a');
 	}
