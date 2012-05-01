@@ -15,11 +15,15 @@ class DelirioBot
 	var $users = array();
 	var $manual = array();
 	var $insulti = array();
-	var $morte = array();
+	var $deaths = array();
 	var $filtro = array();
 
 	//Inizializzazione variabili di impostazione
 	var $stop = FALSE;
+	var $antiflood = TRUE;
+
+	//Varie
+	var $flooders = array();
 
 	function DelirioBot(&$irc) {
 		$this->run($irc);
@@ -42,8 +46,6 @@ class DelirioBot
 
 		//Setup di SmartIRC
 		$irc->setDebug(SMARTIRC_DEBUG_ALL);
-		//$irc->setLogfile(LOG_DIR . 'debug_bot.log');
-		//$irc->setLogdestination(SMARTIRC_FILE);
 		$irc->setUseSockets(TRUE);
 		$irc->setUserSyncing(TRUE);
 		$irc->setChannelSyncing(TRUE);
@@ -57,6 +59,7 @@ class DelirioBot
 		//Lista comandi
 		$irc->registerActionhandler(SMARTIRC_TYPE_JOIN, '.*', $this, 'join_greeting');
 		$irc->registerActionhandler(SMARTIRC_TYPE_KICK, '.*', $this, 'kick_response');
+		$irc->registerActionhandler(SMARTIRC_TYPE_KICK, '.*', $this, 'kick_rejoin');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '.*', $this, 'mention_insult');
 		//$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '/alphacode/i', $this, 'alpha_kick');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!info$', $this, 'info');
@@ -124,7 +127,7 @@ class DelirioBot
 		$manual_db_path = DATABASE_DIR . 'manual.json';
 		$insulti_db_path = DATABASE_DIR . 'insulti.php';
 		$supercazzole_db_path = DATABASE_DIR . 'supercazzole.php';
-		$morte_db_path = DATABASE_DIR . 'morte.php';
+		$deaths_db_path = DATABASE_DIR . 'deaths.php';
 		$filtro_db_path = DATABASE_DIR . 'filtro.php';
 
 		$data_users = file_get_contents($users_db_path);
@@ -134,7 +137,7 @@ class DelirioBot
 		$this->manual = json_decode($data_manual, true);
 		$this->insulti = array_map('rtrim', file($insulti_db_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 		$this->supercazzole = array_map('rtrim', file($supercazzole_db_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
-		$this->morte = array_map('rtrim', file($morte_db_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+		$this->deaths = array_map('rtrim', file($deaths_db_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 		$this->filtro = array_map('rtrim', file($filtro_db_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 	}
 
@@ -145,7 +148,7 @@ class DelirioBot
 	 */
 	function unset_vars()
 	{
-		unset($this->users, $this->insulti, $this->supercazzole, $this->morte, $this->filtro);
+		unset($this->users, $this->insulti, $this->supercazzole, $this->deaths, $this->filtro);
 	}
 
 	/**
@@ -234,6 +237,29 @@ class DelirioBot
 		return $array;
 	}
 
+	function ascii_art($draw)
+	{
+		switch ($draw) {
+		 	case 'beer':
+				$draw = array(
+		 			'      _.._..,_,_',
+					'     (          )',
+					'      ]~,"-.-~~[',
+					'    .=])\' (;  ([',
+					'    | ]:: \'    [',
+					'    \'=]): .)  ([',
+					'      |:: \'    |',
+					'       ~~----~~'
+				);
+		 		break;
+
+			default:
+		 		break;
+		}
+
+		return $draw;
+	}
+
 	/**
 	 * AntiFlood.
 	 *
@@ -242,16 +268,18 @@ class DelirioBot
 	 */
 	function flood($data)
 	{
-		global $bio;
-		$poggiotempo=0;
-		
-		if (isset($bio[$data->nick]['time'])) {
-			$poggiotempo = $bio[$data->nick]['time'];
+		if (!$this->antiflood)
+			return FALSE;
+
+		$time = 0;
+
+		if (isset($this->flooders[$data->nick]['time'])) {
+			$time = $this->flooders[$data->nick]['time'];
 		}
 
-		$bio[$data->nick]['time'] = time();
-		
-		if ($bio[$data->nick]['time'] - $poggiotempo < 3) {
+		$this->flooders[$data->nick]['time'] = time();
+
+		if (($this->flooders[$data->nick]['time'] - $time) < 3) {
 			return TRUE;
 		} else {
 			return FALSE;
@@ -277,11 +305,11 @@ class DelirioBot
 		$nickname = $result['user'];
 
 		if ($condition) {
-			$this->talk($irc, $data, $this->users[$nickname]['saluto']);
+			$irc->message($data->type, $data->channel, $this->users[$nickname]['saluto']);
 
 			//$present = 'puoi prendere la birra gratis dal frigobar.';
 		} else {
-			$this->talk($irc, $data, 'Ciao ' . $data->nick . ', non sei presente nel nostro database. Insultatelo, nao!');
+			$irc->message($data->type, $data->channel, 'Ciao ' . $data->nick . ', non sei presente nel nostro database. Insultatelo, nao!');
 		}
 	}
 
@@ -293,12 +321,24 @@ class DelirioBot
 	 */
 	function kick_response(&$irc, &$data)
 	{
+		$irc->message($data->type, $data->channel, '-1, avanti un altro! :P');
+		$irc->message($data->type, $data->nick, 'Te la sei cercata! :P');
+	}
+
+	/**
+	 * 
+	 *
+	 * @param	string
+	 * @return	string
+	 */
+	function kick_rejoin(&$irc, &$data)
+	{
 		//If bot is kicked
-		//if ($data->nick == $irc->_nick) {
-		//	$irc->join(array($chan));
-			$this->talk($irc, $data, '-1 :-P');
-		//	return;
-		//}
+		if ($data->nick == $irc->_nick) {
+			$irc->join(array($this->server['channel']));
+			$irc->message($data->type, $data->channel, 'Sono immortale!');
+			return;
+		}
 	}
 
 	/**
@@ -311,7 +351,7 @@ class DelirioBot
 	{
 		if (isset($data->messageex[0]) && $data->messageex[0][0] == '!' && !in_array(str_replace('!', '', $data->messageex[0]), get_class_methods($this)) && !$this->flood($data)) {
 			$poggio = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']), 'ChanServ');
-			$this->talk($irc, $data, 'Non conosco questo comando '.$data->nick.', quindi sarai calciorotato da Chuck Norris, smontato da McGyver e insultato da '.$poggio[array_rand($poggio,1)]);
+			$irc->message($data->type, $data->channel, 'Non conosco questo comando '.$data->nick.', quindi sarai calciorotato da Chuck Norris, smontato da McGyver e insultato da '.$poggio[array_rand($poggio,1)]);
 		}
 	}
 
@@ -323,20 +363,27 @@ class DelirioBot
 	 */
 	function mention_insult(&$irc, &$data)
 	{
-		if (rand(0, 24) == 1 && $this->stop) {
-			$this->talk($irc, $data, 'Sarete calciorotati il prima possibile se non mi date degli insulti personali!');
+		if (rand(0, 50) == 1 && $this->stop) {
+			$irc->message($data->type, $data->channel, 'Sarete calciorotati il prima possibile se non mi date degli insulti personali!');
 		}
 
 		if ($this->stop && $data->messageex[0][0] != '!') {
 			$messaggio = implode(' ', $data->messageex);
-			global $bio;
 
-			foreach ($irc->_updateIrcUser($data) as $item) {
-				if (strstr($messaggio,$item)) {
-					if ($item == $this->config['nickname']) {
-						$this->talk($irc, $data, $bio[$item]['insulto'][array_rand($bio[$item]['insulto'])].' '.$data->nick);
-					} elseif (isset($bio[$item]['insulto'][0])) {
-						$this->talk($irc, $data, $bio[$item]['insulto'][array_rand($bio[$item]['insulto'])].' '.$item);
+			foreach ($irc->_updateIrcUser($data) as $value) {
+				$mention = strstr($messaggio, $value);
+				
+				$result = $this->is_user_exists($mention);
+
+				$condition = $result['condition'];
+				$nickname = $result['user'];
+
+				if ($condition) {
+					if ($value == $this->config['nickname']) {
+						$insult_rand = $this->users[$nickname]['insulti'][array_rand($this->users[$nickname]['insulti'])];
+						$irc->message($data->type, $data->channel, $data->nick . ', ' . $insult_rand);
+					} elseif (isset($this->users[$nickname]['insulti'][0])) {
+						$irc->message($data->type, $data->channel, $nickname . ', ' . $insult_rand);
 					}
 				}
 			}
@@ -352,7 +399,7 @@ class DelirioBot
 	function info(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$this->talk($irc, $data, $this->config['nickname'] . ' [ver ' . VERSION . ']. Sorgenti, idee e segnalazioni bug su https://mte90.github.com/Delirante/');
+			$irc->message($data->type, $data->channel, $this->config['nickname'] . ' [ver ' . VERSION . ']. Sorgenti, idee e segnalazioni bug su https://mte90.github.com/Delirante/');
 		}
 	}
 
@@ -364,7 +411,7 @@ class DelirioBot
 	 */
 	function tumblr(&$irc, &$data)
 	{
-		$this->talk($irc, $data, 'Casa dolce casa... http://delirinotturni.tumblr.com/');
+		$irc->message($data->type, $data->channel, 'Casa dolce casa... http://delirinotturni.tumblr.com/');
 	}
 
 	/**
@@ -375,9 +422,9 @@ class DelirioBot
 	function help(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$this->talk($irc, $data, '[Comandi] !info, !tumblr, !man, !saluta, !ls, !who, !whoami, !noi, !insulta, !inalbera, !muori, !supercazzola, !calcio, !gaio, !amore, !birra, !nutella');
-			$this->talk($irc, $data, '[Strumenti] !google, !yt, !porn, !anime, !pkg, !translate, !paste');
-			$this->talk($irc, $data, '[Giochi] !dado');
+			$irc->message($data->type, $data->channel, '[Comandi] !info, !tumblr, !man, !saluta, !ls, !who, !whoami, !noi, !insulta, !inalbera, !muori, !supercazzola, !calcio, !gaio, !amore, !birra, !nutella');
+			$irc->message($data->type, $data->channel, '[Strumenti] !google, !yt, !porn, !anime, !pkg, !translate, !paste');
+			$irc->message($data->type, $data->channel, '[Giochi] !dado');
 		}
 	}
 
@@ -391,10 +438,10 @@ class DelirioBot
 	{
 		if (!$this->flood($data)) {
 			if (isset($data->messageex[1])) {
-				$this->talk($irc, $data, '[Descrizione] ' . $data->messageex[1] . ' -- ' . $this->manual[$data->messageex[1]]['description']);
-				$this->talk($irc, $data, '[Sinossi] ' . $this->manual[$data->messageex[1]]['synopsis']);
+				$irc->message($data->type, $data->channel, '[Descrizione] ' . $data->messageex[1] . ' -- ' . $this->manual[$data->messageex[1]]['description']);
+				$irc->message($data->type, $data->channel, '[Sinossi] ' . $this->manual[$data->messageex[1]]['synopsis']);
 			} else {
-				$this->talk($irc, $data, '!man <query>');
+				$irc->message($data->type, $data->channel, '!man <query>');
 			}
 		}
 	}
@@ -410,9 +457,9 @@ class DelirioBot
 		if (!$this->flood($data)) {
 			if (isset($data->messageex[1])) {
 				if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
-					$this->talk($irc, $data, 'Fottiti '.$data->messageex[1]);
+					$irc->message($data->type, $data->channel, 'Fottiti '.$data->messageex[1]);
 				} elseif ((in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname'])) {
-					$this->talk($irc, $data, 'Fottiti '.$data->nick);
+					$irc->message($data->type, $data->channel, 'Fottiti '.$data->nick);
 				}
 			}
 		}
@@ -428,7 +475,7 @@ class DelirioBot
 	{
 		if (!$this->flood($data)) {
 			$nicklist = $this->remove_item_by_value($irc->_updateIrcUser($data), 'ChanServ');
-			$this->talk($irc, $data, count($nicklist).' deliranti connessi: '.implode(', ', $nicklist));
+			$irc->message($data->type, $data->channel, count($nicklist).' deliranti connessi: '.implode(', ', $nicklist));
 		}
 	}
 
@@ -441,7 +488,7 @@ class DelirioBot
 	function who(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$this->talk($irc, $data, count(array_keys($this->users)).' utenti nel database: '.implode(', ', array_keys($this->users)));
+			$irc->message($data->type, $data->channel, count(array_keys($this->users)).' utenti nel database: '.implode(', ', array_keys($this->users)));
 		}
 	}
 
@@ -464,9 +511,9 @@ class DelirioBot
 			$nickname = $result['user'];
 
 			if ($condition) {
-				$this->talk($irc, $data, 'Biografia di ' . $nickname . ' -- ' . $this->users[$nickname]['bio']);
+				$irc->message($data->type, $data->channel, 'Biografia di ' . $nickname . ' -- ' . $this->users[$nickname]['bio']);
 			} else {
-				$this->talk($irc, $data, 'L\'utente non inserito nel database. Tentativo di intrusione rilevato!');
+				$irc->message($data->type, $data->channel, 'L\'utente non inserito nel database. Tentativo di intrusione rilevato!');
 			}
 		}
 	}
@@ -484,9 +531,9 @@ class DelirioBot
 			$nickname = $result['user'];
 
 			if ($condition) {
-				$this->talk($irc, $data, 'Twitter di ' . $nickname . ' -- ' . $this->users[$nickname]['twitter']);
+				$irc->message($data->type, $data->channel, 'Twitter di ' . $nickname . ' -- ' . $this->users[$nickname]['twitter']);
 			} else {
-				$this->talk($irc, $data, 'L\'utente non inserito nel database. Tentativo di intrusione rilevato!');
+				$irc->message($data->type, $data->channel, 'L\'utente non inserito nel database. Tentativo di intrusione rilevato!');
 			}
 		}
 	}
@@ -502,9 +549,9 @@ class DelirioBot
 		if (!$this->flood($data)) {
 			$nickad = '';
 			if (isset($data->messageex[1]) && in_array($data->messageex[1], $irc->_updateIrcUser($data))) {
-				$this->talk($irc, $data, $data->messageex[1] . ' è ora uno di noi, uno di noi, uno di noi, uno di noi, un delirante come noi!');
+				$irc->message($data->type, $data->channel, $data->messageex[1] . ' è ora uno di noi, uno di noi, uno di noi, uno di noi, un delirante come noi!');
 			} else {
-				$this->talk($irc, $data, $data->nick . ', chi cacchio è ' . $data->messageex[1] . '? Tua suocera o la tua mano destra?');
+				$irc->message($data->type, $data->channel, $data->nick . ', chi cacchio è ' . $data->messageex[1] . '? Tua suocera o la tua mano destra?');
 			}
 		}
 	}
@@ -526,20 +573,20 @@ class DelirioBot
 					$n = str_replace('-', '', (int)$data->messageex[1]);
 
 				if ($data->messageex[1] == '-c') {
-					$this->talk($irc, $data, $total_insults . ' insulti presenti nel database.');
-				} elseif (is_numeric($data->messageex[1]) && ($n < $total_insults) && isset($data->messageex[2]) && in_array($data->messageex[2], $irc->_updateIrcUser($data))) {
-					$this->talk($irc, $data, $data->messageex[2] . ', ' . lcfirst($this->insulti[$n]));
+					$irc->message($data->type, $data->channel, $total_insults . ' insulti presenti nel database.');
+				} elseif (is_numeric($data->messageex[1]) && $n < $total_insults && isset($data->messageex[2]) && in_array($data->messageex[2], $irc->_updateIrcUser($data))) {
+					$irc->message($data->type, $data->channel, $data->messageex[2] . ', ' . lcfirst($this->insulti[$n]));
 				} elseif (is_numeric($data->messageex[1]) && $n < $total_insults) {
-					$this->talk($irc, $data, $this->insulti[$n]);
+					$irc->message($data->type, $data->channel, $this->insulti[$n]);
 				} else {
 					if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
-						$this->talk($irc, $data, $data->messageex[1] . ', ' . lcfirst($insult_rand));
+						$irc->message($data->type, $data->channel, $data->messageex[1] . ', ' . lcfirst($insult_rand));
 					} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname']) {
-						$this->talk($irc, $data, $data->nick . ', non puoi permetterti di insultarmi. Io sono lo divino Bot!');
+						$irc->message($data->type, $data->channel, $data->nick . ', non puoi permetterti di insultarmi. Io sono lo divino Bot!');
 					}
 				}
 			} else {
-				$this->talk($irc, $data, '');
+				$irc->message($data->type, $data->channel, 'Parametro invalido. Per info !man insulta');
 			}
 		}
 	}
@@ -557,10 +604,10 @@ class DelirioBot
 				if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
 					for ($i=0; $i < 5; $i++) {
 						$insult_rand = $this->insulti[array_rand($this->insulti)];
-						$this->talk($irc, $data, $data->messageex[1] . ', ' . lcfirst($insult_rand));
+						$irc->message($data->type, $data->channel, $data->messageex[1] . ', ' . lcfirst($insult_rand));
 					}
 				} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname']) {
-					$this->talk($irc, $data, $data->nick . ', non puoi permetterti di insultarmi. Io sono lo divino Bot!');
+					$irc->message($data->type, $data->channel, $data->nick . ', non puoi permetterti di insultarmi. Io sono lo divino Bot!');
 				} else {
 				}
 			}
@@ -576,10 +623,28 @@ class DelirioBot
 	function muori(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
-				$this->talk($irc, $data, $data->messageex[1].' '.$this->morte[array_rand($this->morte)]);
-			} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname']) {
-				$this->talk($irc, $data, $data->nick . ', non puoi permetterti di insultarmi. Io sono lo divino Bot!');
+			if (isset($data->messageex[1])) {
+				$total_deaths = count($this->deaths);
+				$death_rand = $this->deaths[array_rand($this->deaths)];
+
+				if (is_numeric($data->messageex[1]))
+					$n = str_replace('-', '', (int)$data->messageex[1]);
+
+				if ($data->messageex[1] == '-c') {
+					$irc->message($data->type, $data->channel, $total_deaths . ' morti presenti nel database.');
+				} elseif (is_numeric($data->messageex[1]) && $n < $total_deaths && isset($data->messageex[2]) && in_array($data->messageex[2], $irc->_updateIrcUser($data))) {
+					$irc->message($data->type, $data->channel, $data->messageex[2] . ', ' . lcfirst($this->deaths[$n]));
+				} elseif (is_numeric($data->messageex[1]) && $n < $total_deaths) {
+					$irc->message($data->type, $data->channel, $this->deaths[$n]);
+				} else {
+					if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
+						$irc->message($data->type, $data->channel, $data->messageex[1] . ', ' . lcfirst($death_rand));
+					} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname']) {
+						$irc->message($data->type, $data->channel, $data->nick . ', non puoi permetterti di uccidermi. Io sono lo divino Bot!');
+					}
+				}
+			} else {
+				$irc->message($data->type, $data->channel, 'Parametro invalido. Per info !man muori');
 			}
 		}
 	}
@@ -594,21 +659,27 @@ class DelirioBot
 	{
 		if (!$this->flood($data)) {
 			if (isset($data->messageex[1])) {
+				$total_supercazzole = count($this->supercazzole);
+				$supercazzola_rand = $this->supercazzole[array_rand($this->supercazzole)];
+
+				if (is_numeric($data->messageex[1]))
+					$n = str_replace('-', '', (int)$data->messageex[1]);
+
 				if ($data->messageex[1] == '-c') {
-					$this->talk($irc, $data, count($this->supercazzole).' supercazzole nel sistema');
-				} elseif (is_numeric($data->messageex[1]) && str_replace('-', '', (int)$data->messageex[1]) < count($this->supercazzole) && isset($data->messageex[2])) {
-					$this->talk($irc, $data, $data->messageex[2].' '.$this->supercazzole[str_replace('-','',(int)$data->messageex[1])]);
-				} elseif (is_numeric($data->messageex[1]) && str_replace('-', '', (int)$data->messageex[1]) < count($this->supercazzole)) {
-					$this->talk($irc, $data, $this->supercazzole[str_replace('-', '' ,(int)$data->messageex[1])]);
+					$irc->message($data->type, $data->channel, $total_supercazzole . ' supercazzole presenti nel database.');
+				} elseif (is_numeric($data->messageex[1]) && $n < $total_supercazzole && isset($data->messageex[2]) && in_array($data->messageex[2], $irc->_updateIrcUser($data))) {
+					$irc->message($data->type, $data->channel, $data->messageex[2] . ', ' . lcfirst($this->supercazzole[$n]));
+				} elseif (is_numeric($data->messageex[1]) && $n < $total_supercazzole) {
+					$irc->message($data->type, $data->channel, $this->supercazzole[$n]);
 				} else {
 					if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
-						$this->talk($irc, $data, $data->messageex[1].' '.$this->supercazzole[array_rand($this->supercazzole)]);
+						$irc->message($data->type, $data->channel, $data->messageex[1] . ', ' . lcfirst($supercazzola_rand));
 					} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname']) {
-						$this->talk($irc, $data, $data->nick.' '.$this->supercazzole[array_rand($this->supercazzole)]);
+						$irc->message($data->type, $data->channel, $data->nick . ', non puoi permetterti di farmi una supercazzola. Io sono lo divino Bot!');
 					}
 				}
 			} else {
-				$this->talk($irc, $data, '!supercazzola [n | -c] <username>');
+				$irc->message($data->type, $data->channel, 'Parametro invalido. Per info !man supercazzola');
 			}
 		}
 	}
@@ -624,15 +695,15 @@ class DelirioBot
 		$calci = rand(0, 100);
 		switch ($calci) {
 			case '1':
-				$this->talk($irc, $data, $data->nick . ', sarai calciorotato solamente per ' . $calci . ' volta!');
+				$irc->message($data->type, $data->channel, $data->nick . ', sarai calciorotato solamente per ' . $calci . ' volta!');
 				break;
 			
 			case '100':
-				$this->talk($irc, $data, $data->nick . ', sarai calciorotato per ben ' . $calci . ' volte!');
+				$irc->message($data->type, $data->channel, $data->nick . ', sarai calciorotato per ben ' . $calci . ' volte!');
 				break;
 
 			default:
-				$this->talk($irc, $data, $data->nick . ', sarai calciorotato ' . $calci . ' volte!');
+				$irc->message($data->type, $data->channel, $data->nick . ', sarai calciorotato ' . $calci . ' volte!');
 				break;
 		}
 	}
@@ -646,8 +717,9 @@ class DelirioBot
 	function gaio(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$poggio = $poggio = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']), 'ChanServ');
-			$this->talk($irc, $data, 'Il gay del momento è '.$poggio[array_rand($poggio,1)]);
+			$nicklist = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']), 'ChanServ');
+			$gaio = $nicklist[array_rand($nicklist, 1)];
+			$irc->message($data->type, $data->channel, 'Il gay del momento è ' . $gaio);
 		}
 	}
 
@@ -660,8 +732,9 @@ class DelirioBot
 	function amore(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$poggio = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']), $data->nick);
-			$this->talk($irc, $data, $data->nick.' Lovva '.$poggio[array_rand($poggio,1)].' <3');
+			$nicklist = $this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']), $data->nick);
+			$love = $love[array_rand($love, 1)];
+			$irc->message($data->type, $data->channel, $data->nick . ' Lovva ' . $love . ' <3');
 		}
 	}
 
@@ -673,24 +746,38 @@ class DelirioBot
 	 */
 	function birra(&$irc, &$data)
 	{
-	global $bio;
-		if (isset($data->messageex[1]) && $data->messageex[1] == 'party') {
-			$poggio = $this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']);
-			$this->talk($irc, $data, 'Una bella damigiana di birra per tutti offerta da '.$data->nick.'!');
-			$alcool = array('San Crispino','Tavernello','Olio Cuore','Estathé');
-			$this->talk($irc, $data, 'Per '.$poggio[array_rand($poggio,1)].' solo '.$alcool[array_rand($alcool)].' u.u');
-		} elseif (isset($data->messageex[1])) {
-			$this->talk($irc, $data, $data->messageex[1]. ' Eccoti una bella birra fredda marchio Delirio offerta da '.$data->nick.'!');
-			$this->talk($irc, $data, $data->messageex[1].' '.$this->insulti[array_rand($this->insulti)]);
-		} elseif (!isset($bio[$data->nick])) {
-			$this->talk($irc, $data, 'Tu vorresti la nostra birra?? Non sei nel database brutta pustola.');
-			$this->talk($irc, $data, $data->nick.' '.$this->insulti[array_rand($this->insulti)]);
-			$this->talk($irc, $data, $data->nick.' '.$this->insulti[array_rand($this->insulti)]);
-		} elseif (isset($bio[$data->nick]['insulto']) && count($bio[$data->nick]['insulto']) < 3){
-			$this->talk($irc, $data, 'A te niente birra brutto stronzetto, senza insulti personali non vai da nessuna parte,');
-			$this->talk($irc, $data, $data->nick.' '.$this->insulti[array_rand($this->insulti)]);
-		} else {
-			$this->talk($irc, $data, 'Eccoti una bella birra fredda marchio Delirio!');
+		if (!$this->flood($data)) {
+		global $bio;
+
+			if (isset($data->messageex[1]) && $data->messageex[1] == 'party') {
+				$nicklist = $this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']);
+				$alcohol = array('San Crispino', 'Tavernello', 'Olio Cuore', 'Estathé');
+				$user_rand = $poggio[array_rand($poggio, 1)];
+				$alcohol_rand = $alcohol[array_rand($alcohol)];
+				
+				$irc->message($data->type, $data->channel, 'Una bella damigiana di birra per tutti offerta da ' . $data->nick . '!');
+				$irc->message($data->type, $data->channel, 'Per ' . $user_rand . ' solo ' . $alcohol_rand . '.');
+			} elseif (isset($data->messageex[1])) {
+				$irc->message($data->type, $data->channel, $data->messageex[1] . ', eccoti una bella birra fredda marchio "Delirio" offerta da ' . $data->nick . '!');
+				
+				$draw = $this->ascii_art('beer');
+				for ($i=0; $i < count($draw); $i++) { 
+					$irc->message($data->type, $data->channel, $draw[$i]);
+				}
+			} elseif (!isset($bio[$data->nick])) {
+				$irc->message($data->type, $data->channel, 'Tu vorresti la nostra birra?? Non sei nel database brutta pustola.');
+				$irc->message($data->type, $data->channel, $data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+			} elseif (isset($bio[$data->nick]['insulto']) && count($bio[$data->nick]['insulto']) < 3){
+				$irc->message($data->type, $data->channel, 'A te niente birra brutto stronzetto, senza insulti personali non vai da nessuna parte,');
+				$irc->message($data->type, $data->channel, $data->nick.' '.$this->insulti[array_rand($this->insulti)]);
+			} else {
+				$irc->message($data->type, $data->channel, $data->nick . ', eccoti una bella birra fredda marchio "Delirio" offerta dalla casa!');
+
+				$draw = $this->ascii_art('beer');
+				for ($i=0; $i < count($draw); $i++) { 
+					$irc->message($data->type, $data->channel, $draw[$i]);
+				}
+			}
 		}
 	}
 
@@ -704,7 +791,7 @@ class DelirioBot
 	function nutella(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$this->talk($irc, $data, 'Tirate fuori i vostri cucchiai! Nutella Party ON');
+			$irc->message($data->type, $data->channel, 'Tirate fuori i vostri cucchiai, inizia il Nutella Party!');
 		}
 	}
 
@@ -742,11 +829,11 @@ class DelirioBot
 			}
 
 			if (!preg_match('/('.$filtrot.')+/i', $termine) && isset($data->messageex[1])) {
-				$this->talk($irc, $data,'https://www.google.it/search?q='.$termine.$adds_vars);
+				$irc->message($data->type, $data->channel,'https://www.google.it/search?q='.$termine.$adds_vars);
 			} elseif (!isset($data->messageex[1])) {
-				$this->talk($irc, $data, '!google [-img | -vid | -l:it] <query>');
+				$irc->message($data->type, $data->channel, '!google [-img | -vid | -l:it] <query>');
 			} else {
-				$this->talk($irc, $data, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
+				$irc->message($data->type, $data->channel, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
 		}
 	}
@@ -765,11 +852,11 @@ class DelirioBot
 			$termine = str_replace(' ', '+', $termine);
 
 			if (!preg_match('/('.$filtrot.')+/i', $termine) && isset($data->messageex[1])) {
-				$this->talk($irc, $data, 'http://www.youtube.com/results?search_query='.$termine);
+				$irc->message($data->type, $data->channel, 'http://www.youtube.com/results?search_query='.$termine);
 			} elseif (!isset($data->messageex[1])) {
-					$this->talk($irc, $data, '!yt <query>');
+					$irc->message($data->type, $data->channel, '!yt <query>');
 			} else {
-				$this->talk($irc, $data, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
+				$irc->message($data->type, $data->channel, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
 		}
 	}
@@ -790,46 +877,46 @@ class DelirioBot
 			if (isset($data->messageex[2])) {
 				switch ($data->messageex[1]) {
 					case '-yp':
-						$this->talk($irc, $data, 'http://www.youporn.com/search/?query='.$termine.'&type=straight');
+						$irc->message($data->type, $data->channel, 'http://www.youporn.com/search/?query='.$termine.'&type=straight');
 						break;
 
 					case '-yj':
 						$termine = str_replace('+', '-', $termine);
-						$this->talk($irc, $data, 'http://www.youjizz.com/search/'.$termine.'-1.html');
+						$irc->message($data->type, $data->channel, 'http://www.youjizz.com/search/'.$termine.'-1.html');
 						break;
 
 					case '-t8':
-						$this->talk($irc, $data, 'http://www.tube8.com/search.html?q='.$termine);
+						$irc->message($data->type, $data->channel, 'http://www.tube8.com/search.html?q='.$termine);
 						break;
 
 					case '-rt':
-						$this->talk($irc, $data, 'http://www.redtube.com/?search='.$termine);
+						$irc->message($data->type, $data->channel, 'http://www.redtube.com/?search='.$termine);
 						break;
 
 					case '-ph':
-						$this->talk($irc, $data, 'http://www.pornhub.com/video/search?search='.$termine);
+						$irc->message($data->type, $data->channel, 'http://www.pornhub.com/video/search?search='.$termine);
 						break;
 
 					case '-fk':
-						$this->talk($irc, $data, 'http://www.fakku.net/manga.php?search='.$termine);
+						$irc->message($data->type, $data->channel, 'http://www.fakku.net/manga.php?search='.$termine);
 						break;
 
 					case '-tg':
-						$this->talk($irc, $data, 'http://tubegalore.com/search/?q='.$termine);
+						$irc->message($data->type, $data->channel, 'http://tubegalore.com/search/?q='.$termine);
 						break;
 
 					case '-tm':
-						$this->talk($irc, $data, 'http://www.tubemonsoon.com/videos?search='.$termine.'&btn=Search');
+						$irc->message($data->type, $data->channel, 'http://www.tubemonsoon.com/videos?search='.$termine.'&btn=Search');
 						break;
 
 					default:
-						$this->talk($irc, $data, 'http://findtubes.com/search/?q='.$termine);
+						$irc->message($data->type, $data->channel, 'http://findtubes.com/search/?q='.$termine);
 						break;
 				}
 			} elseif (isset($data->messageex[1])) {
-				$this->talk($irc, $data, 'http://findtubes.com/search/?q='.$termine);
+				$irc->message($data->type, $data->channel, 'http://findtubes.com/search/?q='.$termine);
 			} else {
-				$this->talk($irc, $data, '!porn [-yp -yj -t8 -rt -ph -fk -tg -tm] <query>');
+				$irc->message($data->type, $data->channel, '!porn [-yp -yj -t8 -rt -ph -fk -tg -tm] <query>');
 			}
 		}
 	}
@@ -850,22 +937,22 @@ class DelirioBot
 			if (isset($data->messageex[2])) {
 				switch ($data->messageex[1]) {
 					case '-mal':
-						$this->talk($irc, $data, 'http://myanimelist.net/anime.php?q='.$termine);
+						$irc->message($data->type, $data->channel, 'http://myanimelist.net/anime.php?q='.$termine);
 						break;
 
 					case '-ac':
-						$this->talk($irc, $data, 'http://www.animeclick.it/anime.php?titolo='.$termine);
+						$irc->message($data->type, $data->channel, 'http://www.animeclick.it/anime.php?titolo='.$termine);
 						break;
 
 					case '-fansub':
-						$this->talk($irc, $data, 'http://www.animeclick.it/ListaFansubs.php?keywords='.$termine.'&ftip=T');
+						$irc->message($data->type, $data->channel, 'http://www.animeclick.it/ListaFansubs.php?keywords='.$termine.'&ftip=T');
 						break;
 
 					default:
 						break;
 				}
 			} else {
-				$this->talk($irc, $data, '!anime [-mal -ac -fansub] <query>');
+				$irc->message($data->type, $data->channel, '!anime [-mal -ac -fansub] <query>');
 			}
 		}
 	}
@@ -888,35 +975,35 @@ class DelirioBot
 			if (isset($data->messageex[2])) {
 				switch ($data->messageex[1]) {
 					case '-rpm':
-						$this->talk($irc, $data, 'http://rpmfusion.org/RPM%20Fusion?action=fullsearch&value=' . $termine . '&titlesearch=Titoli');
+						$irc->message($data->type, $data->channel, 'http://rpmfusion.org/RPM%20Fusion?action=fullsearch&value=' . $termine . '&titlesearch=Titoli');
 						break;
 
 					case '-deb':
-						$this->talk($irc, $data, 'http://packages.debian.org/search?keywords=' . $termine);
+						$irc->message($data->type, $data->channel, 'http://packages.debian.org/search?keywords=' . $termine);
 						break;
 
 					case '-ubu':
-						$this->talk($irc, $data, 'http://packages.ubuntu.com/search?keywords=' . $termine);
+						$irc->message($data->type, $data->channel, 'http://packages.ubuntu.com/search?keywords=' . $termine);
 						break;
 
 					case '-arch':
-						$this->talk($irc, $data, 'http://www.archlinux.org/packages/?q=' . $termine);
+						$irc->message($data->type, $data->channel, 'http://www.archlinux.org/packages/?q=' . $termine);
 						break;
 
 					case '-aur':
-						$this->talk($irc, $data, 'https://aur.archlinux.org/packages.php?K=' . $termine);
+						$irc->message($data->type, $data->channel, 'https://aur.archlinux.org/packages.php?K=' . $termine);
 						break;
 
 					case '-suse':
-						$this->talk($irc, $data, 'http://software.opensuse.org/search?q=' . $termine);
+						$irc->message($data->type, $data->channel, 'http://software.opensuse.org/search?q=' . $termine);
 						break;
 
 					default:
-						$this->talk($irc, $data, '');
+						$irc->message($data->type, $data->channel, '');
 						break;
 				}
 			} else {
-				$this->talk($irc, $data, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
+				$irc->message($data->type, $data->channel, 'Non rompere le palle '.$data->nick.' ho di meglio da fare io...');
 			}
 		}
 	}
@@ -935,9 +1022,9 @@ class DelirioBot
 			$termine = str_replace(' ', '+', $termine);
 
 			if (!isset($data->messageex[1])) {
-				$this->talk($irc, $data, '!translate lang_soure|lang_destination <query>');
+				$irc->message($data->type, $data->channel, '!translate lang_soure|lang_destination <query>');
 			} else {
-				$this->talk($irc, $data,'http://translate.google.it/#'.$data->messageex[1].'|'.$termine);
+				$irc->message($data->type, $data->channel,'http://translate.google.it/#'.$data->messageex[1].'|'.$termine);
 			}	
 		}
 	}
@@ -950,7 +1037,7 @@ class DelirioBot
 	 */
 	function paste(&$irc, &$data)
 	{
-		$this->talk($irc, $data, 'http://pastebin.com/ || http://paste.kde.org/ || http://nopaste.voric.com/');
+		$irc->message($data->type, $data->channel, 'http://pastebin.com/ || http://paste.kde.org/ || http://nopaste.voric.com/');
 	}
 
 	/**
@@ -977,27 +1064,29 @@ class DelirioBot
 			switch ($data->messageex[1]) {
 				case '-antiflood':
 					if ($data->messageex[2] == 1) {
-						$this->talk($irc, $data, 'L\'antiflood è stato attivato.');
+						$this->antiflood = TRUE;
+						$irc->message($data->type, $data->channel, 'L\'antiflood è stato attivato.');
 					} elseif ($data->messageex[2] == 0) {
-						$this->talk($irc, $data, 'L\'antiflood è stato disattivato.');
+						$this->antiflood = FALSE;
+						$irc->message($data->type, $data->channel, 'L\'antiflood è stato disattivato.');
 					}
 					break;
 
 				case '-filtro':
 					if ($data->messageex[2] == 1) {
-						$this->talk($irc, $data, 'Il filtro è stato attivato.');
+						$irc->message($data->type, $data->channel, 'Il filtro è stato attivato.');
 					} elseif ($data->messageex[2] == 0) {
-						$this->talk($irc, $data, 'Il filtro è stato disattivato.');
+						$irc->message($data->type, $data->channel, 'Il filtro è stato disattivato.');
 					}
 					break;
 				
 				case '-insulta':
 					if ($data->messageex[2] == 1) {
 						$this->stop = TRUE;
-						$this->talk($irc, $data, 'Adesso vi insulto a tutti! MUAHAHAH!');
+						$irc->message($data->type, $data->channel, 'Adesso vi insulto a tutti! MUAHAHAH!');
 					} elseif ($data->messageex[2] == 0) {
 						$this->stop = FALSE;
-						$this->talk($irc, $data, 'Mi sono stufato, per ora, di insultarvi!');
+						$irc->message($data->type, $data->channel, 'Mi sono stufato, per ora, di insultarvi!');
 					}
 					break;
 
@@ -1006,7 +1095,7 @@ class DelirioBot
 					break;
 			}
 		} else {
-			$this->talk($irc, $data, 'Chi ti credi di essere per darmi questi comandi?');
+			$irc->message($data->type, $data->channel, 'Chi ti credi di essere per darmi questi comandi?');
 		}
 	}
 
@@ -1022,9 +1111,9 @@ class DelirioBot
 		if (in_array($data->nick, $irc->_GetIrcOp($data))) {
 			$this->unset_vars();
 			$this->set_vars();
-			$this->talk($irc, $data, 'Aggiornato e più stronzo di prima!');
+			$irc->message($data->type, $data->channel, 'Aggiornato e più stronzo di prima!');
 		} else {
-			$this->talk($irc, $data, 'Chi ti credi di essere per darmi questi comandi?');
+			$irc->message($data->type, $data->channel, 'Chi ti credi di essere per darmi questi comandi?');
 		}
 	}
 
@@ -1168,7 +1257,7 @@ class DelirioBot
 				$channel = $data->channel;
 				$irc->kick( $channel, $nickname, $reason);
 			} else {
-				$this->talk($irc, $data, 'Sintassi comando errata: !kick $nick ragione');
+				$irc->message($data->type, $data->channel, 'Sintassi comando errata: !kick $nick ragione');
 			}
 		}
 	}
@@ -1179,6 +1268,7 @@ class DelirioBot
 			$nicklist = $this->remove_item_by_value($this->remove_item_by_value($this->remove_item_by_value($irc->_updateIrcUser($data), $this->config['nickname']), 'ChanServ'), $data->nick);
 
 			$n = rand(0, count($nicklist));
+
 			$irc->kick($data->channel, $nicklist[$n], 'La roulette ha scelto te! SBANG!');
 		}
 	}
@@ -1294,8 +1384,8 @@ class DelirioBot
 	{
 		if (in_array($data->nick, $irc->_GetIrcOp($data))) {
 			if (isset($data->messageex[1])) {
-				$this->talk($data->type, $data->channel, $data->messageex[1].', ti battezzo nel nome del channel, delle puppe e dello spirito perverso. A te insulto iniziandoti a questa comunità delirante. Vai in pace ed espandi il nostro credo.');
-				$this->talk($data->type, $data->channel, $data->messageex[1].', adesso sei uno di noi e puoi insultare con fierezza, per la birra gratis devi fornirci la tua biografia ed almeno un insulto personale. Ora puoi andartene a fanculo <3');
+				$irc->message($data->type, $data->channel, $data->messageex[1].', ti battezzo nel nome del channel, delle puppe e dello spirito perverso. A te insulto iniziandoti a questa comunità delirante. Vai in pace ed espandi il nostro credo.');
+				$irc->message($data->type, $data->channel, $data->messageex[1].', adesso sei uno di noi e puoi insultare con fierezza, per la birra gratis devi fornirci la tua biografia ed almeno un insulto personale. Ora puoi andartene a fanculo <3');
 			}
 		}
 	}
@@ -1312,7 +1402,7 @@ class DelirioBot
 		if (in_array($data->nick, $irc->_GetIrcOp($data))) {
 			$irc->quit('Addio mondo crudele!');
 		} else {
-			$this->talk($irc, $data, 'Chi ti credi di essere per darmi questi comandi?');
+			$irc->message($data->type, $data->channel, 'Chi ti credi di essere per darmi questi comandi?');
 		}
 	}
 

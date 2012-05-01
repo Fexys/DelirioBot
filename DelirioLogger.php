@@ -29,8 +29,6 @@ class DelirioLogger
 
 		//Setup di SmartIRC
 		$irc->setDebug(SMARTIRC_DEBUG_ALL);
-		//$irc->setLogfile(LOG_DIR . 'debug_logger.log');
-		//$irc->setLogdestination(SMARTIRC_FILE);
 		$irc->setUseSockets(TRUE);
 		$irc->setUserSyncing(TRUE);
 		$irc->setChannelSyncing(TRUE);
@@ -44,14 +42,10 @@ class DelirioLogger
 		$irc->connect($this->server['server'], $this->server['port']);
 		$irc->login($this->config['nickname'], $this->config['realname'], $this->config['usermode'], $this->config['username'], $this->config['password']);
 		$irc->join($this->server['channel']);
-		if (LOGGER) {
-			$this->startlog($irc);
-		}
+		$this->startlog($irc);
 		$irc->listen();
 		$irc->disconnect();
-		if (LOGGER) {
-			$this->stoplog();
-		}
+		$this->stoplog();
 	}
 
 	function startlog(&$irc)

@@ -7,11 +7,11 @@ define('VERSION', '0.1a');
 define('LOG_DIR', 'logs/');
 define('COMMAND_DIR', 'commands/');
 define('DATABASE_DIR', 'database/');
-define('LOGGER', TRUE);
 
 $config['server']	= 'irc.freenode.net';
 $config['port']		= 6667;
-$config['channel']	= '#DeliriNotturni';
+//$config['channel']	= '#DeliriNotturni';
+$config['channel']	= '#Fexys';
 
 $config['bot']['nickname'] = 'ilDelirante';
 $config['bot']['realname'] = 'ilDelirante [ver ' . VERSION . ']';

@@ -124,7 +124,7 @@
 		],
 		"saluto": "",
 		"bio": "Sono un Nerd, amo l'informatica ed il mondo open-source. Mi piacciono i videogiochi.",
-		"twitter": "https://twitter.com/",
+		"twitter": "",
 		"insulti":[
 			"Ti faccio conoscere 25 cm di simpatia se vieni qui."
 		]
@@ -165,7 +165,7 @@
 	"Fexys":{
 		"alias":[
 		],
-		"saluto": "AH STRONZOOOOOOOOOOOOOO!!!!",
+		"saluto": "Anvedi chi è entrato! Quello stronzo di $nick",
 		"bio": "Sono un Mac che usa Linux ma non si capisce il perché. Quando mi hanno internato per turbe mentali non sapevano cosa fare di me e adesso sono qui.",
 		"twitter": "https://twitter.com/Fexys",
 		"insulti":[
@@ -233,7 +233,7 @@
 		],
 		"saluto": "",
 		"bio": "Informatico dal gusto Nerdico. Web Developer 2.0 HTML5/CSS3/Php/MySQL/Js/jQuery.",
-		"twitter": "https://twitter.com/RaydenDev",
+		"twitter": "https://twitter.com/GianBalex",
 		"insulti":[
 			"Hai il mal di testa? Poverino ha le sue cose.",
 			"Tanto alto, tanto coglione.",
