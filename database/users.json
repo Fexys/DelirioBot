@@ -99,7 +99,7 @@
 	"picchio":{
 		"alias":[
 		],
-		"saluto": "",
+		"saluto": "Ave $nick il Pupparo, nostro Signore e unico vero Dio della pugnetta.",
 		"bio": "Pseudo nerd, amante delle puppe, fancazzista professionista e Linaro. Creatore del mitico #TetteTime.",
 		"twitter": "https://twitter.com/Picchiopc",
 		"insulti":[
@@ -165,7 +165,7 @@
 	"Fexys":{
 		"alias":[
 		],
-		"saluto": "Anvedi chi è entrato! Quello stronzo di $nick",
+		"saluto": "Anvedi chi c'è! Quello stronzo di $nick",
 		"bio": "Sono un Mac che usa Linux ma non si capisce il perché. Quando mi hanno internato per turbe mentali non sapevano cosa fare di me e adesso sono qui.",
 		"twitter": "https://twitter.com/Fexys",
 		"insulti":[

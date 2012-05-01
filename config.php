@@ -10,8 +10,7 @@ define('DATABASE_DIR', 'database/');
 
 $config['server']	= 'irc.freenode.net';
 $config['port']		= 6667;
-//$config['channel']	= '#DeliriNotturni';
-$config['channel']	= '#Fexys';
+$config['channel']	= '#DeliriNotturni';
 
 $config['bot']['nickname'] = 'ilDelirante';
 $config['bot']['realname'] = 'ilDelirante [ver ' . VERSION . ']';
