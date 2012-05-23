@@ -2,11 +2,15 @@
 
 date_default_timezone_set('Europe/Rome');
 
-define('VERSION', '0.1.0a');
+define('VERSION', '0.2.0a');
 
 define('LOG_DIR', 'logs/');
 define('COMMAND_DIR', 'commands/');
-define('DATABASE_DIR', 'database/');
+
+$config['database']['host'] = 'localhost';
+$config['database']['user'] = 'user';
+$config['database']['name'] = 'name';
+$config['database']['password'] = 'password';
 
 $config['server']	= 'irc.freenode.net';
 $config['port']		= 6667;
