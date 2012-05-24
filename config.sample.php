@@ -2,8 +2,6 @@
 
 date_default_timezone_set('Europe/Rome');
 
-define('VERSION', '0.2.1');
-
 define('LOG_DIR', 'logs/');
 define('COMMAND_DIR', 'commands/');
 

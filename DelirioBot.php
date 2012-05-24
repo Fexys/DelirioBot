@@ -1,5 +1,7 @@
 <?php
 
+define('VERSION', '0.2.2');
+
 //Libreria di SmartIRC
 include('SmartIRC.php');
 
