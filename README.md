@@ -1,7 +1,7 @@
 [ilDelirante](http://mte90.github.com/Delirante/)
 =================
 
-ilDelirante [versione 0.1.0a], il Bot del canale #DeliriNotturni (irc.freenode.net). Basato sulla libreria [Net_SmartIRC](http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP).
+ilDelirante [versione 0.2.1], il Bot del canale #DeliriNotturni (irc.freenode.net). Basato sulla libreria [Net_SmartIRC](http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP).
 
 
 
@@ -37,16 +37,10 @@ Funzionalità
 
 
 
-Biografie presenti
-------------------
-> ilDelirante, Mte90, v2, gianguido, worst, toketin, quizzlo, sickmind2x, picchio, alessandro1997, gigitux, vencizOn, turlando, Fexys, Miu, j1g3n, eMarco, Chris_Zeta, Mikiwi93, GianBalex, Pimo, Ryccardo, nannes, Carmine, Fabiospecial
-
-
-
 Bug conosciuti
 --------------
 
-Attualmente il Bot è in testing quindi alcune funzioni potrebbero riportare qualche malfunzionamento.
++ Trivia in sviluppo
 
 
 
@@ -55,7 +49,6 @@ ToDo
 
 + Ultima visita
 + Comandi *nix
-+ Trivia
 
 
 
