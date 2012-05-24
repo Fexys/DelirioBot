@@ -442,7 +442,7 @@ class DelirioBot
 	function info(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$this->talk($irc, $data, $this->config['nickname'] . ' [ver ' . VERSION . ']. Sorgenti, idee e segnalazioni bug su https://mte90.github.com/Delirante/');
+			$this->talk($irc, $data, $this->config['nickname'] . ' [ver ' . VERSION . '] Sorgenti, idee e segnalazioni bug su https://mte90.github.com/Delirante/');
 		}
 	}
 
