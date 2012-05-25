@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: 25 mag, 2012 at 09:43 AM
+-- Generato il: 25 mag, 2012 at 10:39 AM
 -- Versione MySQL: 5.5.9
 -- Versione PHP: 5.3.6
 
@@ -44,7 +44,7 @@ CREATE TABLE `bot_highscores` (
   `roulette_kick` int(10) unsigned NOT NULL DEFAULT '0',
   `trivia_score` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -96,7 +96,7 @@ CREATE TABLE `bot_quotes` (
   `added` int(10) unsigned NOT NULL DEFAULT '0',
   `quote` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 

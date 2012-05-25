@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '0.2.4');
+define('VERSION', '0.2.5');
 
 //Libreria di SmartIRC
 include('SmartIRC.php');
@@ -513,10 +513,14 @@ class DelirioBot
 				$result = mysql_query($query);
 				$manual = mysql_fetch_assoc($result);
 
-				$this->talk($irc, $data, '[Descrizione] ' . $command . ' -- ' . $manual['description']);
-				$this->talk($irc, $data, '[Sinossi] ' . $manual['synopsis']);
+				if (mysql_num_rows($result) > 0) {
+					$this->talk($irc, $data, '[Descrizione] ' . $command . ' -- ' . $manual['description']);
+					$this->talk($irc, $data, '[Sinossi] ' . $manual['synopsis']);
+				} else {
+					$this->talk($irc, $data, 'Comando inesistente. Pensa prima di scrivere, idiota!');
+				}
 			} else {
-				$this->talk($irc, $data, 'Sintassi comando errata. Usa !man <comando>. Per ulteriori informazioni !man man.');
+				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!man <comando>`. Per ulteriori informazioni `!man man`.');
 			}
 		}
 	}
@@ -762,7 +766,7 @@ class DelirioBot
 	}
 
 	/**
-	 * Insulta l'utente richiesto. Inoltre può restituire il totale degli insulti presente nel database.
+	 * Insulta l'utente richiesto. Inoltre può restituire il totale degli insulti presenti nel database.
 	 *
 	 * @param	nickname
 	 * @return	message
@@ -842,7 +846,7 @@ class DelirioBot
 	}
 
 	/**
-	 * Insulta a morte l'utente richiesto. Inoltre può restituire il totale degli insulti di morte presente nel database.
+	 * Augura la morte l'utente richiesto. Inoltre può restituire il totale delle morti presenti nel database.
 	 *
 	 * @param	nickname
 	 * @return	message
@@ -891,7 +895,7 @@ class DelirioBot
 	}
 
 	/**
-	 * Fa una supercazzola all'utente richiesto. Inoltre può restituire il totale delle supercazzole presente nel database.
+	 * Fa una supercazzola all'utente richiesto. Inoltre può restituire il totale delle supercazzole presenti nel database.
 	 *
 	 * @param	nickname
 	 * @return	message
@@ -1324,7 +1328,7 @@ class DelirioBot
 	function paste(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$this->talk($irc, $data, 'http://pastebin.com/ | http://paste.kde.org/ | http://nopaste.voric.com/');
+			$this->talk($irc, $data, 'http://pastebin.com/ | http://paste.kde.org/ | http://nopaste.voric.com/ | http://notepad.cc/');
 		}
 	}
 
@@ -1369,7 +1373,7 @@ class DelirioBot
 					$this->talk($irc, $data, $data->nick . ', hai lanciato ' . $dadi . ' dadi da ' . $facce . ' facce e hai ottenuto: ' . $display_results);
 				}
 			} else {
-				$this->talk($irc, $data, 'Sintassi comando errata. Per informazioni `!man dado`.');
+				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!dado <n> <m>` dove n è il numero di dadi e m il numero di facce. Per ulteriori informazioni `!man dado`.');
 			}
 		}
 	}
@@ -1385,15 +1389,15 @@ class DelirioBot
 			$calci = rand(0, 100);
 			switch ($calci) {
 				case '1':
-					$this->talk($irc, $data, $data->nick . ', sarai calciorotato solamente per ' . $calci . ' volta!');
+					$this->talk($irc, $data, $data->nick . ', sarai calciorotato da Chuck Norris solamente per ' . $calci . ' volta!');
 					break;
 				
 				case '100':
-					$this->talk($irc, $data, $data->nick . ', sarai calciorotato per ben ' . $calci . ' volte!');
+					$this->talk($irc, $data, $data->nick . ', sarai calciorotato da Chuck Norris per ben ' . $calci . ' volte!');
 					break;
 
 				default:
-					$this->talk($irc, $data, $data->nick . ', sarai calciorotato ' . $calci . ' volte!');
+					$this->talk($irc, $data, $data->nick . ', sarai calciorotato da Chuck Norris ' . $calci . ' volte!');
 					break;
 			}
 		}

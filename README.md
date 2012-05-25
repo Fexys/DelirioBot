@@ -1,7 +1,7 @@
 [ilDelirante](http://mte90.github.com/Delirante/)
 =================
 
-ilDelirante [versione 0.2.1], il Bot del canale #DeliriNotturni (irc.freenode.net). Basato sulla libreria [Net_SmartIRC](http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP).
+ilDelirante [versione 0.2.5], il Bot del canale #DeliriNotturni (irc.freenode.net). Basato sulla libreria [Net_SmartIRC](http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP).
 
 
 
