@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: 25 mag, 2012 at 08:59 AM
+-- Generato il: 25 mag, 2012 at 09:39 AM
 -- Versione MySQL: 5.5.9
 -- Versione PHP: 5.3.6
 

@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '0.2.3');
+define('VERSION', '0.2.4');
 
 //Libreria di SmartIRC
 include('SmartIRC.php');
@@ -15,11 +15,11 @@ class DelirioBot
 	var $stop = FALSE;
 	var $antiflood = TRUE;
 
+	//Trivia
+	var $trivia = array();
+
 	//Varie
 	var $flooders = array();
-
-	//Trivia
-	var $answer;
 
 	function DelirioBot(&$irc) {
 		$this->run($irc);
@@ -748,12 +748,10 @@ class DelirioBot
 					} else {
 						$this->talk($irc, $data, 'Non hai aggiunto citazioni.');
 					}
-				}
-			} else {
-				if (isset($data->messageex[1]) {
+				} else {
 					$this->talk($irc, $data, 'Sintassi comando errata. Usa `!quote` per leggere una citazione, oppure, `!quote add <quote>` per aggiurne una nuova. Per ulteriori informazioni `!man quote`.');
 				}
-
+			} else {
 				$query = "SELECT * FROM bot_quotes ORDER BY RAND() LIMIT 0,1";
 				$result = mysql_query($query);
 				$quote = mysql_fetch_assoc($result);
@@ -1470,15 +1468,15 @@ class DelirioBot
 					
 					$query = "SELECT question, answer FROM bot_trivia ORDER BY RAND() LIMIT 0,1";
 					$result = mysql_query($query);
-					$trivia = mysql_fetch_assoc($result);
+					$res = mysql_fetch_assoc($result);
 
 					$n = 1;
 
-					$this->talk($irc, $data, 'Domanda #' . $n . ': ' . $trivia['question']);
+					$this->talk($irc, $data, 'Domanda #' . $n . ': ' . $res['question']);
 					
-					$this->answer = $trivia['answer'];
+					$this->trivia['answer'] = $res['answer'];
 					
-					$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, "/$this->answer/i", $this, 'trivia_matching');
+					$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, "/$this->trivia['answer']/i", $this, 'trivia_matching');
 				}
 			} else {
 				$this->talk($irc, $data, 'Errore.');
@@ -1496,17 +1494,17 @@ class DelirioBot
 	{
 		$user = $data->nick;
 
-		$this->talk($irc, $data, 'Vince ' . $user . '; Risposta: ' . $this->answer . '; Tempo impiegato: ' . $time . 's; Punti: ' . $score);
+		$this->talk($irc, $data, 'Vince ' . $user . '; Risposta: ' . $this->trivia['answer'] . '; Tempo impiegato: ' . $time . 's; Punti: ' . $score);
 
 		$this->db_connect();
 
-		$query = "SELECT score FROM bot_highscores WHERE nickname = '{$user}'";
+		$query = "SELECT trivia_score FROM bot_highscores WHERE nickname = '{$user}'";
 		$result = mysql_query($query);
 		$row = mysql_fetch_row($result);
 
 		if (mysql_num_rows($result) > 0) {
-			$sum_points = $row[0]+1;
-			$query = "UPDATE bot_highscores SET score = '{$sum_points}' WHERE nickname = '{$user}'";
+			$sum = $row[0]+1;
+			$query = "UPDATE bot_highscores SET score = '{$sum}' WHERE nickname = '{$user}'";
 			$result = mysql_query($query);
 		} else {
 			$query = "INSERT INTO bot_highscores (nickname, score) VALUES ('{$user}', '1')";
@@ -1740,7 +1738,11 @@ class DelirioBot
 		if (in_array($data->nick, $irc->_GetIrcOp($data))) {
 			if (isset($data->messageex[1], $data->messageex[2])) {
 				$nickname = $data->messageex[1];
-				$reason = $data->messageex[2];
+				
+				array_shift($data->messageex);
+				array_shift($data->messageex);
+				$reason = implode(' ', $data->messageex);
+				
 				$channel = $data->channel;
 				$irc->kick( $channel, $nickname, $reason);
 			} else {
