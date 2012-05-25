@@ -8,7 +8,7 @@ ilDelirante [versione 0.2.5], il Bot del canale #DeliriNotturni (irc.freenode.ne
 Quick start
 -----------
 
-Clona il repo, `git clone git@github.com:Fexys/Delirante.git`, oppure [scarica l'ultima release](https://github.com/Fexys/Delirante/zipball/master).
+Clona il repo, `git clone git://github.com/Mte90/Delirante.git`, oppure [scarica l'ultima release](https://github.com/Mte90/Delirante/zipball/master).
 
 Avvia il file `bot.php` da terminale. Nel caso si voglia avviare anche il logger, avviare il file `logger.php` da terminale (Work-In-Progress).
 
@@ -19,7 +19,7 @@ Bug tracker
 
 Per segnalare un bug o idee per nuove funzionalità, c'è l'issue system di GitHub!
 
-https://github.com/Fexys/Delirante/issues
+https://github.com/Mte90/Delirante/issues
 
 
 
@@ -33,7 +33,7 @@ Funzionalità
 + Ricerca avanzata: Google, YouTube, ricerca di package, ricerca di materiale pornografico, ricerca di anime
 + Traduttore multilingua
 + Aggiorna i file database senza riavvio
-+ Dado
++ Dado, roulette, etc.
 
 
 
