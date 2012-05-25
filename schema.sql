@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: 25 mag, 2012 at 09:39 AM
+-- Generato il: 25 mag, 2012 at 09:43 AM
 -- Versione MySQL: 5.5.9
 -- Versione PHP: 5.3.6
 
@@ -27,7 +27,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE `bot_deaths` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `author` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `death` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -55,7 +54,6 @@ CREATE TABLE `bot_highscores` (
 
 CREATE TABLE `bot_insults` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `author` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `insult` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -108,7 +106,6 @@ CREATE TABLE `bot_quotes` (
 
 CREATE TABLE `bot_supercazzole` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `author` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `supercazzola` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -121,7 +118,6 @@ CREATE TABLE `bot_supercazzole` (
 
 CREATE TABLE `bot_trivia` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `author` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `added` int(10) unsigned NOT NULL DEFAULT '0',
   `question` text COLLATE utf8_bin NOT NULL,
   `answer` text COLLATE utf8_bin NOT NULL,
