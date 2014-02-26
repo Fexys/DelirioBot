@@ -1,14 +1,14 @@
-[ilDelirante](http://mte90.github.com/Delirante/)
+[DelirioBot](https://github.com/Fexys/DelirioBot/)
 =================
 
-ilDelirante [versione 0.2.5], il Bot del canale #DeliriNotturni (irc.freenode.net). Basato sulla libreria [Net_SmartIRC](http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP).
+DelirioBot [versione 0.3], è un bot per canali IRC. Basato sulla libreria [Net_SmartIRC](http://wiki.shellium.org/w/Writing_an_IRC_bot_in_PHP).
 
 
 
 Quick start
 -----------
 
-Clona il repo, `git clone git://github.com/Mte90/Delirante.git`, oppure [scarica l'ultima release](https://github.com/Mte90/Delirante/zipball/master).
+Clona il repo, `git clone git://github.com/Fexys/DelirioBot.git`, oppure [scarica l'ultima release](https://github.com/Fexys/DelirioBot/zipball/master).
 
 Avvia il file `bot.php` da terminale. Nel caso si voglia avviare anche il logger, avviare il file `logger.php` da terminale (Work-In-Progress).
 
@@ -19,28 +19,22 @@ Bug tracker
 
 Per segnalare un bug o idee per nuove funzionalità, c'è l'issue system di GitHub!
 
-https://github.com/Mte90/Delirante/issues
+https://github.com/Fexys/DelirioBot/issues
 
 
 
 Funzionalità
 ------------
 
++ Logger
 + Lista utenti connessi
-+ Insulto, insulti di morte, supercazzole, calci, gaio del giorno, offri birra, amore, etc.
-+ Biografia, account Twitter, saluto personale, insulti personali per ogni utente
-+ Impostazioni: filtro antiflood, attiva/disattiva filtro nelle ricerche, blocco/sblocco insulti su citazione
-+ Ricerca avanzata: Google, YouTube, ricerca di package, ricerca di materiale pornografico, ricerca di anime
++ Proverbio, battute, offri birra, fortunato del giorno, etc.
++ Biografia, account Twitter, saluto personale, proverbi personali per ogni utente
++ Impostazioni: filtro antiflood, attiva/disattiva filtro nelle ricerche, blocco/sblocco proverbi su menzione
++ Ricerca avanzata: Google, YouTube, ricerca di package, ricerca di anime
 + Traduttore multilingua
 + Aggiorna i file database senza riavvio
 + Dado, roulette, etc.
-
-
-
-Bug conosciuti
---------------
-
-+ Trivia in sviluppo
 
 
 
@@ -49,30 +43,26 @@ ToDo
 
 + Ultima visita
 + Comandi *nix
++ Trivia in sviluppo
 
 
 
 Sviluppatori
 ------------
 
-**Mte90**
-
-+ https://twitter.com/Mte90Net
-+ https://github.com/Mte90
-
 **Fexys**
 
 + https://twitter.com/Fexys
 + https://github.com/Fexys
 
-Inoltre, un ringraziamente particolare per l'aiuto nella programmazione a: turlando, vencizOn e GianBalex. Un ringraziamento anche a tutti gli utenti del chan per il testing.
+Un ringraziamento speciale a [Mte90](https://github.com/Mte90/) che ha iniziato questo progetto da cui è nato questo fork. Inoltre, un ringraziamente particolare per l'aiuto nella programmazione a: turlando, vencizOn e GianBalex. Un ringraziamento anche a tutti gli utenti del chan per il testing.
 
 
 
 Copyright e licenza
 -------------------
 
-Copyright (C) 2012  Mte90
+Copyright (C) 2014  DelirioBot
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by

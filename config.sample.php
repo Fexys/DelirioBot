@@ -12,10 +12,10 @@ $config['database']['password'] = 'password';
 
 $config['server'] = 'irc.freenode.net';
 $config['port'] = 6667;
-$config['channel'] = '#DeliriNotturni';
+$config['channel'] = '#Channel';
 
-$config['bot']['nickname'] = 'ilDelirante';
-$config['bot']['realname'] = 'ilDelirante [ver ' . VERSION . ']';
+$config['bot']['nickname'] = 'DelirioBot';
+$config['bot']['realname'] = 'DelirioBot [ver ' . VERSION . ']';
 $config['bot']['username'] = 'delirio';
 $config['bot']['password'] = '';
 $config['bot']['usermode'] = 8;

@@ -16,20 +16,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `delirinotturni`
+-- Database: `deliriobot`
 --
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `bot_deaths`
---
-
-CREATE TABLE `bot_deaths` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `death` text COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -49,12 +37,12 @@ CREATE TABLE `bot_highscores` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `bot_insults`
+-- Struttura della tabella `bot_proverbs`
 --
 
-CREATE TABLE `bot_insults` (
+CREATE TABLE `bot_proverbs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `insult` text COLLATE utf8_bin NOT NULL,
+  `proverb` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -74,13 +62,13 @@ CREATE TABLE `bot_manual` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `bot_personal_insults`
+-- Struttura della tabella `bot_personal_proverbs`
 --
 
-CREATE TABLE `bot_personal_insults` (
+CREATE TABLE `bot_personal_proverbs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
-  `insult` text COLLATE utf8_bin NOT NULL,
+  `proverb` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -101,12 +89,12 @@ CREATE TABLE `bot_quotes` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `bot_supercazzole`
+-- Struttura della tabella `bot_battute`
 --
 
-CREATE TABLE `bot_supercazzole` (
+CREATE TABLE `bot_battute` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `supercazzola` text COLLATE utf8_bin NOT NULL,
+  `battuta` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

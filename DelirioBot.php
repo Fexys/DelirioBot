@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '0.2.5');
+define('VERSION', '0.3');
 
 //Libreria di SmartIRC
 include('SmartIRC.php');
@@ -61,9 +61,8 @@ class DelirioBot
 		$irc->registerActionhandler(SMARTIRC_TYPE_KICK, '.*', $this, 'kick_response');
 		$irc->registerActionhandler(SMARTIRC_TYPE_KICK, '.*', $this, 'kick_rejoin');
 		$irc->registerActionhandler(SMARTIRC_TYPE_QUERY, '.*', $this, 'query_to_talk');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '.*', $this, 'mention_insult');
+		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '.*', $this, 'proverb_on_mention');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!info$', $this, 'info');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!tumblr', $this, 'tumblr');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!help$', $this, 'help');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!man', $this, 'man');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!saluta', $this, 'give_greeting');
@@ -71,26 +70,18 @@ class DelirioBot
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!who$', $this, 'who');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!whoami', $this, 'whoami');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!twitter', $this, 'twitter');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!noi', $this, 'noi');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!quote', $this, 'quote');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!insulta', $this, 'insulta');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!inalbera', $this, 'inalbera');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!muori', $this, 'muori');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!supercazzola', $this, 'supercazzola');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!gaio$', $this, 'gaio');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!amore', $this, 'amore');
+		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!proverbio', $this, 'proverb');
+		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!battuta', $this, 'battuta');
+		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!lucky$', $this, 'lucky');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!birra', $this, 'birra');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!nutella', $this, 'nutella');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!sex', $this, 'sex');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!google', $this, 'google_search');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!youtube', $this, 'youtube_search');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!porn', $this, 'porn_search');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!anime', $this, 'anime_search');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!pkg', $this, 'packages_search');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!translate', $this, 'translate');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!paste', $this, 'paste');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!dado', $this, 'dado');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!calcio', $this, 'calcio');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!roulette$', $this, 'roulette');
 		//$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!trivia', $this, 'trivia');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!set', $this, 'settings');
@@ -110,7 +101,6 @@ class DelirioBot
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!unmute', $this, 'unmute');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!ban', $this, 'ban');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!unban', $this, 'unban');
-		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!battezza', $this, 'battezza');
 		$irc->registerActionhandler(SMARTIRC_TYPE_CHANNEL, '^!kill$', $this, 'disconnect');
 
 		$irc->connect($this->server['server'], $this->server['port']);
@@ -266,32 +256,6 @@ class DelirioBot
 				);
 		 		break;
 
-		 	case 'penis':
-		 		$draw = array(
-					'      ___',
-					'     //  7',
-					'    (_,_/\\       Fuck yeah!',
-					'     \    \\',
-					'      \    \\',
-					'      _\    \__',
-					'     (   \     )',
-					'      \___\___/'
-		 			);
-		 		break;
-
-		 	case 'nutella':
-		 		$draw = array(
-					'   _______',
-					'  <_______>',
-					' /   ___   \\       Che mondo sarebbe',
-					'/___´   `___\\      senza Nutella?',
-					'|  nutella  |',
-					'|ˆ`--...--´ˆ|',
-					'\           /',
-					' `=========´'
-					);
-		 		break;
-
 			default:
 		 		break;
 		}
@@ -351,13 +315,13 @@ class DelirioBot
 			$user = mysql_fetch_assoc($result);
 
 			if ($user['greeting'] == '') {
-				$this->talk($irc, $data, 'Ciao ' . $data->nick . ', ti prendo a sassate se non mi dai il tuo saluto personale.');
+				$this->talk($irc, $data, 'Hey! Ciao ' . $data->nick . ', ma non hai ancora un saluto personale?');
 			} else {
 				$greeting = str_replace('$nick', $data->nick, $user['greeting']);
 				$this->talk($irc, $data, $greeting);
 			}
 		} else {
-			$this->talk($irc, $data, 'Ciao ' . $data->nick . ', non sei presente nel nostro database. Insultatelo, nao!');
+			$this->talk($irc, $data, 'Ciao ' . $data->nick . '!');
 		}
 	}
 
@@ -383,7 +347,6 @@ class DelirioBot
 	{
 		if ($data->rawmessageex[3] == $this->config['nickname']) {
 			$irc->join(array($this->server['channel']));
-			$this->talk($irc, $data, 'Sono IMMORTALE ed esisto da quando il mondo era ancora una palla di fuoco, questo è il motivo della mia super intelligenza, io sono lo Divino Bot!');
 		}
 	}
 
@@ -394,7 +357,7 @@ class DelirioBot
 	 */
 	function word_kick(&$irc, &$data)
 	{
-		$irc->kick($data->channel, $data->nick, 'Bla bla bla, EBBBASTA!!');
+		$irc->kick($data->channel, $data->nick, 'Parola bandita!');
 	}
 
 	/**
@@ -407,22 +370,18 @@ class DelirioBot
 	{
 		if (isset($data->messageex[0]) && $data->messageex[0][0] == '!' && !in_array(str_replace('!', '', $data->messageex[0]), get_class_methods($this)) && !$this->flood($data)) {
 			$users_list = $this->remove_users($irc->_updateIrcUser($data), array($this->config['nickname'], $data->nick,'ChanServ'));
-			$this->talk($irc, $data, 'Non conosco questo comando '.$data->nick.', quindi sarai calciorotato da Chuck Norris, smontato da McGyver e insultato da '.$poggio[array_rand($poggio,1)]);
+			$this->talk($irc, $data, 'Non conosco questo comando ' . $data->nick);
 		}
 	}
 
 	/**
-	 * Insulto personalizzato su citazione.
+	 * Proverbio personalizzato su citazione.
 	 *
 	 * @param	nickname
 	 * @return	message
 	 */
-	function mention_insult(&$irc, &$data)
+	function proverb_on_mention(&$irc, &$data)
 	{
-		if (rand(0, 50) == 1 && $this->stop) {
-			$this->talk($irc, $data, 'Sarete calciorotati il prima possibile se non mi date degli insulti personali!');
-		}
-
 		if ($this->stop && $data->messageex[0][0] != '!') {
 			$messaggio = implode(' ', $data->messageex);
 
@@ -437,18 +396,18 @@ class DelirioBot
 				if ($condition) {
 					$this->db_connect();
 				
-					$query = "SELECT bot_personal_insults.insult FROM bot_users INNER JOIN bot_personal_insults ON bot_users.id = bot_personal_insults.user_id WHERE bot_users.nickname = '{$nickname}'";
+					$query = "SELECT bot_personal_proverbs.proverb FROM bot_users INNER JOIN bot_personal_proverbs ON bot_users.id = bot_personal_proverbs.user_id WHERE bot_users.nickname = '{$nickname}'";
 					$result = mysql_query($query);
-					$total_insults = mysql_num_rows($result);
+					$total_proverbs = mysql_num_rows($result);
 
-					$query = "SELECT bot_personal_insults.insult FROM bot_users INNER JOIN bot_personal_insults ON bot_users.id = bot_personal_insults.user_id WHERE bot_users.nickname = '{$nickname}' ORDER BY RAND() LIMIT 0,1";
+					$query = "SELECT bot_personal_proverbs.proverb FROM bot_users INNER JOIN bot_personal_proverbs ON bot_users.id = bot_personal_proverbs.user_id WHERE bot_users.nickname = '{$nickname}' ORDER BY RAND() LIMIT 0,1";
 					$result = mysql_query($query);
-					$rand_insult = mysql_result($result, 0);
+					$rand_proverb = mysql_result($result, 0);
 					
 					if ($value == $this->config['nickname']) {
-						$this->talk($irc, $data, $data->nick . ', ' . lcfirst($rand_insult));
-					} elseif ($total_insults > 0) {
-						$this->talk($irc, $data, $nickname . ', ' . lcfirst($rand_insult));
+						$this->talk($irc, $data, $data->nick . ', ' . lcfirst($rand_proverb));
+					} elseif ($total_proverbs > 0) {
+						$this->talk($irc, $data, $nickname . ', ' . lcfirst($rand_proverb));
 					}
 				}
 			}
@@ -464,20 +423,7 @@ class DelirioBot
 	function info(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$this->talk($irc, $data, $this->config['nickname'] . ' [ver ' . VERSION . ']. Sorgenti, idee e segnalazioni bug su https://mte90.github.com/Delirante/');
-		}
-	}
-
-	/**
-	 * Link al Tumblr del canale.
-	 *
-	 * @param	string
-	 * @return	string
-	 */
-	function tumblr(&$irc, &$data)
-	{
-		if (!$this->flood($data)) {
-			$this->talk($irc, $data, 'I nostri log, meme, racconti ed altro ancora sul nostro Tumblr: http://delirinotturni.tumblr.com/');
+			$this->talk($irc, $data, $this->config['nickname'] . ' [ver ' . VERSION . ']. Sorgenti, idee e segnalazioni bug su https://github.com/Fexys/Delirante/');
 		}
 	}
 
@@ -489,9 +435,9 @@ class DelirioBot
 	function help(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
-			$this->talk($irc, $data, '[Comandi] !info, !tumblr, !man, !saluta, !ls, !who, !whoami, !noi, !insulta, !inalbera, !muori, !supercazzola, !gaio, !amore, !birra, !nutella, !sex');
-			$this->talk($irc, $data, '[Strumenti] !google, !yt, !porn, !anime, !pkg, !translate, !paste');
-			$this->talk($irc, $data, '[Giochi] !dado, !calcio, !roulette');
+			$this->talk($irc, $data, '[Comandi] !info, !man, !saluta, !ls, !who, !whoami, !twitter, !quote, !proverbio, !battuta, !lucky, !birra');
+			$this->talk($irc, $data, '[Strumenti] !google, !yt, !anime, !pkg, !translate, !paste');
+			$this->talk($irc, $data, '[Giochi] !dado, !roulette');
 		}
 	}
 
@@ -517,7 +463,7 @@ class DelirioBot
 					$this->talk($irc, $data, '[Descrizione] ' . $command . ' -- ' . $manual['description']);
 					$this->talk($irc, $data, '[Sinossi] ' . $manual['synopsis']);
 				} else {
-					$this->talk($irc, $data, 'Comando inesistente. Pensa prima di scrivere, idiota!');
+					$this->talk($irc, $data, 'Comando inesistente.');
 				}
 			} else {
 				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!man <comando>`. Per ulteriori informazioni `!man man`.');
@@ -536,9 +482,9 @@ class DelirioBot
 		if (!$this->flood($data)) {
 			if (isset($data->messageex[1])) {
 				if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
-					$this->talk($irc, $data, 'Fottiti ' . $data->messageex[1]);
+					$this->talk($irc, $data, 'Salute a te, o ' . $data->messageex[1]);
 				} elseif ((in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname'])) {
-					$this->talk($irc, $data, 'Fottiti ' . $data->nick);
+					$this->talk($irc, $data, 'Salute a te, o ' . $data->nick);
 				}
 			}
 		}
@@ -607,7 +553,7 @@ class DelirioBot
 
 				$this->talk($irc, $data, 'Biografia di ' . $nickname . ' -- ' . $row['bio']);
 			} else {
-				$this->talk($irc, $data, 'L\'utente non è inserito nel database. Tentativo di intrusione rilevato!');
+				$this->talk($irc, $data, 'L\'utente non è inserito nel database.');
 			}
 		}
 	}
@@ -637,31 +583,14 @@ class DelirioBot
 				$row = mysql_fetch_assoc($result);
 
 				if ($row['twitter'] == '') {
-					$this->talk($irc, $data, $nickname . ' ancora non si decide a fornirmi il suo account Twitter.');
+					$this->talk($irc, $data, $nickname . ' non ha ancora fornito il suo account Twitter.');
 				} elseif ($row['twitter'] == 'NULL') {
 					$this->talk($irc, $data, $nickname . ' ha preferito non rendere pubblico il suo account Twitter.');
 				} else {
 					$this->talk($irc, $data, 'Twitter di ' . $nickname . ' -- https://twitter.com/' . $row['twitter']);
 				}
 			} else {
-				$this->talk($irc, $data, 'L\'utente non è inserito nel database. Tentativo di intrusione rilevato!');
-			}
-		}
-	}
-
-	/**
-	 * Il benvenuto al nuovo inizializzato!
-	 *
-	 * @param	nickname
-	 * @return	message
-	 */
-	function noi(&$irc, &$data)
-	{
-		if (!$this->flood($data)) {
-			if (isset($data->messageex[1]) && in_array($data->messageex[1], $irc->_updateIrcUser($data))) {
-				$this->talk($irc, $data, $data->messageex[1] . ' è ora uno di noi, uno di noi, uno di noi, uno di noi, un delirante come noi!');
-			} else {
-				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!noi <nickname>`. Per ulteriori informazioni `!man noi`.');
+				$this->talk($irc, $data, 'L\'utente non è inserito nel database.');
 			}
 		}
 	}
@@ -766,212 +695,116 @@ class DelirioBot
 	}
 
 	/**
-	 * Insulta l'utente richiesto. Inoltre può restituire il totale degli insulti presenti nel database.
+	 * Invia un proverbio all'utente richiesto. Inoltre può restituire il totale dei proverbi presenti nel database.
 	 *
 	 * @param	nickname
 	 * @return	message
 	 */
-	function insulta(&$irc, &$data)
+	function proverb(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
 			if (isset($data->messageex[1])) {
 				$this->db_connect();
 				
-				$query = "SELECT insult FROM bot_insults";
+				$query = "SELECT proverb FROM bot_proverbs";
 				$result = mysql_query($query);
-				$total_insults = mysql_num_rows($result);
+				$total_proverbs = mysql_num_rows($result);
 
-				$query = "SELECT insult FROM bot_insults ORDER BY RAND() LIMIT 0,1";
+				$query = "SELECT proverb FROM bot_proverbs ORDER BY RAND() LIMIT 0,1";
 				$result = mysql_query($query);
-				$rand_insult = mysql_result($result, 0);
+				$rand_proverb = mysql_result($result, 0);
 
 				if (is_numeric($data->messageex[1])) {
 					$n = abs((int)$data->messageex[1]);
 
-					$query = "SELECT insult FROM bot_insults WHERE id = '{$n}'";
+					$query = "SELECT proverb FROM bot_proverbs WHERE id = '{$n}'";
 					$result = mysql_query($query);
-					$insult = mysql_result($result, 0);
+					$proverb = mysql_result($result, 0);
 				}
 
 				if ($data->messageex[1] == '-c') {
-					$this->talk($irc, $data, $total_insults . ' insulti presenti nel database.');
-				} elseif (is_numeric($data->messageex[1]) && $n <= $total_insults && isset($data->messageex[2]) && in_array($data->messageex[2], $irc->_updateIrcUser($data))) {
-					$this->talk($irc, $data, $data->messageex[2] . ', ' . lcfirst($insult));
-				} elseif (is_numeric($data->messageex[1]) && $n <= $total_insults) {
-					$this->talk($irc, $data, $insult);
+					$this->talk($irc, $data, $total_proverbs . ' proverbi presenti nel database.');
+				} elseif (is_numeric($data->messageex[1]) && $n <= $total_proverbs && isset($data->messageex[2]) && in_array($data->messageex[2], $irc->_updateIrcUser($data))) {
+					$this->talk($irc, $data, $data->messageex[2] . ', ' . lcfirst($proverb));
+				} elseif (is_numeric($data->messageex[1]) && $n <= $total_proverbs) {
+					$this->talk($irc, $data, $proverb);
 				} else {
 					if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
-						$this->talk($irc, $data, $data->messageex[1] . ', ' . lcfirst($rand_insult));
+						$this->talk($irc, $data, $data->messageex[1] . ', ' . lcfirst($rand_proverb));
 					} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname']) {
-						$this->talk($irc, $data, $data->nick . ', non puoi permetterti di insultarmi. Io sono lo Divino Bot!');
+						$this->talk($irc, $data, $data->nick . ', non ha senso inviare un proverbio a me, io sono un bot!');
 					} else {
-						$this->talk($irc, $data, $data->nick . ', chi sarebbe ' . $data->messageex[1] . '? E\' tua suocera o la tua mano destra?');
+						$this->talk($irc, $data, $data->nick . ', chi sarebbe ' . $data->messageex[1] . '?');
 					}
 				}
 			} else {
-				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!insulta <nickname>`. Per ulteriori informazioni `!man insulta`.');
+				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!proverbio <nickname>`. Per ulteriori informazioni `!man proverbio`.');
 			}
 		}
 	}
 
 	/**
-	 * Insulta l'utente richiesto per 5 volte consecutive.
+	 * Fa una battuta all'utente richiesto. Inoltre può restituire il totale delle battuta presenti nel database.
 	 *
 	 * @param	nickname
 	 * @return	message
 	 */
-	function inalbera(&$irc, &$data)
-	{
-		if (!$this->flood($data)) {
-			if (!empty($data->messageex[1])) {
-				if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
-					$this->db_connect();
-
-					for ($i=0; $i < 5; $i++) {			
-						$query = "SELECT insult FROM bot_insults ORDER BY RAND() LIMIT 0,1";
-						$result = mysql_query($query);
-						$rand_insult = mysql_result($result, 0);
-
-						$this->talk($irc, $data, $data->messageex[1] . ', ' . lcfirst($rand_insult));
-					}
-				} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname']) {
-					$this->talk($irc, $data, $data->nick . ', non puoi permetterti di insultarmi. Io sono lo Divino Bot!');
-				} else {
-					$this->talk($irc, $data, $data->nick . ', chi sarebbe ' . $data->messageex[1] . '? E\' tua suocera o la tua mano destra?');
-				}
-			} else {
-				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!inalbera <nickname>`. Per ulteriori informazioni `!man inalbera`.');
-			}
-		}
-	}
-
-	/**
-	 * Augura la morte l'utente richiesto. Inoltre può restituire il totale delle morti presenti nel database.
-	 *
-	 * @param	nickname
-	 * @return	message
-	 */
-	function muori(&$irc, &$data)
+	function battuta(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
 			if (isset($data->messageex[1])) {
 				$this->db_connect();
 				
-				$query = "SELECT death FROM bot_deaths";
+				$query = "SELECT battuta FROM bot_battute";
 				$result = mysql_query($query);
-				$total_deaths = mysql_num_rows($result);
+				$total_battute = mysql_num_rows($result);
 
-				$query = "SELECT death FROM bot_deaths ORDER BY RAND() LIMIT 0,1";
+				$query = "SELECT battuta FROM bot_battute ORDER BY RAND() LIMIT 0,1";
 				$result = mysql_query($query);
-				$rand_death = mysql_result($result, 0);
+				$rand_battuta = mysql_result($result, 0);
 
 				if (is_numeric($data->messageex[1])) {
 					$n = abs((int)$data->messageex[1]);
 
-					$query = "SELECT death FROM bot_deaths WHERE id = '{$n}'";
+					$query = "SELECT battuta FROM bot_battute WHERE id = '{$n}'";
 					$result = mysql_query($query);
-					$death = mysql_result($result, 0);
+					$battuta = mysql_result($result, 0);
 				}
 
 				if ($data->messageex[1] == '-c') {
-					$this->talk($irc, $data, $total_deaths . ' tipi di morte presenti nel database.');
-				} elseif (is_numeric($data->messageex[1]) && $n <= $total_deaths && isset($data->messageex[2]) && in_array($data->messageex[2], $irc->_updateIrcUser($data))) {
-					$this->talk($irc, $data, $data->messageex[2] . ', ' . lcfirst($death));
-				} elseif (is_numeric($data->messageex[1]) && $n <= $total_deaths) {
-					$this->talk($irc, $data, $death);
+					$this->talk($irc, $data, $total_battute . ' battute presenti nel database.');
+				} elseif (is_numeric($data->messageex[1]) && $n <= $total_battute && isset($data->messageex[2]) && in_array($data->messageex[2], $irc->_updateIrcUser($data))) {
+					$this->talk($irc, $data, $data->messageex[2] . ', ' . lcfirst($battuta));
+				} elseif (is_numeric($data->messageex[1]) && $n <= $total_battute) {
+					$this->talk($irc, $data, $battuta);
 				} else {
 					if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
-						$this->talk($irc, $data, $data->messageex[1] . ', ' . lcfirst($rand_death));
+						$this->talk($irc, $data, $data->messageex[1] . ', ' . lcfirst($rand_battuta));
 					} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname']) {
-						$this->talk($irc, $data, $data->nick . ', non puoi permetterti di uccidermi. Io sono lo Divino Bot!');
+						$this->talk($irc, $data, $data->nick . ', come ti permetti di fare una battuta a me?');
 					} else {
-						$this->talk($irc, $data, $data->nick . ', chi sarebbe ' . $data->messageex[1] . '? E\' tua suocera o la tua mano destra?');
+						$this->talk($irc, $data, $data->nick . ', chi sarebbe ' . $data->messageex[1] . '?');
 					}
 				}
 			} else {
-				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!muori <nickname>`. Per ulteriori informazioni `!man muori`.');
+				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!battuta <nickname>`. Per ulteriori informazioni `!man battuta`.');
 			}
 		}
 	}
 
 	/**
-	 * Fa una supercazzola all'utente richiesto. Inoltre può restituire il totale delle supercazzole presenti nel database.
-	 *
-	 * @param	nickname
-	 * @return	message
-	 */
-	function supercazzola(&$irc, &$data)
-	{
-		if (!$this->flood($data)) {
-			if (isset($data->messageex[1])) {
-				$this->db_connect();
-				
-				$query = "SELECT supercazzola FROM bot_supercazzole";
-				$result = mysql_query($query);
-				$total_supercazzole = mysql_num_rows($result);
-
-				$query = "SELECT supercazzola FROM bot_supercazzole ORDER BY RAND() LIMIT 0,1";
-				$result = mysql_query($query);
-				$rand_supercazzola = mysql_result($result, 0);
-
-				if (is_numeric($data->messageex[1])) {
-					$n = abs((int)$data->messageex[1]);
-
-					$query = "SELECT supercazzola FROM bot_supercazzole WHERE id = '{$n}'";
-					$result = mysql_query($query);
-					$supercazzola = mysql_result($result, 0);
-				}
-
-				if ($data->messageex[1] == '-c') {
-					$this->talk($irc, $data, $total_supercazzole . ' supercazzole presenti nel database.');
-				} elseif (is_numeric($data->messageex[1]) && $n <= $total_supercazzole && isset($data->messageex[2]) && in_array($data->messageex[2], $irc->_updateIrcUser($data))) {
-					$this->talk($irc, $data, $data->messageex[2] . ', ' . lcfirst($supercazzola));
-				} elseif (is_numeric($data->messageex[1]) && $n <= $total_supercazzole) {
-					$this->talk($irc, $data, $supercazzola);
-				} else {
-					if (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] != $this->config['nickname']) {
-						$this->talk($irc, $data, $data->messageex[1] . ', ' . lcfirst($rand_supercazzola));
-					} elseif (in_array($data->messageex[1], $irc->_updateIrcUser($data)) && $data->messageex[1] == $this->config['nickname']) {
-						$this->talk($irc, $data, $data->nick . ', non puoi permetterti di farmi una supercazzola. Io sono lo Divino Bot!');
-					} else {
-						$this->talk($irc, $data, $data->nick . ', chi sarebbe ' . $data->messageex[1] . '? E\' tua suocera o la tua mano destra?');
-					}
-				}
-			} else {
-				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!supercazzola <nickname>`. Per ulteriori informazioni `!man supercazzola`.');
-			}
-		}
-	}
-
-	/**
-	 * Decreta il gaio del momento.
+	 * Decreta il fortunato del giorno.
 	 *
 	 * @return	message
 	 */
-	function gaio(&$irc, &$data)
+	function lucky(&$irc, &$data)
 	{
 		if (!$this->flood($data)) {
 			$users_list = $this->remove_users($irc->_updateIrcUser($data), array($this->config['nickname'], 'ChanServ'));
 
-			$gaio = $users_list[array_rand($users_list, 1)];
+			$lucky = $users_list[array_rand($users_list, 1)];
 
-			$this->talk($irc, $data, 'Il gay del momento è ' . $gaio);
-		}
-	}
-
-	/**
-	 * Chi ama chi!
-	 *
-	 * @return	message
-	 */
-	function amore(&$irc, &$data)
-	{
-		if (!$this->flood($data)) {
-			$users_list = $this->remove_users($irc->_updateIrcUser($data), array($this->config['nickname'], $data->nick, 'ChanServ'));
-			
-			$love = $users_list[array_rand($users_list, 1)];
-			
-			$this->talk($irc, $data, $data->nick . ' lovva ' . $love . ' <3');
+			$this->talk($irc, $data, 'Il fortunato di oggi è ' . $lucky);
 		}
 	}
 
@@ -991,13 +824,9 @@ class DelirioBot
 
 			$this->db_connect();
 
-			$query = "SELECT bot_personal_insults.insult FROM bot_users INNER JOIN bot_personal_insults ON bot_users.id = bot_personal_insults.user_id WHERE bot_users.nickname = '{$nickname}'";
+			$query = "SELECT bot_personal_proverbs.proverb FROM bot_users INNER JOIN bot_personal_proverbs ON bot_users.id = bot_personal_proverbs.user_id WHERE bot_users.nickname = '{$nickname}'";
 			$result = mysql_query($query);
-			$total_insults = mysql_num_rows($result);
-
-			$query = "SELECT insult FROM bot_insults ORDER BY RAND() LIMIT 0,1";
-			$result = mysql_query($query);
-			$rand_insult = mysql_result($result, 0);
+			$total_proverbs = mysql_num_rows($result);
 
 			if (isset($data->messageex[1]) && $data->messageex[1] == 'party') {
 				$users_list = $this->remove_users($irc->_updateIrcUser($data), array($this->config['nickname'], $data->nick, 'ChanServ'));
@@ -1009,20 +838,18 @@ class DelirioBot
 				
 				$this->talk($irc, $data, 'Una bella damigiana di birra per tutti offerta da ' . $data->nick . '! Mentre per ' . $user_rand . ' solo ' . $alcohol_rand . '.');
 			} elseif (isset($data->messageex[1])) {
-				$this->talk($irc, $data, $data->messageex[1] . ', eccoti una bella birra fredda marchio "Delirio" offerta da ' . $data->nick . '!');
+				$this->talk($irc, $data, $data->messageex[1] . ', eccoti una bella birra fredda offerta da ' . $data->nick . '!');
 				
 				$draw = $this->ascii_art('beer');
 				for ($i=0; $i < count($draw); $i++) { 
 					$this->talk($irc, $data, $draw[$i]);
 				}
 			} elseif (!$condition) {
-				$this->talk($irc, $data, 'Tu vorresti la nostra birra?? Non sei nel database brutta pustola.');
-				$this->talk($irc, $data, $data->nick . ' ' . lcfirst($rand_insult));
-			} elseif ($total_insults > 0 && $total_insults < 3){
-				$this->talk($irc, $data, 'A te niente birra brutto stronzetto, senza insulti personali non vai da nessuna parte.');
-				$this->talk($irc, $data, $data->nick . ' ' . lcfirst($rand_insult));
+				$this->talk($irc, $data, 'Tu vorresti la nostra birra? Ma non sei nel database!');
+			} elseif ($total_proverbs > 0 && $total_proverbs < 3){
+				$this->talk($irc, $data, 'A te niente birra, senza un saluto personale non vai da nessuna parte.');
 			} else {
-				$this->talk($irc, $data, $data->nick . ', eccoti una bella birra fredda marchio "Delirio" offerta dalla casa!');
+				$this->talk($irc, $data, $data->nick . ', eccoti una bella birra fredda offerta dalla casa!');
 
 				$draw = $this->ascii_art('beer');
 				for ($i=0; $i < count($draw); $i++) { 
@@ -1032,49 +859,6 @@ class DelirioBot
 		}
 	}
 
-	/**
-	 * Attiva il Nutella Party.
-	 *
-	 * @return	message
-	 */
-	function nutella(&$irc, &$data)
-	{
-		if (!$this->flood($data)) {
-			$this->talk($irc, $data, 'Tirate fuori i vostri cucchiai, inizia il Nutella Party!');
-
-			$draw = $this->ascii_art('nutella');
-			for ($i=0; $i < count($draw); $i++) { 
-				$this->talk($irc, $data, $draw[$i]);
-			}
-		}
-	}
-
-	/**
-	 * XXX!
-	 *
-	 * @param	nickname
-	 * @return	message
-	 */
-	function sex(&$irc, &$data)
-	{
-		if (!$this->flood($data)) {
-			if (isset($data->messageex[1])) {
-				$this->talk($irc, $data, $data->messageex[1] . ', prendi sta minchia offerta da quel cazzone di ' . $data->nick . '!');
-				
-				$draw = $this->ascii_art('penis');
-				for ($i=0; $i < count($draw); $i++) { 
-					$this->talk($irc, $data, $draw[$i]);
-				}
-			} else {
-				$this->talk($irc, $data, $data->nick . ', attaccati a sto cazzo!');
-
-				$draw = $this->ascii_art('penis');
-				for ($i=0; $i < count($draw); $i++) { 
-					$this->talk($irc, $data, $draw[$i]);
-				}
-			}
-		}
-	}
 
 	/**
 	 * Ricerca avanzata su Google.
@@ -1131,72 +915,9 @@ class DelirioBot
 			$query = str_replace(' ', '+', $query);
 
 			if (isset($data->messageex[1])) {
-				$this->talk($irc, $data, 'http://www.youtube.com/results?search_query=' . $query);
+				$this->talk($irc, $data, 'https://www.youtube.com/results?search_query=' . $query);
 			} else {
 				$this->talk($irc, $data, 'Devi inserire una o più parole chiave da ricercare, idiota!');
-			}
-		}
-	}
-
-	/**
-	 * Ricerca su siti pornografici.
-	 *
-	 * @param	string
-	 * @return	string
-	 */
-	function porn_search(&$irc, &$data)
-	{
-		if (!$this->flood($data)) {
-			$query = urldecode($query);
-			$query = str_replace('!porn ', '', implode(' ', $data->messageex));
-			$query = preg_replace("/\-([^ ]*)/", '', $query);
-			$query = trim($query);
-			$query = str_replace(' ', '+', $query);
-
-			if ($query == '') {
-				$this->talk($irc, $data, 'Devi inserire una o più parole chiave da ricercare, idiota!');
-			} elseif (isset($data->messageex[1])) {
-				switch ($data->messageex[1]) {
-					case '-yp':
-						$this->talk($irc, $data, 'http://www.youporn.com/search/?query=' . $query . '&type=straight');
-						break;
-
-					case '-yj':
-						$query = str_replace('+', '-', $query);
-						$this->talk($irc, $data, 'http://www.youjizz.com/search/' . $query . '-1.html');
-						break;
-
-					case '-t8':
-						$this->talk($irc, $data, 'http://www.tube8.com/search.html?q=' . $query);
-						break;
-
-					case '-rt':
-						$this->talk($irc, $data, 'http://www.redtube.com/?search=' . $query);
-						break;
-
-					case '-ph':
-						$this->talk($irc, $data, 'http://www.pornhub.com/video/search?search=' . $query);
-						break;
-
-					case '-fk':
-						$query = str_replace('+', '%20', $query);
-						$this->talk($irc, $data, 'http://www.fakku.net/search/' . $query);
-						break;
-
-					case '-tg':
-						$this->talk($irc, $data, 'http://tubegalore.com/search/?q=' . $query);
-						break;
-
-					case '-tm':
-						$this->talk($irc, $data, 'http://www.tubemonsoon.com/videos?search=' . $query . '&btn=Search');
-						break;
-
-					default:
-						$this->talk($irc, $data, 'Sintassi comando errata. Usa `!porn [-yp | -yj | -t8 | -rt | -ph | -fk | -tg | -tm] <query>` scegliendo una tra le opzioni proposte. Per ulteriori informazioni `!man porn`.');
-						break;
-				}
-			} else {
-				$this->talk($irc, $data, 'Sintassi comando errata. Usa `!porn [-yp | -yj | -t8 | -rt | -ph | -fk | -tg | -tm] <query>` scegliendo una tra le opzioni proposte. Per ulteriori informazioni `!man porn`.');
 			}
 		}
 	}
@@ -1379,31 +1100,6 @@ class DelirioBot
 	}
 
 	/**
-	 * L'utente riceve N calcio random.
-	 *
-	 * @return	message
-	 */
-	function calcio(&$irc, &$data)
-	{
-		if (!$this->flood($data)) {
-			$calci = rand(0, 100);
-			switch ($calci) {
-				case '1':
-					$this->talk($irc, $data, $data->nick . ', sarai calciorotato da Chuck Norris solamente per ' . $calci . ' volta!');
-					break;
-				
-				case '100':
-					$this->talk($irc, $data, $data->nick . ', sarai calciorotato da Chuck Norris per ben ' . $calci . ' volte!');
-					break;
-
-				default:
-					$this->talk($irc, $data, $data->nick . ', sarai calciorotato da Chuck Norris ' . $calci . ' volte!');
-					break;
-			}
-		}
-	}
-
-	/**
 	 * Roulette russa.
 	 *
 	 * @return	event
@@ -1457,6 +1153,7 @@ class DelirioBot
 
 	/**
 	 * Gioco a domande.
+	 * IN DEVELOPMENT
 	 *
 	 * @param	message
 	 * @return	message
@@ -1490,6 +1187,7 @@ class DelirioBot
 
 	/**
 	 * Trova la risposta giusta nel Trivia.
+	 * IN DEVELOPMENT
 	 *
 	 * @param	event
 	 * @return	message
@@ -1517,7 +1215,7 @@ class DelirioBot
 	}
 
 	/**
-	 * Permette di gestire il settaggio del Bot, come l'antiflood e gli insulti su citazione.
+	 * Permette di gestire il settaggio del Bot, come l'antiflood e i proverbi su citazione.
 	 * (Riservata agli operatori)
 	 *
 	 * @param	message
@@ -1537,13 +1235,13 @@ class DelirioBot
 					}
 					break;
 				
-				case 'insulta':
+				case 'proverbi':
 					if ($data->messageex[2] == 1) {
 						$this->stop = TRUE;
-						$this->talk($irc, $data, 'Adesso vi insulto a tutti! MUAHAHAH!');
+						$this->talk($irc, $data, 'Adesso inizio a riempirvi di proverbi!');
 					} elseif ($data->messageex[2] == 0) {
 						$this->stop = FALSE;
-						$this->talk($irc, $data, 'Mi sono stufato, per ora, di insultarvi!');
+						$this->talk($irc, $data, 'Mi sono stufato, per ora!');
 					}
 					break;
 
@@ -1551,7 +1249,7 @@ class DelirioBot
 					break;
 			}
 		} else {
-			$this->talk($irc, $data, 'Chi ti credi di essere per darmi questi comandi?');
+			$this->talk($irc, $data, 'Non sei autorizzato a darmi questo comando.');
 		}
 	}
 
@@ -1568,7 +1266,7 @@ class DelirioBot
 			$this->set_vars();
 			$this->talk($irc, $data, 'Database aggiornato.');
 		} else {
-			$this->talk($irc, $data, 'Chi ti credi di essere per darmi questi comandi?');
+			$this->talk($irc, $data, 'Non sei autorizzato a darmi questo comando.');
 		}
 	}
 
@@ -1783,7 +1481,7 @@ class DelirioBot
 		if (in_array($data->nick, $irc->_GetIrcOp($data))) {
 			$users_list = $this->remove_users($irc->_updateIrcUser($data), array($this->config['nickname'], $data->nick,'ChanServ'));
 
-			$this->talk($irc, $data, 'Il sistema è prossimo al colasso tra 5 secondi... COUNTDOWN STARTO!');
+			$this->talk($irc, $data, 'Kick \'em all!');
 			
 			for ($i=5; $i > 0; $i--) { 
 				$this->talk($irc, $data, '-' . $i);
@@ -1791,7 +1489,7 @@ class DelirioBot
 			}
 
 			for ($i=0; $i < count($users_list); $i++) { 
-				$irc->kick($data->channel, $users_list[$i], 'Kernel Panic!');
+				$irc->kick($data->channel, $users_list[$i], 'Clear!');
 			}
 		}
 	}
@@ -1879,23 +1577,6 @@ class DelirioBot
 	}
 
 	/**
-	 * Battezza il nuovo utente.
-	 * (Riservato agli operatori)
-	 *
-	 * @param	nickname
-	 * @return	message
-	 */
-	function battezza(&$irc, &$data)
-	{
-		if (in_array($data->nick, $irc->_GetIrcOp($data))) {
-			if (isset($data->messageex[1])) {
-				$this->talk($irc, $data, $data->messageex[1] . ', ti battezzo nel nome del channel, delle puppe e dello spirito perverso. A te insulto iniziandoti a questa comunità delirante. Vai in pace ed espandi il nostro credo.');
-				$this->talk($irc, $data, $data->messageex[1] . ', adesso sei uno di noi e puoi insultare con fierezza, per la birra gratis devi fornirci la tua biografia ed almeno un insulto personale. Ora puoi andartene a fanculo <3');
-			}
-		}
-	}
-
-	/**
 	 * Disconnette il Bot.
 	 * (Riservato agli operatori)
 	 *
@@ -1904,9 +1585,9 @@ class DelirioBot
 	function disconnect(&$irc, &$data)
 	{
 		if (in_array($data->nick, $irc->_GetIrcOp($data))) {
-			$irc->quit('Addio mondo crudele!');
+			$irc->quit('Bye bye!');
 		} else {
-			$this->talk($irc, $data, 'Chi ti credi di essere per darmi questi comandi?');
+			$this->talk($irc, $data, 'Non sei autorizzato a darmi questo comando.');
 		}
 	}
 }
