@@ -51,6 +51,7 @@ class DelirioLogger
 		$this->stoplog();
 	}
 
+	//Avvia Logger
 	function startlog(&$irc)
 	{
 		$irc->registerActionhandler(
@@ -67,6 +68,7 @@ class DelirioLogger
 		$this->log = fopen($file_log, 'a');
 	}
 
+	//Ferma Logger
 	function stoplog()
 	{
 		fclose($this->log);
